@@ -1,7 +1,7 @@
 var waypts = [];
 function initMap() {
   console.log(1);
-  var map = new google.maps.Map(document.getElementById('map'), {
+  var map = new google.maps.Map($('#map')[0], {
     zoom: 4,
     center: {lat: -24.345, lng: 134.46}  // Australia.
   });
@@ -10,21 +10,21 @@ function initMap() {
 
   directionsDisplay.setMap(map);
 
-  document.getElementById('submit').addEventListener('click', function() {
+  $('#submit').on('click', function() {
     calculateAndDisplayRoute(directionsService, directionsDisplay);
   });
 }
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-  var waypt = document.getElementById('waypoint').value;
+  var waypt = $('#waypoint').val();
   waypts.push({
     location: waypt,
     stopover: true
   });
 
   directionsService.route({
-    origin: document.getElementById('start').value,
-    destination: document.getElementById('end').value,
+    origin: $('#start').val(),
+    destination: $('#end').val(),
     waypoints: waypts,
     optimizeWaypoints: true,
     travelMode: google.maps.TravelMode.DRIVING
