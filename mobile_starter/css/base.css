@@ -1,0 +1,87 @@
+* {
+    font-size: 1em;
+    word-spacing: .3em
+}
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+h1, h2, h3, h4, h5 {
+    font-family: 'Montserrat', sans-serif;
+}
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+}
+h2 {
+    letter-spacing: .07rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+h3 {
+    letter-spacing: .07rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+h4 {
+    letter-spacing: .07rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+h5 {
+    letter-spacing: .07rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+h5.underline {
+    letter-spacing: .07rem;
+    font-size: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+a {
+    text-decoration: none;
+    color: #000;
+}
+a:hover {
+    color: #F8F8F8;
+    ;
+}
+a:active {
+    color: #F0F0F0;
+}
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media (min-width:320px) {
+.myBodyText {
+  font-size: .8rem;
+  line-height: .1rem;
+  width: 90%;
+  margin: 0 auto;
+  padding-left: 1em;
+}
+}
+@media (min-width:481px) {
+  .myBodyText {
+    font-size: .8rem;
+    line-height: .1rem;
+    width: 90%;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+}
+@media (min-width:641px) {
+  .myBodyText {
+    font-size: .9rem;
+    line-height: .3rem;
+    width: 90%;
+    margin: 0 auto;
+    padding: 3rem;
+  }
+
+}

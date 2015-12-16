@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Starter Template</title>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/colors.css">
+    <link rel="stylesheet" type="text/css" href="css/mudule.css">
+    <link rel="stylesheet" type="text/css" href="css/scrollOpacity.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <header class="globalHeader">
+        <h1 class="responsiveHeadline">Road Trip Calc</h1>
+    </header>
+    <section class="myBodyText">
+        <h2 class="responsiveHeadline">Please select:</h2>
+        <select class="fullWidth carYear">
+            <option value="">2015</option>
+            <option value="">2014</option>
+        </select>
+        <select class="fullWidth carMake">
+            <option value="">Volvo</option>
+            <option value="">Audi</option>
+        </select>
+        <select class="fullWidth carModel">
+            <option value="">Wagon</option>
+            <option value="">Sedan</option>
+        </select>
+        <h2 class="responsiveHeadline">Map Prototype:</h2>
+        <form class="userMapForm" method="get" action="https://www.google.com/maps" target="mapframe">
+            <input name="saddr" type="text" id="saddr" value="start">
+            <input name="output" type="hidden" value="embed">
+            <input name="f" type="hidden" value="d">
+            <input name="z" type="hidden" value="11">
+
+            <input name="daddr" id="daddr" value="end">
+            <input class="mapSubmit" type="submit" name="Submit" value="submit">
+        </form>
+        <iframe class="gmap" name="mapframe" width="100%" height="490" src="https://www.google.com/maps?z=11&amp;f=d&amp;output=embed&amp;ll=40.7902,-73.9597">
+        </iframe>
+
+        <!--Scripts-section-->
+        <script src="js/libraries/jquery-2.1.4.min.js"></script>
+        <script src="js/style/scrollOpacity.js"></script>
+        <script src="js/plugins/FitText.js/jquery.fittext.js"></script>
+</body>
+
+</html>

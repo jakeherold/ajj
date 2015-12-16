@@ -1,0 +1,31 @@
+.myBodyText {
+  font-family: 'Libre Baskerville', serif;
+  margin: 0 auto;
+  line-height: 2rem;
+  letter-spacing: .1em;
+}
+.gmap {
+  width: 100%;
+  padding: 0;
+  margin: 0 auto;
+}
+.userMapForm {
+  width: 100%;
+  margin: 0 auto;
+}
+.mapSubmit {
+  width: 50%;
+  marign: 0 auto;
+}
+.fullWidth {
+  width: 100%;
+}
+.carYear {
+
+}
+.carMake {
+
+}
+.carModel {
+
+}
