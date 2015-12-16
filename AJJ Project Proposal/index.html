@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Alex Anderson Starter Template</title>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/colors.css">
+    <link rel="stylesheet" type="text/css" href="css/mudule.css">
+    <link rel="stylesheet" type="text/css" href="css/scrollOpacity.css">
+    <link rel="stylesheet" type="text/css" href="css/slide.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <header class="mainPage">
+        <h1 class="responsiveHeadline">Team: AJJ, GASSY! Project Proposal</h1>
+    </header>
+    <!--Menu/nav and author/category sort dropdowns**************************-->
+    <!--<nav class="menu">
+      <svg class="hamBurger" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 8 8">
+        <path d="M0 0v1h8v-1h-8zm0 2.97v1h8v-1h-8zm0 3v1h8v-1h-8z" transform="translate(0 1)" />
+      </svg>
+        <ul>
+            <li class="myArticlesLink">
+              <a class="navLink" href="#">
+                    <h2>Nav 1</h2></a>
+                <li>
+                    <a class="navLink" href="#">
+                        <h2>Nav 2</h2></a>
+                </li>
+                <li>
+                    <a class="navLink" href="#">
+                      <h2>Nav 3</h2></a>
+                </li>
+                <li>
+                    <a class="navLink " href="#">
+                        <h2>Nav 4</h2></a>
+                </li>
+                <li>
+                    <a class="navLink " href="#" target="_blank">
+                        <h2>Nav 5</h2></a>
+                </li>
+                <li>
+                    <a class="navLink " href="#" target="_blank">
+                        <h2>Nav 6</h2></a>
+                </li>
+              </li>
+        </ul>
+    </nav>-->
+    <section class="myBodyText">
+        <p>
+            <h2 class="responsiveHeadline">Section 1:</h2>
+            Our group , is propopsing to create a
+            <strong>road trip calculator</strong> for our final project, that will tell users distance, route, amount of gas needed and approximate cost of their trip. Our initial user stories are as follows:
+            <h2>As a user:</h2>
+            <li>I want to quickly be able to see my:
+                <ul>Miles</ul>
+                <ul>Gas</ul>
+                <ul>Cost</ul>
+                <ul>Time</ul>
+            </li>
+            <li>I want easy to use but advanced filter options</li>
+            <li>I want my information to persist when I return (cached)</li>
+            <li>I want a visual represantation of my trip and info</li>
+        </p>
+        <h2 class="responsiveHeadline">Section 2:</h2>
+        <p>
+            Domain model Draw a diagram(s). What data is needed? How is it organized? What does each piece of data represent? How is it shown to the user? How does the user interact with the data? What methods act on the data? Where does the data live (JSON, WebSQL,
+            localStorage?). Include time sequences of data creation/evolution, if appropriate.
+            <h2>Data:</h2>
+            <li>mpg records for u.s. automobiles (JSON/SQL)
+                <li>this data represents number of milage for every car</li>
+                <li>this data is shown to the user with numbers</li>
+                <li>Methods: filtered from database and used to calculate output data for gallons and cost. Stored in WebSQL</li>
+            </li>
+            <li>google map api(CDN)
+                <li>this data represents total distance(s) user has to drive for any given road trip</li>
+                <li>this data is shown to the user with map from google API </li>
+                <li>Methods: google API. Obtained in JSON</li>
+            </li>
+            <li>user entered information(SQL)
+                <li>this data represents specific information entered by user </li>
+                <li>this data is given by the user through form </li>
+                <li>Methods: user's input. Stored in localStorage</li>
+            </li>
+        </p>
+        <p>
+            <h2 class="responsiveHeadline">Section 3:</h2>
+            <h3>Wireframes:</h3>
+        </p>
+
+        <img src="assets/wireFrame1.png" style="width: 200px"/><br>
+        <img src="assets/wireFrame2.png" style="width: 200px"/><br>
+
+
+        <h2 class="responsiveHeadline">Map Prototype:</h2>
+        <form method="get" action="https://www.google.com/maps" target="mapframe">
+            <input name="saddr" type="text" id="saddr" value="start">
+            <input name="output" type="hidden" value="embed">
+            <input name="f" type="hidden" value="d">
+            <input name="z" type="hidden" value="11">
+
+            <input name="daddr" id="daddr" value="end">
+
+            <input type="submit" name="Submit" value="submit">
+        </form>
+        <iframe name="mapframe" width="90%" height="90%" src="https://www.google.com/maps?z=11&amp;f=d&amp;output=embed&amp;ll=40.7902,-73.9597">
+        </iframe>
+    </section>
+    <!--Scripts section******************************************************-->
+    <script src="js/libraries/jquery-2.1.4.min.js"></script>
+    <script src="js/libraries/marked.min.js"></script>
+    <script src="js/libraries/highlight/highlight.pack.js"></script>
+    <script src="js/style/scrollOpacity.js"></script>
+    <script src="js/plugins/FitText.js/jquery.fittext.js"></script>
+</body>
+
+</html>
