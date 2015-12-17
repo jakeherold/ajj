@@ -1,6 +1,6 @@
 var waypts = [];
 var user = {};
-// var $distanceDefer = $.Deferred();
+var $distanceDefer = $.Deferred();
 
 $('#submitWP').on('click',addWayPoint);
 $('#clearMidPoint').on('click',removeWayPoint);
@@ -87,6 +87,12 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
       destination: $('#end').val(),
       travelMode: google.maps.TravelMode.DRIVING
     };
+    if (avoidHighways==1){
+      request.avoidHighways = true;
+    }
+    if (avoidTolls==1){
+      request.avoidTolls = true;
+    }
     console.log(request);
   }//end of if-else request preparation
   directionsService.route(request,function(response, status){
@@ -111,8 +117,10 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
           counter++;
         });//end of route.leg.forEach
         var totalDistance = distances.reduce(sum);
+        $total.html('');
+
         user.distance = (Math.round(totalDistance*0.000621371*100)/100);
-        // $distanceDefer.resolve();
+        $distanceDefer.resolve();
         console.log("user's total distance in miles: "+ user.distance);
         $total.append((user.distance)+' miles'+ '<br>');
       });//end of routes.forEach. Outputing distances, calculate prices
