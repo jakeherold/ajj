@@ -1,20 +1,40 @@
 var waypts = [];
+var user = {};
+// var $distanceDefer = $.Deferred();
 
 $('#submitWP').on('click',addWayPoint);
+$('#clearMidPoint').on('click',removeWayPoint);
 
 //helper functions
+function createWPOutput(waypts){
+  var $WPOutput = $('#WPOutput');
+  $WPOutput.html('');
+  waypts.forEach(function(waypt){
+    $WPOutput.append('<option>'+waypt.location+'</option>');
+  });
+}
 function addWayPoint(e){
   e.preventDefault();
-  var $WPOutput = $('#WPOutput');
   var waypt = {
     location: $('#waypoint').val(),
     stopover: true
   };
     waypts.push(waypt) ;
-    $WPOutput.html('');
-    waypts.forEach(function(waypt){
-      $WPOutput.append(waypt.location+'<br>');
-    });
+    createWPOutput(waypts);
+}
+function removeWayPoint(e){
+  waypts = [];
+  e.preventDefault();
+  $wayptToAdd = $('#WPOutput').children(':not(:selected)');
+  for (var ii = 0; ii<$wayptToAdd.length;ii++){
+    var $waypt = $($wayptToAdd[ii]);
+    var waypt = {
+      location: $waypt.text(),
+      stopover:true
+    }
+    waypts.push(waypt);
+  }
+  createWPOutput(waypts);
 }
 
 function sum (prev, current){
@@ -44,6 +64,8 @@ function initMap (){
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay){
   console.log(waypts);
+  var avoidHighways = $('[name = avoidHighways]:checked').length;
+  var avoidTolls = $('[name = avoidTolls]:checked').length;
   if (waypts.length >0){
     var request = {
       origin: $('#start').val(),
@@ -52,6 +74,12 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
       optimizeWaypoints: true,
       travelMode: google.maps.TravelMode.DRIVING
     };
+    if (avoidHighways==1){
+      request.avoidHighways = true;
+    }
+    if (avoidTolls==1){
+      request.avoidTolls = true;
+    }
   }
   else{
     var request = {
@@ -59,6 +87,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
       destination: $('#end').val(),
       travelMode: google.maps.TravelMode.DRIVING
     };
+    console.log(request);
   }//end of if-else request preparation
   directionsService.route(request,function(response, status){
     if(status===google.maps.DirectionsStatus.OK){
@@ -82,7 +111,10 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
           counter++;
         });//end of route.leg.forEach
         var totalDistance = distances.reduce(sum);
-        $total.append(Math.round(totalDistance*0.000621371*100)/100+' miles'+ '<br>');
+        user.distance = (Math.round(totalDistance*0.000621371*100)/100);
+        // $distanceDefer.resolve();
+        console.log("user's total distance in miles: "+ user.distance);
+        $total.append((user.distance)+' miles'+ '<br>');
       });//end of routes.forEach. Outputing distances, calculate prices
     }
     else{

@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Road Trippr</title>
+    <title>ga$</title>
     <link rel="stylesheet" type="text/css" href="css/base.css">
     <link rel="stylesheet" type="text/css" href="css/layout.css">
     <link rel="stylesheet" type="text/css" href="css/colors.css">
@@ -38,9 +38,12 @@
                 <p>Midpoint:</p>
                 <input class="fullWidth" id="waypoint" type="text" placeholder="Mid point" value="Pioneer Court House, Portland, OR">
                 <button class="fullWidth mobileButton" id="submitWP">Add</button>
-                <div id="WPOutput"></div>
+                <select id="WPOutput" size="4" name="midPoints" multiple="multiple"></select>
+                <button id="clearMidPoint">Clear selected mid points</button>
                 <p>End:</p>
                 <input class="fullWidth" id="end" type="text" placeholder="Destination" value="Beaverton, OR">
+                <input type="checkbox" name="avoidHighways">Avoid Freeway</input>
+                <input type="checkbox" name="avoidTolls">Avoid Toll</input>
             </form>
             <button class="fullWidth mobileButton" id="submit">submit</button>
             <div id="directions-panel"></div>
@@ -66,9 +69,17 @@
             </div>
         </section>
         <!--end mapForm-->
+        <!-- Begin hidden user automobile data div -->
+
+        <div id="templateAnchor"></div>
+
+
+        <!-- End hidden user automobile data div -->
+
         <!--SCRIPTS-->
         <!--Libraries-->
         <script src="js/libraries/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="js/libraries/handlebars-v4.0.5.js"></script>
         <!--Plugins-->
 
         <!--Model-->
@@ -78,6 +89,7 @@
         <script src="js/vehicleRequest.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/xml.js"></script>
+        <script type="text/javascript" src="js/templateHandler.js"></script>
 
         <!--View-->
 
