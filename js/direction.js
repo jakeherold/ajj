@@ -1,4 +1,6 @@
 var waypts = [];
+var user = {};
+// var $distanceDefer = $.Deferred;
 
 $('#submitWP').on('click',addWayPoint);
 
@@ -82,7 +84,10 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
           counter++;
         });//end of route.leg.forEach
         var totalDistance = distances.reduce(sum);
-        $total.append(Math.round(totalDistance*0.000621371*100)/100+' miles'+ '<br>');
+        user.distance = (Math.round(totalDistance*0.000621371*100)/100);
+        // $distanceDefer.resolve();
+        console.log("user's total distance in miles: "+ user.distance);
+        $total.append((user.distance)+' miles'+ '<br>');
       });//end of routes.forEach. Outputing distances, calculate prices
     }
     else{
