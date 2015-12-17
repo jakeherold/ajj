@@ -1,33 +1,51 @@
-.red {
-    background-color: #FF444A;
+.baseFill {
+  background-color: #f4f3ef;
 }
-.teal {
-    background-color: #C1FEE5;
+.blue {
+  background-color: #092140;
 }
-.darkGrey {
-    background-color: #273039;
+.blueGreen {
+  background-color: #024959;
 }
-.darkestGrey {
-    background-color: #242C34;
+.tan {
+  background-color: #F2C777;
 }
-.light {
-    background-color: #F1FEE5;
+.redOrange {
+  background-color: #F24738;
 }
-.extraLight {
-    background-color: #F1FEE5;
+.red{
+  background-color: #BF2A2A;
+}
+.baseText {
+  color: #3a3a3c;
+}
+.blueText {
+  color: #092140;
+}
+.blueGreenText {
+  color: #024959;
+}
+.tanText {
+  color: #F2C777;
+}
+.redOrangeText {
+  color: #F24738;
 }
 .redText {
-    color: #FF444A;
+  color: #BF2A2A;
 }
-.tealText {
-    color: #C1FEE5;
+.blueBorder {
+  border: 1px solid #092140;
 }
-.darkGreyText {
-    color: #273039;
+.blueGreenBorder {
+  border: 1px solid #024959;
 }
-.darkestGreyText {
-    color: #242C34;
+.tanBorder {
+  border: 1px solid #F2C777;
 }
-.lightText {
-    color: #F1FEE5;
+.redOrangeBorder {
+  border: 1px solid #F24738;
+}
+.redBorder {
+  border: 1px solid #BF2A2A;
 }

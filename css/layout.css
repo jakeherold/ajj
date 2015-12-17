@@ -20,10 +20,37 @@
     margin: 0 auto;
 }
 .mobileButton {
-  height: 2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  color: #f4f3ef;
+  text-transform: uppercase;
+  height: 4rem;
+  border-style: none;
+  background: #F24738;
+  margin: .5rem 0;
 }
 .mobileDrop {
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  height: 3rem;
+  border: 1px solid #3a3a3c;
+  margin: .5rem 0;
+}
+input {
+  font-family: 'Montserrat', sans-serif;
   height: 4rem;
+  width: 12rem;
+  margin: 0 auto;
+}
+input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:30px;
+    height:30px;
+    background:white;
+    border-radius:5px;
+    border:1px solid #3a3a3c;
+    margin: 1rem;
+    vertical-align: middle;
 }
 .carYear {
 
@@ -37,7 +64,7 @@
 #map {
     position: relative;
     padding-bottom: 75%;
-    height: 0;
+    height: 100px;
     margin: 0 auto;
     width: 90%;
     overflow: hidden;
@@ -45,7 +72,7 @@
 .google-maps iframe {
     position: absolute;
     width: 90% !important;
-    height: 300px !important;
+    height: 100px !important;
 }
 .resultsMap {
     height: 100px;
@@ -54,4 +81,7 @@
 .resultsChart {
     height: 100px;
     background: #C1FEE5;
+}
+.gasLogo {
+  height: 90%;
 }
