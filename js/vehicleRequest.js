@@ -25,7 +25,7 @@ vehicleRequest.index = function() {
                     $(xml).find("value").each(function() {
                         $carMake.append('<option>' + $(this).text() + '</option>');
                     })
-                    $vehicleDefer.resolve();
+                    // $vehicleDefer.resolve();
                 });
 
             });
@@ -45,8 +45,11 @@ vehicleRequest.index = function() {
                     $(xml).find("value").each(function() {
                         $carModel.append('<option>' + $(this).text() + '</option>');
                     })
-                    $vehicleDefer.resolve();
+                    // $vehicleDefer.resolve();
+                    //        console.log("vehicleDefer resolved");
+
                     userCarId();
+
                 });
             });
 
@@ -81,8 +84,10 @@ vehicleRequest.index = function() {
                               $minMpg.append($(this).text());
                               console.log(metaMpgData);
                             });
-                        })
                         $vehicleDefer.resolve();
+                        console.log("vehicle defer resolved");
+
+                        })
                     });
                   } //userCarId
                 }; //vehicleRequest closed
