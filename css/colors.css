@@ -1,0 +1,33 @@
+.red {
+    background-color: #FF444A;
+}
+.teal {
+    background-color: #C1FEE5;
+}
+.darkGrey {
+    background-color: #273039;
+}
+.darkestGrey {
+    background-color: #242C34;
+}
+.light {
+    background-color: #F1FEE5;
+}
+.extraLight {
+    background-color: #F1FEE5;
+}
+.redText {
+    color: #FF444A;
+}
+.tealText {
+    color: #C1FEE5;
+}
+.darkGreyText {
+    color: #273039;
+}
+.darkestGreyText {
+    color: #242C34;
+}
+.lightText {
+    color: #F1FEE5;
+}
