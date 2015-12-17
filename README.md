@@ -1,2 +1,4 @@
+## Mobile app for road trip costs ##
 # ajj
-Mobile app for road trip costs
+
+Welcome to ga$! We want to make your road trip easier!

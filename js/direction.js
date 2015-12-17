@@ -1,6 +1,6 @@
 var waypts = [];
 var user = {};
-// var $distanceDefer = $.Deferred;
+// var $distanceDefer = $.Deferred();
 
 $('#submitWP').on('click',addWayPoint);
 

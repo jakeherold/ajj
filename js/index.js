@@ -1,5 +1,5 @@
 //$(function(){
-  // var $gasDefer = $.Deferred;
+  // var $gasDefer = $.Deferred();
 
 
   var gas = {};
