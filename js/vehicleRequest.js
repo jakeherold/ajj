@@ -1,61 +1,89 @@
-//TESTING OKAY DONT JUDGE MEH
-/*
-Notes before I pass out -
-basic flow: cascading ajax calls/async
--User selects year, then year gets concated to the end of make ajax url, makes the call,
-and populates make drop down.
--User selects a make, then make gets concated to the end of model ajax url, makes the call,
-and populates the model drop down.
--Pull all three values from the selectors below after this occurs, and get the car {id} #
-we then can make the last ajax call in this module, getting the important mpg data or any
-other criteria for that specific vehicle only.
-*/
+var metaMpgData    = {};
+var vehicleRequest = {};
+vehicleRequest.index = function() {
+            var $carYear  = $('.carYear');
+            var $carMake  = $('.carMake');
+            var $carModel = $('.carModel');
+            var $avgMpg   = $('.avgMpg');
+            var $minMpg   = $('.minMpg');
+            var $maxMpg   = $('.maxMpg');
+            var $vehicleDefer = $.Deferred();
 
-$(function() {
-    var $carYear = $('.carYear');
-    var $carMake = $('.carMake');
-    var $carModel = $('.carModel');
+            for(ii=1984;ii<2017;ii++){$carYear.append('<option>'+ii+'</option>')};
 
-    var userSelectedMake;
-    $carMake.change(function() {
-            userSelectedMake = " "
-            $(".carMake option:selected").each(function() {
-                userSelectedMake += $(this).text();
+            $carYear.change(function() {
+                var userSelectedYear = ""
+                $(".carYear option:selected").each(function() {
+                    userSelectedYear += $(this).text();
+                });
+                var ajaxRequest = $.ajax({
+                    type: "GET",
+                    url: 'http://www.fueleconomy.gov/ws/rest/vehicle/menu/make?year=' + userSelectedYear,
+                    dataType: "xml",
+                });
+                ajaxRequest.done(function(xml) {
+                    $(xml).find("value").each(function() {
+                        $carMake.append('<option>' + $(this).text() + '</option>');
+                    })
+                    $vehicleDefer.resolve();
+                });
+
             });
-        })
+            //MODELSd
+            $carMake.change(function() {
+                var userSelectedMake = ""
+                $(".carMake option:selected").each(function() {
+                    userSelectedMake += $(this).text();
+                });
 
-        //LOLZ GUYZ I WROTE U A 4LOOPZ
-        //YEARS
-    for (ii = 1984; ii < 2017; ii++) {
-        $carYear.append('<option>' + ii + '</option>')
-    };
+                ajaxRequest = $.ajax({
+                    type: "GET",
+                    url: 'http://www.fueleconomy.gov/ws/rest/vehicle/menu/model?year=2012&make=' + userSelectedMake,
+                    dataType: "xml",
+                });
+                ajaxRequest.done(function(xml) {
+                    $(xml).find("value").each(function() {
+                        $carModel.append('<option>' + $(this).text() + '</option>');
+                    })
+                    $vehicleDefer.resolve();
+                    userCarId();
+                });
+            });
 
-    //MAKES
-    var ajaxRequest = $.ajax({
-        type: "GET",
-        url: "http://www.fueleconomy.gov/ws/rest/vehicle/menu/make?year=2012",
-        dataType: "xml",
-        success: function(xml) {
-            $(xml).find("value").each(function() {
-                var carMakes = $(this).text();
-                $carMake.append('<option>' + carMakes + '</option>');
-            })
-        },
-    });
-
-    //MODELS
-    ajaxRequest = $.ajax({
-        type: "GET",
-        url: 'http://www.fueleconomy.gov/ws/rest/vehicle/menu/model?year=2012&make=Honda',
-        dataType: "xml",
-        success: function(xml) {
-            $(xml).find("value").each(function() {
-                var carModels = $(this).text();
-                $carModel.append('<option>' + carModels + '</option>');
-            })
-        },
-    });
-    ajaxRequest.fail(function(data, textStatus, xhr) {
-        console.log('your ajax request was bullshit.')
-    });
-});
+            function userCarId() {
+                userYear    = $(".carYear option:selected").text();
+                userMake    = $(".carMake option:selected").text();
+                userModel   = $(".carModel option:selected").text();;
+                ajaxRequest = $.ajax({
+                    type: "GET",
+                    url: '//www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=' + userYear + '&make=' + userMake + '&model=' + userModel,
+                    dataType: "xml",
+                });
+                ajaxRequest.done(function(xml) {
+                        var vehicleID = $(xml).find("value").first().text();
+                        console.log(vehicleID);
+                        ajaxRequest = $.ajax({
+                            type: "GET",
+                            url: '//www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/' + vehicleID,
+                            dataType: "xml",
+                        });
+                        ajaxRequest.done(function(xml) {
+                            $(xml).find("avgMpg").each(function() {
+                              metaMpgData.avgmpg = $(this).text();
+                              $avgMpg.append($(this).text());
+                            });
+                            $(xml).find("maxMpg").each(function() {
+                              metaMpgData.maxmpg = $(this).text();
+                              $maxMpg.append($(this).text());
+                            });
+                            $(xml).find("minMpg").each(function() {
+                              metaMpgData.minmpg = $(this).text();
+                              $minMpg.append($(this).text());
+                              console.log(metaMpgData);
+                            });
+                        })
+                        $vehicleDefer.resolve();
+                    });
+                  } //userCarId
+                }; //vehicleRequest closed
+vehicleRequest.index();
