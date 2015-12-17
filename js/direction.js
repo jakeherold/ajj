@@ -62,6 +62,8 @@ function initMap (){
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay){
   console.log(waypts);
+  var avoidHighways = $('[name = avoidHighways]:checked').length;
+  var avoidTolls = $('[name = avoidTolls]:checked').length;
   if (waypts.length >0){
     var request = {
       origin: $('#start').val(),
@@ -70,6 +72,12 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
       optimizeWaypoints: true,
       travelMode: google.maps.TravelMode.DRIVING
     };
+    if (avoidHighways==1){
+      request.avoidHighways = true;
+    }
+    if (avoidTolls==1){
+      request.avoidTolls = true;
+    }
   }
   else{
     var request = {
@@ -77,6 +85,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
       destination: $('#end').val(),
       travelMode: google.maps.TravelMode.DRIVING
     };
+    console.log(request);
   }//end of if-else request preparation
   directionsService.route(request,function(response, status){
     if(status===google.maps.DirectionsStatus.OK){
