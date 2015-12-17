@@ -1,5 +1,6 @@
 var metaMpgData    = {};
 var vehicleRequest = {};
+var $vehicleDefer = $.Deferred();
 vehicleRequest.index = function() {
             var $carYear  = $('.carYear');
             var $carMake  = $('.carMake');
@@ -7,7 +8,6 @@ vehicleRequest.index = function() {
             var $avgMpg   = $('.avgMpg');
             var $minMpg   = $('.minMpg');
             var $maxMpg   = $('.maxMpg');
-            var $vehicleDefer = $.Deferred();
 
             for(ii=1984;ii<2017;ii++){$carYear.append('<option>'+ii+'</option>')};
 
