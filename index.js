@@ -8,13 +8,19 @@ $(function(){
     success: function(data){
       console.log(data);
       gas.rawData = xmlToJson(data);
-      console.log(gas.rawData);
+
+    gas.regular = gas.rawData.fuelPrices.regular["#text"];
+    console.log(gas.regular);
+    gas.midgrade = gas.rawData.fuelPrices.midgrade["#text"];
+    console.log(gas.midgrade);
+    gas.premium = gas.rawData.fuelPrices.premium["#text"];
+    console.log(gas.premium);
+
     }
   });
 
-  // var gas.regular = gas.rawData.fuelPrices.midgrade;
-  // console.log(gas.regular);
-  // var gas.midgrade;
-  // var gas.premium;
+
+
+
 
 }); //ends IIFE
