@@ -100,6 +100,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
           counter++;
         });//end of route.leg.forEach
         var totalDistance = distances.reduce(sum);
+        $total.html('');
         $total.append(Math.round(totalDistance*0.000621371*100)/100+' miles'+ '<br>');
       });//end of routes.forEach. Outputing distances, calculate prices
     }
