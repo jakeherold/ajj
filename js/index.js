@@ -18,6 +18,7 @@
   });
 
   gasAjaxRequest.done(function(){
+      console.log(gas);
           console.log("regular price: "+gas.regular);
           console.log("midgrade price: "+gas.midgrade);
           console.log("premium price: "+gas.premium);
