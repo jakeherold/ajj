@@ -9,9 +9,12 @@ vehicleRequest.index = function() {
             var $minMpg   = $('.minMpg');
             var $maxMpg   = $('.maxMpg');
 
-            for(ii=1984;ii<2017;ii++){$carYear.append('<option>'+ii+'</option>')};
+            var date = new Date();
+            var currentYear = date.getFullYear();
+            for(ii=1984;ii<currentYear;ii++){$carYear.append('<option>'+ii+'</option>')};
 
-            $carYear.change(function() {
+            $carYear.on('change',function() {
+                console.log('carYear event fires');
                 var userSelectedYear = ""
                 $(".carYear option:selected").each(function() {
                     userSelectedYear += $(this).text();
@@ -31,6 +34,7 @@ vehicleRequest.index = function() {
             });
             //MODELSd
             $carMake.change(function() {
+                console.log('carMake event fires');
                 var userSelectedMake = ""
                 $(".carMake option:selected").each(function() {
                     userSelectedMake += $(this).text();
