@@ -11,4 +11,6 @@ $.get('template.html', function(templateData) {
         $templateAnchor.append(userVehicleData);
       });
 
+  })
+
 }
