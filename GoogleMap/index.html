@@ -49,11 +49,13 @@
   <div id="right-panel">
     <p>Total Distance: <span id="total"></span></p>
     <form return false>
-      <input id="start" type="text" placeholder="Start point">
-      <input id="waypoint" type="text" placeholder="Mid point">
-      <input id="end" type="text" placeholder="Destination">
+      <input id="start" type="text" placeholder="Start point" value="920 3rd Ave, Portland, OR">
+      <input id="waypoint" type="text" placeholder="Mid point" value="Pioneer Court House, Portland, OR">
+      <button id="submitWP">Add Mid Point</button>
+      <div id="WPOutput"></div>
+      <input id="end" type="text" placeholder="Destination" value="Beaverton, OR">
     </form>
-    <p id="submit">submit</p>
+    <button id="submit">submit</button>
     <div id="directions-panel"></div>
   </div>
 
@@ -62,6 +64,7 @@
 
   <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="direction.js"></script>
+  <!-- <script type="text/javascript" src="waypoint.js"></script> -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuGyCs5KKsG97HZufUiCzC6zA4WlzxnBA&signed_in=true&callback=initMap"
         async defer></script>
 </body>
