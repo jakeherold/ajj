@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Mobile web-app for road trip costs</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/colors.css">
+    <link rel="stylesheet" type="text/css" href="css/mudule.css">
+    <link rel="stylesheet" type="text/css" href="css/scrollOpacity.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <header class="globalHeader">
+        <h1 class="responsiveHeadline">Road Trip Calc</h1>
+    </header>
+    <section class="fullWidth carSelection">
+        <h2 class="responsiveHeadline">Please select:</h2>
+        <select class="fullWidth mobileDrop carYear">
+        </select>
+        <select class="fullWidth mobileDrop carMake">
+        </select>
+        <select class="fullWidth mobileDrop carModel">
+        </select>
+        </select>
+
+        <!--end carSelection-->
+        <section class="fullWidth mapForm">
+            <form return false>
+                <p>Start:</p>
+                <input class="fullWidth" id="start" type="text" placeholder="Start point" value="920 3rd Ave, Portland, OR">
+                <p>Midpoint:</p>
+                <input class="fullWidth" id="waypoint" type="text" placeholder="Mid point" value="Pioneer Court House, Portland, OR">
+                <button class="fullWidth mobileButton" id="submitWP">Add</button>
+                <div id="WPOutput"></div>
+                <p>End:</p>
+                <input class="fullWidth" id="end" type="text" placeholder="Destination" value="Beaverton, OR">
+            </form>
+            <button class="fullWidth mobileButton" id="submit">submit</button>
+            <div id="directions-panel"></div>
+            <p>Total Distance:
+                <span id="total"></span>
+            </p>
+        </section>
+
+        <!--end mapForm-->
+        <section class="mapView">
+            <div id="map"></div>
+        </section>
+        <section class="fullWidth resultsView">
+            <h2>Your Trip</h2>
+            <p>Miles:</p>
+            <p>Gallons:</p>
+            <p>Cost:</p>
+            <div class="fullWidth resultsMap">
+                <h2>results map here</h2>
+            </div>
+            <div class="fullWidth resultsChart">
+                <h2>results chart here</h2>
+            </div>
+        </section>
+        <!--end mapForm-->
+        <!--SCRIPTS-->
+        <!--Libraries-->
+        <script src="js/libraries/jquery-2.1.4.min.js"></script>
+        <!--Plugins-->
+
+        <!--Model-->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuGyCs5KKsG97HZufUiCzC6zA4WlzxnBA&signed_in=true&callback=initMap" async defer></script>
+        <!--Controller-->
+        <script src="js/direction.js"></script>
+        <script src="js/vehicleRequest.js"></script>
+        <!--View-->
+
+</body>
+
+</html>
