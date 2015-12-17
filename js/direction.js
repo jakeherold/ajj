@@ -1,20 +1,38 @@
 var waypts = [];
 
 $('#submitWP').on('click',addWayPoint);
+$('#clearMidPoint').on('click',removeWayPoint);
 
 //helper functions
+function createWPOutput(waypts){
+  var $WPOutput = $('#WPOutput');
+  $WPOutput.html('');
+  waypts.forEach(function(waypt){
+    $WPOutput.append('<option>'+waypt.location+'</option>');
+  });
+}
 function addWayPoint(e){
   e.preventDefault();
-  var $WPOutput = $('#WPOutput');
   var waypt = {
     location: $('#waypoint').val(),
     stopover: true
   };
     waypts.push(waypt) ;
-    $WPOutput.html('');
-    waypts.forEach(function(waypt){
-      $WPOutput.append(waypt.location+'<br>');
-    });
+    createWPOutput(waypts);
+}
+function removeWayPoint(e){
+  waypts = [];
+  e.preventDefault();
+  $wayptToAdd = $('#WPOutput').children(':not(:selected)');
+  for (var ii = 0; ii<$wayptToAdd.length;ii++){
+    var $waypt = $($wayptToAdd[ii]);
+    var waypt = {
+      location: $waypt.text(),
+      stopover:true
+    }
+    waypts.push(waypt);
+  }
+  createWPOutput(waypts);
 }
 
 function sum (prev, current){
