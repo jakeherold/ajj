@@ -1,5 +1,5 @@
 //$(function(){
-  // var $gasDefer = $.Deferred();
+  var $gasDefer = $.Deferred();
 
 
   var gas = {};
@@ -23,17 +23,25 @@
           console.log("midgrade price: "+gas.midgrade);
           console.log("premium price: "+gas.premium);
 
-       // $gasDefer.resolve();
+       $gasDefer.resolve();
 
   });
 
-// $.when($gasDefer, $distanceDefer /*  , $vehicleDefer*/).done(function(){
-//   user.mpg         =  "x";
-//   user.gasQuantity =  ((user.distance)/(user.mpg));
-//   user.costReg     =  ((user.gasQuantity) * (gas.regular));
-//   user.costMid     =  ((user.gasQuantity) * (gas.midgrade));
-//   user.costPrem    =  ((user.gasQuantity) * (gas.premium));
-//   console.log(user);
-// })
+$.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
+  user.mpgAvg      =  metaMpgData.avgmpg;
+  user.maxMpg      = metaMpgData.maxmpg;
+  user.minMpg      = metaMpgData.minmpg;
+  user.gasQuantity =  (Math.round(((user.distance)/(user.mpgAvg))*100)/100);
+  user.costReg     =  (Math.round(((user.gasQuantity) * (gas.regular))*100)/100);
+  user.costMid     =  ((user.gasQuantity) * (gas.midgrade));
+  user.costPrem    =  ((user.gasQuantity) * (gas.premium));
+  console.log(user);
+
+  $(".milesAnchor").append(user.distance);
+  $(".costAnchor").append(user.costReg);
+  $(".gallonsAnchor").append(user.gasQuantity);
+})
+
+
 
 //}); //ends IIFE
