@@ -4,14 +4,16 @@ function chartTrigger(){
   nv.addGraph(function() {
     console.log("starting addGraph shenannigans");
     var chart = nv.models.discreteBarChart()
-      .x(function(d) { return d.label })
-      .y(function(d) { return d.value })
+      .x(function(d) { return d.label; })
+      .y(function(d) { return d.value; })
       .staggerLabels(true)
-      // .tooltips(false)
-      .showValues(true)
+      .showValues(true);
 
-    d3.select('.resultsChart')
-      .datum(chartData())
+    var c = chartData();
+    console.log(c);
+
+    d3.select('#chaos svg')
+      .datum(c)
       .transition().duration(500)
       .call(chart)
       ;
@@ -23,7 +25,8 @@ function chartTrigger(){
 
 }
 
-
+// .tooltips(false)
+//
 function chartData () {
   console.log("starting chartData Function")
   return [
@@ -32,15 +35,15 @@ function chartData () {
             values: [
               {
                 "label" : "Gallons Needed" ,
-                "value" : 10 //user.gasQuantity
+                "value" : user.gasQuantity
               } ,
               {
                 "label" : "Trip Cost" ,
-                "value" : 11 //user.costReg
+                "value" : user.costReg
               } ,
               {
                 "label" : "MPG" ,
-                "value" : 12 //user.mpgAvg
+                "value" : user.mpgAvg
               }
             ]
           }
