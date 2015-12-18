@@ -13,6 +13,13 @@ function createWPOutput(waypts){
     $WPOutput.append('<option>'+waypt.location+'</option>');
   });
 }
+function setMapBound(locationObj){
+  var lat = locationObj.lat();
+  console.log(lat);
+  var lng = locationObj.lng();
+  var LatLng = new google.maps.LatLng(lat,lng);
+  bound.extend(LatLng);
+}
 function addWayPoint(e){
   e.preventDefault();
   var waypt = {
@@ -45,15 +52,15 @@ function sum (prev, current){
 function initMap (){
   console.log(1);
   var mapElem = $('#map')[0];
-  var map = new google.maps.Map(mapElem,
+  map = new google.maps.Map(mapElem,
             {
               zoom: 7,
-              center: {lat: 45.5425909, lng: -122.7948514}  // Portland, OR
+              center: {lat: 45.5425909, lng: -122.7948514},  // Portland, OR
+              scrollwheel: false
             });//end of specifying map obj
   //Declare variables as objs that will get passed to calculateAndDisplayRoute in the even listener below
   var directionsService = new google.maps.DirectionsService;
   var directionsDisplay = new google.maps.DirectionsRenderer;
-
   directionsDisplay.setMap(map);
   //Event listener for submit 'button'
   $('#submit').on('click', function(e){
@@ -97,6 +104,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
   }//end of if-else request preparation
   directionsService.route(request,function(response, status){
     if(status===google.maps.DirectionsStatus.OK){
+      bound = new google.maps.LatLngBounds();
       directionsDisplay.setDirections(response);
       var routes = response.routes;
       console.log(response);
@@ -104,18 +112,23 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
       var $total = $('#total');
       $summaryPanel.html(''); //clear directions panel to display more output
       routes.forEach(function(route){
+        var lat, lng;
         var distances = [];
         var counter = 1;
         route.legs.forEach(function(leg){
           var routeSegment = '<b>Segment '+counter+'</b><br>';
           var start_address = 'Start: '+leg.start_address+'<br>';
+          setMapBound(leg.start_location);
           var end_address = 'End: '+leg.end_address+'<br>';
+          setMapBound(leg.end_location);
           var distance = leg.distance.text+'<br>';
           distances.push(leg.distance.value);
           var insert = routeSegment+start_address+end_address+distance;
           $summaryPanel.append(insert);
           counter++;
         });//end of route.leg.forEach
+        map.fitBounds(bound);
+        //Print out total distance
         var totalDistance = distances.reduce(sum);
         $total.html('');
 
