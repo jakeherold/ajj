@@ -30,7 +30,6 @@ vehicleRequest.index = function() {
                     })
                     // $vehicleDefer.resolve();
                 });
-
             });
             //MODELSd
             $carMake.change(function() {
@@ -52,15 +51,17 @@ vehicleRequest.index = function() {
                     // $vehicleDefer.resolve();
                     //        console.log("vehicleDefer resolved");
 
-                    userCarId();
-
                 });
+            });
+
+            $carModel.on('change', function(){
+              userCarId();
             });
 
             function userCarId() {
                 userYear    = $(".carYear option:selected").text();
                 userMake    = $(".carMake option:selected").text();
-                userModel   = $(".carModel option:selected").text();;
+                userModel   = $(".carModel option:selected").text();
                 ajaxRequest = $.ajax({
                     type: "GET",
                     url: '//www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=' + userYear + '&make=' + userMake + '&model=' + userModel,
