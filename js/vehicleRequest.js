@@ -1,7 +1,7 @@
 var metaMpgData = {};
 var vehicleRequest = {};
 var $vehicleDefer = $.Deferred();
-vehicleRequest.index = function() {
+vehicleRequest.index = function() {      //.index here is not using (.index) as a method, but as a key
     var $carYear = $('.carYear');
     var $carMake = $('.carMake');
     var $carModel = $('.carModel');
@@ -72,6 +72,8 @@ vehicleRequest.index = function() {
         });
         ajaxRequest.done(function(xml) {
             var vehicleID = $(xml).find("value").first().text();
+            user.vehicleID = vehicleID;
+            console.log(user.vehicleID);
             console.log(vehicleID);
             ajaxRequest = $.ajax({
                 type: "GET",

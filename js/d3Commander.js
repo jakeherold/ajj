@@ -43,7 +43,7 @@ function chartData () {
               } ,
               {
                 "label" : "MPG" ,
-                "value" : user.mpgAvg
+                "value" : user.avgMpg
               }
             ]
           }
