@@ -121,6 +121,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
 
         user.distance = (Math.round(totalDistance*0.000621371*100)/100);
         $distanceDefer.resolve();
+        console.log("DistanceDefer resolved");
         console.log("user's total distance in miles: "+ user.distance);
         $total.append((user.distance)+' miles'+ '<br>');
       });//end of routes.forEach. Outputing distances, calculate prices

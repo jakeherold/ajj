@@ -9,9 +9,12 @@ vehicleRequest.index = function() {
             var $minMpg   = $('.minMpg');
             var $maxMpg   = $('.maxMpg');
 
-            for(ii=1984;ii<2017;ii++){$carYear.append('<option>'+ii+'</option>')};
+            var date = new Date();
+            var currentYear = date.getFullYear();
+            for(ii=1984;ii<currentYear;ii++){$carYear.append('<option>'+ii+'</option>')};
 
-            $carYear.change(function() {
+            $carYear.on('change',function() {
+                console.log('carYear event fires');
                 var userSelectedYear = ""
                 $(".carYear option:selected").each(function() {
                     userSelectedYear += $(this).text();
@@ -25,12 +28,12 @@ vehicleRequest.index = function() {
                     $(xml).find("value").each(function() {
                         $carMake.append('<option>' + $(this).text() + '</option>');
                     })
-                    $vehicleDefer.resolve();
+                    // $vehicleDefer.resolve();
                 });
-
             });
             //MODELSd
             $carMake.change(function() {
+                console.log('carMake event fires');
                 var userSelectedMake = ""
                 $(".carMake option:selected").each(function() {
                     userSelectedMake += $(this).text();
@@ -45,15 +48,20 @@ vehicleRequest.index = function() {
                     $(xml).find("value").each(function() {
                         $carModel.append('<option>' + $(this).text() + '</option>');
                     })
-                    $vehicleDefer.resolve();
-                    userCarId();
+                    // $vehicleDefer.resolve();
+                    //        console.log("vehicleDefer resolved");
+
                 });
+            });
+
+            $carModel.on('change', function(){
+              userCarId();
             });
 
             function userCarId() {
                 userYear    = $(".carYear option:selected").text();
                 userMake    = $(".carMake option:selected").text();
-                userModel   = $(".carModel option:selected").text();;
+                userModel   = $(".carModel option:selected").text();
                 ajaxRequest = $.ajax({
                     type: "GET",
                     url: '//www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=' + userYear + '&make=' + userMake + '&model=' + userModel,
@@ -81,8 +89,10 @@ vehicleRequest.index = function() {
                               $minMpg.append($(this).text());
                               console.log(metaMpgData);
                             });
-                        })
                         $vehicleDefer.resolve();
+                        console.log("vehicle defer resolved");
+
+                        })
                     });
                   } //userCarId
                 }; //vehicleRequest closed

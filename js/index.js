@@ -24,6 +24,7 @@
           console.log("premium price: "+gas.premium);
 
        $gasDefer.resolve();
+       console.log("gasDefer resolved");
 
   });
 
