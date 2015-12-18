@@ -15,11 +15,13 @@
 </head>
 
 <body>
-    <header class="globalHeader">
-        <h1 class="responsiveHeadline">Road Trip Calc</h1>
+    <header class="responsiveHeadline globalHeader">
+      <div>
+      <img class="gasLogo" src="assets/imgs/ga$logo.svg" alt="gas-logo">
+      <div>
     </header>
     <section class="fullWidth carSelection">
-        <h2 class="responsiveHeadline">Please select:</h2>
+        <h2 class="responsiveHeadline redOrangeText">Please select:</h2>
         <select class="fullWidth mobileDrop carYear">
         </select>
         <select class="fullWidth mobileDrop carMake">
@@ -27,46 +29,42 @@
         <select class="fullWidth mobileDrop carModel">
         </select>
         </select>
-        <div class="avgMpg">avg MPG: </div>
-        <div class="minMpg">min MPG: </div>
-        <div class="maxMpg">max MPG: </div>
+        <section class="mpgOutput">
+        <h2 class="avgMpg">Your avg MPG: </h2>
+        <h2 class="minMpg">Your min MPG: </h2>
+        <h2 class="maxMpg">Your max MPG: </h2>
+      </section>
         <!--end carSelection-->
         <section class="fullWidth mapForm">
             <form return false>
-                <p>Start:</p>
+                <p class="redOrangeText">Start:</p>
                 <input class="fullWidth" id="start" type="text" placeholder="Start point" value="920 3rd Ave, Portland, OR">
-                <p>Midpoint:</p>
-                <input class="fullWidth" id="waypoint" type="text" placeholder="Mid point" value="Pioneer Court House, Portland, OR">
+                <p class="redOrangeText">Midpoint:</p>
+                <input class="fullWidth" id="waypoint" type="text" placeholder="Mid point">
                 <button class="fullWidth mobileButton" id="submitWP">Add</button>
-                <select id="WPOutput" size="4" name="midPoints" multiple="multiple"></select>
-                <button id="clearMidPoint">Clear selected mid points</button>
-                <p>End:</p>
+                <select class="fullWidth" id="WPOutput" size="4" name="midPoints" multiple="multiple"></select>
+                <button class="fullWidth mobileButton" id="clearMidPoint">Clear mid points</button>
+                <p class="redOrangeText">End:</p>
                 <input class="fullWidth" id="end" type="text" placeholder="Destination" value="Beaverton, OR">
-                <input type="checkbox" name="avoidHighways">Avoid Freeway</input>
-                <input type="checkbox" name="avoidTolls">Avoid Toll</input>
+                <input class"checkBox" type="checkbox" name="avoidHighways">Avoid Freeway</input>
+                <input class"checkBox" type="checkbox" name="avoidTolls">Avoid Toll</input>
             </form>
             <button class="fullWidth mobileButton" id="submit">submit</button>
             <div id="directions-panel"></div>
-            <p>Total Distance:
+            <h1>Total Distance:
                 <span id="total"></span>
-            </p>
+            </h1>
         </section>
 
         <!--end mapForm-->
-        <section class="mapView">
+        <section class="">
             <div id="map"></div>
         </section>
         <section class="fullWidth resultsView">
-            <h2>Your Trip</h2>
-            <p class="milesAnchor">Miles:</p>
-            <p class="gallonsAnchor">Gallons:</p>
-            <p class="costAnchor">Cost:</p>
-            <div class="fullWidth resultsMap">
-                <h2>results map here</h2>
-            </div>
-            <div class="fullWidth resultsChart">
-                <h2>results chart here</h2>
-            </div>
+            <h1>Your Trip</h1>
+            <h2 class="milesAnchor">Miles:</h2>
+            <h2 class="gallonsAnchor">Gallons:</h2>
+            <h2 class="costAnchor">Cost:</h2>
         </section>
         <!--end mapForm-->
         <!-- Begin hidden user automobile data div -->
@@ -81,7 +79,7 @@
         <script src="js/libraries/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/libraries/handlebars-v4.0.5.js"></script>
         <!--Plugins-->
-
+        <script src="js/plugins/FitText.js/jquery.fittext.js"></script>
         <!--Model-->
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuGyCs5KKsG97HZufUiCzC6zA4WlzxnBA&signed_in=true&callback=initMap" async defer></script>
         <!--Controller-->
