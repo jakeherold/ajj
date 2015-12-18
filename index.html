@@ -22,14 +22,18 @@
     </header>
     <section class="fullWidth carSelection">
         <h2 class="responsiveHeadline redOrangeText">Please select:</h2>
+        <p class="redOrangeText">Year:</p>
         <select class="fullWidth mobileDrop carYear">
         </select>
+        <p class="redOrangeText">Make:</p>
         <select class="fullWidth mobileDrop carMake">
         </select>
+        <p class="redOrangeText">Model:</p>
         <select class="fullWidth mobileDrop carModel">
         </select>
         </select>
         <section class="mpgOutput">
+        <h2 class="errorVehicle redOrangeText"></h2>
         <h2 class="avgMpg">Your avg MPG: </h2>
         <h2 class="minMpg">Your min MPG: </h2>
         <h2 class="maxMpg">Your max MPG: </h2>
@@ -51,20 +55,20 @@
             </form>
             <button class="fullWidth mobileButton" id="submit">submit</button>
             <div id="directions-panel"></div>
-            <h1>Total Distance:
-                <span id="total"></span>
-            </h1>
+            <section class="fullWidth resultsView">
+                <h1 class="redOrangeText">Your Trip</h1>
+                <h2>Total Distance:
+                    <span id="total"></span>
+                </h2>
+                <h2 class="milesAnchor">Miles:</h2>
+                <h2 class="gallonsAnchor">Gallons:</h2>
+                <h2 class="costAnchor">Cost:</h2>
+            </section>
         </section>
 
         <!--end mapForm-->
         <section class="">
             <div id="map"></div>
-        </section>
-        <section class="fullWidth resultsView">
-            <h1>Your Trip</h1>
-            <h2 class="milesAnchor">Miles:</h2>
-            <h2 class="gallonsAnchor">Gallons:</h2>
-            <h2 class="costAnchor">Cost:</h2>
         </section>
         <!--end mapForm-->
         <!-- Begin hidden user automobile data div -->

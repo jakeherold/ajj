@@ -29,12 +29,15 @@
   background: #F24738;
   margin: .5rem 0;
 }
+.mobileButton:active {
+  background: #BF2A2A;
+}
 .mobileDrop {
   font-family: 'Montserrat', sans-serif;
   text-align: center;
   height: 3rem;
   border: 1px solid #3a3a3c;
-  margin: .5rem 0;
+  margin: 0;
 }
 input {
   font-family: 'Montserrat', sans-serif;
