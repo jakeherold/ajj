@@ -12,7 +12,7 @@ function chartTrigger(){
     var c = chartData();
     console.log(c);
 
-    d3.select('#chaos svg')
+    d3.select('#chart svg')
       .datum(c)
       .transition().duration(500)
       .call(chart)
