@@ -41,6 +41,7 @@ $.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
   $(".milesAnchor").append(user.distance);
   $(".costAnchor").append(user.costReg);
   $(".gallonsAnchor").append(user.gasQuantity);
+  chartTrigger();
 })
 
 
