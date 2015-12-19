@@ -1,5 +1,6 @@
 var metaMpgData    = {};
 var vehicleRequest = {};
+
 var $vehicleDefer  = $.Deferred();
 vehicleRequest.index = function() {
     var $carYear      = $('.carYear');
@@ -71,10 +72,12 @@ vehicleRequest.index = function() {
             dataType: "xml",
         });
         ajaxRequest.done(function(xml) {
+
             $(xml).find("text").each(function() {
                 $carVersion.append('<option>' + $(this).text() + '</option>');
             });
             var vehicleID = $(xml).find("text:contains('" + $carVersion.val() + "')").next("value").text();
+
             console.log(vehicleID);
 
             $carVersion.on('change', function() {
