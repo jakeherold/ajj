@@ -6,13 +6,13 @@ $('#submitWP').on('click',addWayPoint);
 $('#clearMidPoint').on('click',removeWayPoint);
 
 //helper functions
-function setMapCenter(){
-  mapCenter = map.getCenter();
-  console.log(mapCenter.lat());
-  console.log(mapCenter.lng());
+function setMapCenter(bounds){
   //Event listener for centering map
   controlUI.addEventListener('click', function() {
     map.setCenter(mapCenter);
+    console.log(mapCenter.lat());
+    console.log(mapCenter.lng());
+    map.fitBounds(bounds);
   });
 }
 function createWPOutput(waypts){
@@ -61,6 +61,7 @@ function initMap (){
               center: {lat: 45.5425909, lng: -122.7948514},  // Portland, OR
               scrollwheel: false
             });//end of specifying map obj
+  window.map = map;
   //Declare variables as objs that will get passed to calculateAndDisplayRoute in the even listener below
   var directionsService = new google.maps.DirectionsService;
   var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -70,17 +71,15 @@ function initMap (){
   var centerControl = new CenterControl(centerControlDiv, map);
   centerControlDiv.index = 1;
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
-  //Event listener for when map is resize
-  google.maps.event.addListener(map, 'resize', function() {
-    setMapCenter();
-  });
   //Event listener for submit 'button'
   $('#submit').on('click', function(e){
+    console.log('submittng map instructions');
     e.preventDefault();
-    calculateAndDisplayRoute(directionsService, directionsDisplay);
-    $('#userInput').hide();
-    $('#pageResults').show();
-    google.maps.event.trigger(map, 'resize');
+    calculateAndDisplayRoute(directionsService, directionsDisplay,map);
+    // $('#userInput').hide();
+    // $('#pageResults').show();
+
+    console.log('after resize');
 
   });//end of submit button event listener
 }//end of initmap
@@ -123,7 +122,12 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
 
       directionsDisplay.setDirections(response);
       var routes = response.routes;
-      console.log(response);
+      //Set event listener for center map button
+      var ne = new google.maps.LatLng(routes[0].bounds.O.O,routes[0].bounds.j.O);
+      var sw = new google.maps.LatLng(routes[0].bounds.O.j,routes[0].bounds.j.j);
+      bounds = new google.maps.LatLngBounds(sw,ne);
+      setMapCenter(bounds);
+      //calculate and print out distances
       var $summaryPanel = $('#directions-panel');
       var $total = $('#total');
       $summaryPanel.html(''); //clear directions panel to display more output
@@ -149,8 +153,9 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
         console.log("DistanceDefer resolved");
         console.log("user's total distance in miles: "+ user.distance);
         $total.append((user.distance)+' miles'+ '<br>');
+
       });//end of routes.forEach. Outputing distances, calculate prices
-      setMapCenter();
+
     }
     else{
       window.alert('Directions request failed due to ' + status);
