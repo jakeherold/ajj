@@ -20,41 +20,60 @@
       <img class="gasLogo" src="assets/imgs/ga$logo.svg" alt="gas-logo">
     </div>
   </header>
-  <section class="fullWidth carSelection">
-    <h2 class="responsiveHeadline redOrangeText">Please select:</h2>
-    <p class="redOrangeText">Year:</p>
-    <select class="fullWidth mobileDrop carYear">
-    </select>
-    <p class="redOrangeText">Make:</p>
-    <select class="fullWidth mobileDrop carMake">
-    </select>
-    <p class="redOrangeText">Model:</p>
-    <select class="fullWidth mobileDrop carModel">
-    </select>
+  <!--***********user input**************-->
+  <section id="userInput">
+    <section class="fullWidth carSelection">
+      <h2 class="responsiveHeadline redOrangeText">Please select:</h2>
+      <p class="redOrangeText">Year:</p>
+      <select class="fullWidth mobileDrop carYear">
+      </select>
+      <p class="redOrangeText">Make:</p>
+      <select class="fullWidth mobileDrop carMake">
+      </select>
+      <p class="redOrangeText">Model:</p>
+      <select class="fullWidth mobileDrop carModel">
+      </select>
+    </section>
+
+    <section class="fullWidth mapForm">
+      <form return false>
+        <p class="redOrangeText">Start:</p>
+        <input class="fullWidth" id="start" type="text" placeholder="Start point" value="920 3rd Ave, Portland, OR">
+        <p class="redOrangeText">Midpoint:</p>
+        <input class="fullWidth" id="waypoint" type="text" placeholder="Mid point">
+        <button class="fullWidth mobileButton" id="submitWP">Add</button>
+        <select class="fullWidth" id="WPOutput" size="4" name="midPoints" multiple="multiple"></select>
+        <button class="fullWidth mobileButton" id="clearMidPoint">Clear mid points</button>
+        <p class="redOrangeText">End:</p>
+        <input class="fullWidth" id="end" type="text" placeholder="Destination" value="Beaverton, OR">
+        <input class"checkBox" type="checkbox" name="avoidHighways">Avoid Freeway</input>
+        <input class"checkBox" type="checkbox" name="avoidTolls">Avoid Toll</input>
+        <button class="fullWidth mobileButton" id="submit">submit</button>
+      </form>
+
+    </section>
+
   </section>
-  <section class="mpgOutput">
-    <h2 class="errorVehicle redOrangeText"></h2>
-    <h2 class="avgMpg">Your avg MPG: </h2>
-    <h2 class="minMpg">Your min MPG: </h2>
-    <h2 class="maxMpg">Your max MPG: </h2>
-  </section>
-  <!--end carSelection-->
-  <section class="fullWidth mapForm">
-    <form return false>
-      <p class="redOrangeText">Start:</p>
-      <input class="fullWidth" id="start" type="text" placeholder="Start point" value="920 3rd Ave, Portland, OR">
-      <p class="redOrangeText">Midpoint:</p>
-      <input class="fullWidth" id="waypoint" type="text" placeholder="Mid point">
-      <button class="fullWidth mobileButton" id="submitWP">Add</button>
-      <select class="fullWidth" id="WPOutput" size="4" name="midPoints" multiple="multiple"></select>
-      <button class="fullWidth mobileButton" id="clearMidPoint">Clear mid points</button>
-      <p class="redOrangeText">End:</p>
-      <input class="fullWidth" id="end" type="text" placeholder="Destination" value="Beaverton, OR">
-      <input class"checkBox" type="checkbox" name="avoidHighways">Avoid Freeway</input>
-      <input class"checkBox" type="checkbox" name="avoidTolls">Avoid Toll</input>
-    </form>
-    <button class="fullWidth mobileButton" id="submit">submit</button>
-    <div id="directions-panel"></div>
+
+
+
+
+  <!-- Begin hidden user automobile data div -->
+  <div id="templateAnchor"></div>
+
+  <section id="pageResults">
+    <section class="">
+      <div id="map"></div>
+      <div id="directions-panel"></div>
+    </section>
+
+    <section class="mpgOutput">
+      <h2 class="errorVehicle redOrangeText"></h2>
+      <h2 class="avgMpg">Your avg MPG: </h2>
+      <h2 class="minMpg">Your min MPG: </h2>
+      <h2 class="maxMpg">Your max MPG: </h2>
+    </section>
+
     <section class="fullWidth resultsView">
       <h1 class="redOrangeText">Your Trip</h1>
       <h2>Total Distance:
@@ -66,16 +85,6 @@
     </section>
   </section>
 
-  <!--end mapForm-->
-  <section class="map">
-    <div id="map"></div>
-  </section>
-  <!--end mapForm-->
-  <!-- Begin hidden user automobile data div -->
-
-  <div id="templateAnchor"></div>
-
-
   <!-- End hidden user automobile data div -->
 
   <!--SCRIPTS-->
@@ -85,14 +94,17 @@
   <!--Plugins-->
   <script src="js/plugins/FitText.js/jquery.fittext.js"></script>
   <!--Model-->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuGyCs5KKsG97HZufUiCzC6zA4WlzxnBA&signed_in=true&callback=initMap" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQitgmMI3c2ZOHWhDgNT4TppZqKZOISac&signed_in=true&callback=initMap" async defer></script>
   <!--Controller-->
+  <script type="text/javascript" src="js/inputResultViewControl.js"></script>
+  <script type="text/javascript" src="js/MapView.js"></script>
   <script src="js/direction.js"></script>
   <script src="js/vehicleRequest.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
   <script type="text/javascript" src="js/xml.js"></script>
   <script type="text/javascript" src="js/templateHandler.js"></script>
-  <script type="text/javascript" src="js/inputResultViewControl.js"</script>
+
+
 
   <!--View-->
 

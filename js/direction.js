@@ -6,6 +6,15 @@ $('#submitWP').on('click',addWayPoint);
 $('#clearMidPoint').on('click',removeWayPoint);
 
 //helper functions
+function setMapCenter(){
+  mapCenter = map.getCenter();
+  console.log(mapCenter.lat());
+  console.log(mapCenter.lng());
+  //Event listener for centering map
+  controlUI.addEventListener('click', function() {
+    map.setCenter(mapCenter);
+  });
+}
 function createWPOutput(waypts){
   var $WPOutput = $('#WPOutput');
   $WPOutput.html('');
@@ -13,13 +22,7 @@ function createWPOutput(waypts){
     $WPOutput.append('<option>'+waypt.location+'</option>');
   });
 }
-function setMapBound(locationObj){
-  var lat = locationObj.lat();
-  console.log(lat);
-  var lng = locationObj.lng();
-  var LatLng = new google.maps.LatLng(lat,lng);
-  bound.extend(LatLng);
-}
+
 function addWayPoint(e){
   e.preventDefault();
   var waypt = {
@@ -62,10 +65,23 @@ function initMap (){
   var directionsService = new google.maps.DirectionsService;
   var directionsDisplay = new google.maps.DirectionsRenderer;
   directionsDisplay.setMap(map);
+  //Creating centering map tile control UI
+  var centerControlDiv = document.createElement('div');
+  var centerControl = new CenterControl(centerControlDiv, map);
+  centerControlDiv.index = 1;
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+  //Event listener for when map is resize
+  google.maps.event.addListener(map, 'resize', function() {
+    setMapCenter();
+  });
   //Event listener for submit 'button'
   $('#submit').on('click', function(e){
     e.preventDefault();
     calculateAndDisplayRoute(directionsService, directionsDisplay);
+    $('#userInput').hide();
+    $('#pageResults').show();
+    google.maps.event.trigger(map, 'resize');
+
   });//end of submit button event listener
 }//end of initmap
 
@@ -104,7 +120,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
   }//end of if-else request preparation
   directionsService.route(request,function(response, status){
     if(status===google.maps.DirectionsStatus.OK){
-      bound = new google.maps.LatLngBounds();
+
       directionsDisplay.setDirections(response);
       var routes = response.routes;
       console.log(response);
@@ -118,26 +134,23 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
         route.legs.forEach(function(leg){
           var routeSegment = '<b>Segment '+counter+'</b><br>';
           var start_address = 'Start: '+leg.start_address+'<br>';
-          setMapBound(leg.start_location);
           var end_address = 'End: '+leg.end_address+'<br>';
-          setMapBound(leg.end_location);
           var distance = leg.distance.text+'<br>';
           distances.push(leg.distance.value);
           var insert = routeSegment+start_address+end_address+distance;
           $summaryPanel.append(insert);
           counter++;
         });//end of route.leg.forEach
-        map.fitBounds(bound);
         //Print out total distance
         var totalDistance = distances.reduce(sum);
         $total.html('');
-
         user.distance = (Math.round(totalDistance*0.000621371*100)/100);
         $distanceDefer.resolve();
         console.log("DistanceDefer resolved");
         console.log("user's total distance in miles: "+ user.distance);
         $total.append((user.distance)+' miles'+ '<br>');
       });//end of routes.forEach. Outputing distances, calculate prices
+      setMapCenter();
     }
     else{
       window.alert('Directions request failed due to ' + status);
