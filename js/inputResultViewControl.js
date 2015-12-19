@@ -1,4 +1,4 @@
 
 $(function(){
-  // $('#pageResults').hide();
+  $('#pageResults').hide();
 })//end of ready function

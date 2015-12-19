@@ -9,9 +9,6 @@ $('#clearMidPoint').on('click',removeWayPoint);
 function setMapCenter(bounds){
   //Event listener for centering map
   controlUI.addEventListener('click', function() {
-    map.setCenter(mapCenter);
-    console.log(mapCenter.lat());
-    console.log(mapCenter.lng());
     map.fitBounds(bounds);
   });
 }
@@ -76,9 +73,9 @@ function initMap (){
     console.log('submittng map instructions');
     e.preventDefault();
     calculateAndDisplayRoute(directionsService, directionsDisplay,map);
-    // $('#userInput').hide();
-    // $('#pageResults').show();
-
+    $('#userInput').hide();
+    $('#pageResults').show();
+    google.maps.event.trigger(map, 'resize');
     console.log('after resize');
 
   });//end of submit button event listener
