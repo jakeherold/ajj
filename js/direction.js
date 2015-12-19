@@ -58,7 +58,6 @@ function initMap (){
               center: {lat: 45.5425909, lng: -122.7948514},  // Portland, OR
               scrollwheel: false
             });//end of specifying map obj
-  window.map = map;
   //Declare variables as objs that will get passed to calculateAndDisplayRoute in the even listener below
   var directionsService = new google.maps.DirectionsService;
   var directionsDisplay = new google.maps.DirectionsRenderer;
