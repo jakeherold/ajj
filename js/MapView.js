@@ -1,4 +1,4 @@
-//Function creating center tile for control UI for map
+//Function creating center tile for control UI for map, from google map sample code
 function CenterControl(controlDiv, map) {
 
   // Set CSS for the control border.

@@ -76,9 +76,13 @@ function initMap (){
     $('#userInput').hide();
     $('#pageResults').show();
     google.maps.event.trigger(map, 'resize');
-    console.log('after resize');
-
   });//end of submit button event listener
+  //Event listener for back button
+  $('#back').on('click', function(e){
+    e.preventDefault();
+    $('#userInput').show();
+    $('#pageResults').hide();
+  });//end of back button listener
 }//end of initmap
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay){
