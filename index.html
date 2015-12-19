@@ -2,98 +2,111 @@
 <html>
 
 <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>ga$</title>
-    <link rel="stylesheet" type="text/css" href="css/base.css">
-    <link rel="stylesheet" type="text/css" href="css/layout.css">
-    <link rel="stylesheet" type="text/css" href="css/colors.css">
-    <link rel="stylesheet" type="text/css" href="css/mudule.css">
-    <link rel="stylesheet" type="text/css" href="css/scrollOpacity.css">
-    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <title>ga$</title>
+  <link rel="stylesheet" type="text/css" href="css/base.css">
+  <link rel="stylesheet" type="text/css" href="css/layout.css">
+  <link rel="stylesheet" type="text/css" href="css/colors.css">
+  <link rel="stylesheet" type="text/css" href="css/mudule.css">
+  <link rel="stylesheet" type="text/css" href="css/scrollOpacity.css">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
-    <header class="responsiveHeadline globalHeader">
-      <div>
+  <header class="responsiveHeadline globalHeader">
+    <div>
       <img class="gasLogo" src="assets/imgs/ga$logo.svg" alt="gas-logo">
-      <div>
-    </header>
+    </div>
+  </header>
+  <!--***********user input**************-->
+  <section id="userInput">
     <section class="fullWidth carSelection">
-        <h2 class="responsiveHeadline redOrangeText">Please select:</h2>
-        <p class="redOrangeText">Year:</p>
-        <select class="fullWidth mobileDrop carYear">
-        </select>
-        <p class="redOrangeText">Make:</p>
-        <select class="fullWidth mobileDrop carMake">
-        </select>
-        <p class="redOrangeText">Model:</p>
-        <select class="fullWidth mobileDrop carModel">
-        </select>
-        </select>
-        <section class="mpgOutput">
-        <h2 class="errorVehicle redOrangeText"></h2>
-        <h2 class="avgMpg">Your avg MPG: </h2>
-        <h2 class="minMpg">Your min MPG: </h2>
-        <h2 class="maxMpg">Your max MPG: </h2>
-      </section>
-        <!--end carSelection-->
-        <section class="fullWidth mapForm">
-            <form return false>
-                <p class="redOrangeText">Start:</p>
-                <input class="fullWidth" id="start" type="text" placeholder="Start point" value="920 3rd Ave, Portland, OR">
-                <p class="redOrangeText">Midpoint:</p>
-                <input class="fullWidth" id="waypoint" type="text" placeholder="Mid point">
-                <button class="fullWidth mobileButton" id="submitWP">Add</button>
-                <select class="fullWidth" id="WPOutput" size="4" name="midPoints" multiple="multiple"></select>
-                <button class="fullWidth mobileButton" id="clearMidPoint">Clear mid points</button>
-                <p class="redOrangeText">End:</p>
-                <input class="fullWidth" id="end" type="text" placeholder="Destination" value="Beaverton, OR">
-                <input class"checkBox" type="checkbox" name="avoidHighways">Avoid Freeway</input>
-                <input class"checkBox" type="checkbox" name="avoidTolls">Avoid Toll</input>
-            </form>
-            <button class="fullWidth mobileButton" id="submit">submit</button>
-            <div id="directions-panel"></div>
-            <section class="fullWidth resultsView">
-                <h1 class="redOrangeText">Your Trip</h1>
-                <h2>Total Distance:
-                    <span id="total"></span>
-                </h2>
-                <h2 class="milesAnchor">Miles:</h2>
-                <h2 class="gallonsAnchor">Gallons:</h2>
-                <h2 class="costAnchor">Cost:</h2>
-            </section>
-        </section>
+      <h2 class="responsiveHeadline redOrangeText">Please select:</h2>
+      <p class="redOrangeText">Year:</p>
+      <select class="fullWidth mobileDrop carYear">
+      </select>
+      <p class="redOrangeText">Make:</p>
+      <select class="fullWidth mobileDrop carMake">
+      </select>
+      <p class="redOrangeText">Model:</p>
+      <select class="fullWidth mobileDrop carModel">
+      </select>
+    </section>
 
-        <!--end mapForm-->
-        <section class="">
-            <div id="map"></div>
-        </section>
-        <!--end mapForm-->
-        <!-- Begin hidden user automobile data div -->
+    <section class="fullWidth mapForm">
+      <form return false>
+        <p class="redOrangeText">Start:</p>
+        <input class="fullWidth" id="start" type="text" placeholder="Start point" value="920 3rd Ave, Portland, OR">
+        <p class="redOrangeText">Midpoint:</p>
+        <input class="fullWidth" id="waypoint" type="text" placeholder="Mid point">
+        <button class="fullWidth mobileButton" id="submitWP">Add</button>
+        <select class="fullWidth" id="WPOutput" size="4" name="midPoints" multiple="multiple"></select>
+        <button class="fullWidth mobileButton" id="clearMidPoint">Clear mid points</button>
+        <p class="redOrangeText">End:</p>
+        <input class="fullWidth" id="end" type="text" placeholder="Destination" value="Beaverton, OR">
+        <input class"checkBox" type="checkbox" name="avoidHighways">Avoid Freeway</input>
+        <input class"checkBox" type="checkbox" name="avoidTolls">Avoid Toll</input>
+        <button class="fullWidth mobileButton" id="submit">submit</button>
+      </form>
 
-        <div id="templateAnchor"></div>
+    </section>
+
+  </section>
 
 
-        <!-- End hidden user automobile data div -->
 
-        <!--SCRIPTS-->
-        <!--Libraries-->
-        <script src="js/libraries/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="js/libraries/handlebars-v4.0.5.js"></script>
-        <!--Plugins-->
-        <script src="js/plugins/FitText.js/jquery.fittext.js"></script>
-        <!--Model-->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuGyCs5KKsG97HZufUiCzC6zA4WlzxnBA&signed_in=true&callback=initMap" async defer></script>
-        <!--Controller-->
-        <script src="js/direction.js"></script>
-        <script src="js/vehicleRequest.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/xml.js"></script>
-        <script type="text/javascript" src="js/templateHandler.js"></script>
 
-        <!--View-->
+  <!-- Begin hidden user automobile data div -->
+  <div id="templateAnchor"></div>
+
+  <section id="pageResults">
+    <section class="">
+      <div id="map"></div>
+      <div id="directions-panel"></div>
+    </section>
+
+    <section class="mpgOutput">
+      <h2 class="errorVehicle redOrangeText"></h2>
+      <h2 class="avgMpg">Your avg MPG: </h2>
+      <h2 class="minMpg">Your min MPG: </h2>
+      <h2 class="maxMpg">Your max MPG: </h2>
+    </section>
+
+    <section class="fullWidth resultsView">
+      <h1 class="redOrangeText">Your Trip</h1>
+      <h2>Total Distance:
+        <span id="total"></span>
+      </h2>
+      <h2 class="milesAnchor">Miles:</h2>
+      <h2 class="gallonsAnchor">Gallons:</h2>
+      <h2 class="costAnchor">Cost:</h2>
+      <button class = "fullWidth mobileButton" id="back">back</button>
+    </section>
+  </section>
+
+
+  <!--SCRIPTS-->
+  <!--Libraries-->
+  <script src="js/libraries/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="js/libraries/handlebars-v4.0.5.js"></script>
+  <!--Plugins-->
+  <script src="js/plugins/FitText.js/jquery.fittext.js"></script>
+  <!--Model-->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQitgmMI3c2ZOHWhDgNT4TppZqKZOISac&signed_in=true&callback=initMap" async defer></script>
+  <!--Controller-->
+  <script type="text/javascript" src="js/inputResultViewControl.js"></script>
+  <script type="text/javascript" src="js/MapView.js"></script>
+  <script src="js/direction.js"></script>
+  <script src="js/vehicleRequest.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="js/xml.js"></script>
+  <script type="text/javascript" src="js/templateHandler.js"></script>
+
+
+
+  <!--View-->
 
 </body>
 
