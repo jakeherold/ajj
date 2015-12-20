@@ -6,7 +6,7 @@
   // var gas.rawData;
   var gasAjaxRequest = $.ajax({
     type:'GET',
-    url: 'http://www.fueleconomy.gov/ws/rest/fuelprices',
+    url: 'https://www.fueleconomy.gov/ws/rest/fuelprices',
     success: function(data){
       gas.rawData  = xmlToJson(data);
       gas.regular  = gas.rawData.fuelPrices.regular["#text"];
