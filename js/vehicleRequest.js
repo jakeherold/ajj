@@ -18,7 +18,8 @@ vehicleRequest.index = function() {
         $carYear.append('<option>' + ii + '</option>')
     };
 
-    $carYear.on('change', function() {
+    $carYear.on('change', function(e) {
+        e.preventDefault;
         console.log('carYear event fires');
         var userSelectedYear = ""
         $(".carYear option:selected").each(function() {
