@@ -18,31 +18,34 @@
   });
 
   gasAjaxRequest.done(function(){
-      console.log(gas);
-          console.log("regular price: "+gas.regular);
-          console.log("midgrade price: "+gas.midgrade);
-          console.log("premium price: "+gas.premium);
+    console.log(gas);
+    console.log("regular price: "+gas.regular);
+    console.log("midgrade price: "+gas.midgrade);
+    console.log("premium price: "+gas.premium);
 
-       $gasDefer.resolve();
-       console.log("gasDefer resolved");
+    $gasDefer.resolve();
+    console.log("gasDefer resolved");
 
   });
 
-$.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
-  user.avgMpg      =  metaMpgData.avgmpg;
-  user.maxMpg      = metaMpgData.maxmpg;
-  user.minMpg      = metaMpgData.minmpg;
-  user.gasQuantity =  (Math.round(((user.distance)/(user.avgMpg))*100)/100);
-  user.costReg     =  (Math.round(((user.gasQuantity) * (gas.regular))*100)/100);
-  user.costMid     =  ((user.gasQuantity) * (gas.midgrade));
-  user.costPrem    =  ((user.gasQuantity) * (gas.premium));
-  console.log(user);
-  $printDataDefer.resolve()
+  $.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
+    user.avgMpg      =  metaMpgData.avgmpg;
+    user.maxMpg      = metaMpgData.maxmpg;
+    user.minMpg      = metaMpgData.minmpg;
+    user.gasQuantity =  (Math.round(((user.distance)/(user.avgMpg))*100)/100);
+    user.costReg     =  (Math.round(((user.gasQuantity) * (gas.regular))*100)/100);
+    user.costMid     =  ((user.gasQuantity) * (gas.midgrade));
+    user.costPrem    =  ((user.gasQuantity) * (gas.premium));
+    console.log(user);
+    $printDataDefer.resolve();
 
-  $.when($printDataDefer).done(function(){
+    $.when($printDataDefer).done(function(){
       //Show miles traveled, total trip cost, and gallons of gas used in the DOM
+      $(".milesAnchor").html("");
       $(".milesAnchor").append(user.distance);
+      $(".costAnchor").html("");
       $(".costAnchor").append(user.costReg);
+      $(".gallonsAnchor").html("");
       $(".gallonsAnchor").append(user.gasQuantity);
       //Prints chart using nv.d3
       chartTrigger();
@@ -55,9 +58,9 @@ $.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
       localStorage.setItem('costPrem', user.costPrem);
       localStorage.setItem('distance', user.distance);
       localStorage.setItem('vehicleID', user.vehicleID);
+    });
   });
 
-})
 
 
 
