@@ -39,7 +39,7 @@ vehicleRequest.index = function() {
     //MODELSd
     $carMake.change(function() {
         console.log('carMake event fires');
-        var userSelectedMake = ""
+        var userSelectedMake = "";
         $(".carMake option:selected").each(function() {
             userSelectedMake += $(this).text();
         });
@@ -82,10 +82,10 @@ vehicleRequest.index = function() {
 
             $carVersion.on('change', function() {
                 userCarId();
-                console.log(vehicleID);
             });
 
             function userCarId() {
+                console.log(vehicleID);
                 ajaxRequest = $.ajax({
                     type: "GET",
                     url: 'http://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/' + vehicleID,
