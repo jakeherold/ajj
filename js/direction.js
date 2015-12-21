@@ -1,7 +1,6 @@
 var waypts = [];
 var user = {};
 var $distanceDefer = $.Deferred();
-
 $('#submitWP').on('click',addWayPoint);
 $('#clearMidPoint').on('click',removeWayPoint);
 
@@ -77,11 +76,6 @@ function initMap (){
       $('#pageResults').show();
       google.maps.event.trigger(map, 'resize');
   }
-  $('#back').on('click', function(e){
-    e.preventDefault();
-    $('#userInput').show();
-    $('#pageResults').hide();
-  });//end of back button listener
 }//end of initmap
 
 
