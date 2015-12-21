@@ -26,7 +26,7 @@ vehicleRequest.index = function() {
         });
         var ajaxRequest = $.ajax({
             type: "GET",
-            url: 'http://www.fueleconomy.gov/ws/rest/vehicle/menu/make?year=' + userSelectedYear,
+            url: 'https://www.fueleconomy.gov/ws/rest/vehicle/menu/make?year=' + userSelectedYear,
             dataType: "xml",
         });
         ajaxRequest.done(function(xml) {
@@ -46,7 +46,7 @@ vehicleRequest.index = function() {
 
         ajaxRequest = $.ajax({
             type: "GET",
-            url: 'http://www.fueleconomy.gov/ws/rest/vehicle/menu/model?year=2012&make=' + userSelectedMake,
+            url: 'https://www.fueleconomy.gov/ws/rest/vehicle/menu/model?year=2012&make=' + userSelectedMake,
             dataType: "xml",
         });
         ajaxRequest.done(function(xml) {
@@ -68,7 +68,7 @@ vehicleRequest.index = function() {
         userModel   = $(".carModel option:selected").text();
         ajaxRequest = $.ajax({
             type: "GET",
-            url: 'http://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=' + userYear + '&make=' + userMake + '&model=' + userModel,
+            url: 'https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=' + userYear + '&make=' + userMake + '&model=' + userModel,
             dataType: "xml",
         });
         ajaxRequest.done(function(xml) {
@@ -88,7 +88,7 @@ vehicleRequest.index = function() {
                 console.log(vehicleID);
                 ajaxRequest = $.ajax({
                     type: "GET",
-                    url: 'http://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/' + vehicleID,
+                    url: 'https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/' + vehicleID,
                     dataType: "xml",
                     statusCode: {
                         404: function() {
