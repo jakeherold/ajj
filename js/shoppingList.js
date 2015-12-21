@@ -12,16 +12,15 @@ $(function(){
       $input.val('');
     }
   };
-  shopping.removeItem = function (e){
-    if (e.target !== e.currentTarget)
-  }
-  $('#add').on('click', function(e){
-    e.preventDefault();
+  $('#add').on('click', function(event){
+    event.preventDefault();
     shopping.addItem();
   });//end of add button event listener
-  $('section').on('click',function(e){
-    e.preventDefault();
-
+  $('section').on('click','img',function(event){
+    event.stopPropagation();
+    var $this = $(this);
+    var $removeItem = $this.closest('p');
+    $removeItem.remove();
   });
 });//end of jquery ready function
 
