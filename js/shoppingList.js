@@ -3,25 +3,37 @@ $(function(){
   var $input = $('#shoppingInput');
   var $shoppingList = $('#shoppingList');
   var shoppingList = '';
-  shopping.addItem = function (){
+  shopping.addItem = function(){
     var newItem = $input.val();
-    console.log(newItem);
     if(newItem.length!==0){
       var item = '<p>'+newItem+'<img src="assets/imgs/icon_close.png" width="16px"></p>';
       $shoppingList.append(item);
       $input.val('');
     }
   };
-  $('#add').on('click', function(event){
-    event.preventDefault();
-    shopping.addItem();
-  });//end of add button event listener
-  $('section').on('click','img',function(event){
+  shopping.loadList = function(){
+    var list = localStorage.getItem('shoppingList');
+    if(list){
+      $('#shoppingList').append(list);
+    }
+  }
+  $input.on('keydown', function(event){
+    if (event.keyCode ==13){
+      shopping.addItem();
+    }
+  });
+  $shoppingList.on('click','img',function(event){
     event.stopPropagation();
     var $this = $(this);
     var $removeItem = $this.closest('p');
     $removeItem.remove();
   });
+  $shoppingList.bind('DOMSubtreeModified', function(){
+    var list = $(this).html();
+    console.log(list);
+    localStorage.setItem('shoppingList',list);
+  });
+  shopping.loadList();
 });//end of jquery ready function
 
 
