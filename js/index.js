@@ -53,6 +53,9 @@ $.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
       localStorage.setItem('avgMpg', user.avgMpg);
       localStorage.setItem('maxMpg', user.maxMpg);
       localStorage.setItem('minMpg', user.minMpg);
+      localStorage.setItem('gasQuantityAvg', user.gasQuantityAvg);
+      localStorage.setItem('gasQuantityMax', user.gasQuantityMax);
+      localStorage.setItem('gasQuantityMin', user.gasQuantityMin);
       localStorage.setItem('costReg', user.costReg);
       localStorage.setItem('costMid', user.costMid);
       localStorage.setItem('costPrem', user.costPrem);
