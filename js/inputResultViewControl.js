@@ -1,10 +1,13 @@
+var mainControl    = {};
 var resultsControl = {};
-//On load view
-resultsControl.index = function(){
-  $('#pageResults').hide();
-})
-//On submit results view
 
+//On load view
+
+function mainControl(){
+  $('#pageResults').hide();
+};
+page('./', mainControl());
+//On submit results viewxs
 //Event listener for submit 'button'
 resultsControl.index = function() {
 $('#submit').on('click', function(e){
@@ -22,3 +25,5 @@ $('#back').on('click', function(e){
   $('#pageResults').hide();
 });//end of back button listener
 }
+
+//page('./results', resultsControl.index());
