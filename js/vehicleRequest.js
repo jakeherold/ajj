@@ -30,11 +30,13 @@ vehicleRequest.index = function() {
             dataType: "xml",
         });
         ajaxRequest.done(function(xml) {
+            $carMake.html('');
+            $carMake.append('<option>Make</option>');
             $(xml).find("value").each(function() {
-                    $carMake.append('<option>' + $(this).text() + '</option>');
-                })
+                $carMake.append('<option>' + $(this).text() + '</option>');
+            })
                 // $vehicleDefer.resolve();
-        });
+            });
     });
     //MODELSd
     $carMake.change(function() {
@@ -50,13 +52,15 @@ vehicleRequest.index = function() {
             dataType: "xml",
         });
         ajaxRequest.done(function(xml) {
+            $carModel.html('');
+            $carModel.append('<option>Model</option>');
             $(xml).find("value").each(function() {
-                    $carModel.append('<option>' + $(this).text() + '</option>');
-                })
+                $carModel.append('<option>' + $(this).text() + '</option>');
+            })
                 // $vehicleDefer.resolve();
                 //        console.log("vehicleDefer resolved");
 
-        });
+            });
     });
 
     $carModel.on('change', function() {
@@ -72,19 +76,21 @@ vehicleRequest.index = function() {
             dataType: "xml",
         });
         ajaxRequest.done(function(xml) {
-
+            $carVersion.html('');
+            $carVersion.append('<option>Version</option>');
             $(xml).find("text").each(function() {
                 $carVersion.append('<option>' + $(this).text() + '</option>');
             });
-            var vehicleID = $(xml).find("text:contains('" + $carVersion.val() + "')").next("value").text();
-
-            console.log(vehicleID);
-
+            if ($carVersion.children().length===1){
+                $errorVehicle.append('Sorry, we could not find the information about the vehicle.');
+            }else{
             $carVersion.on('change', function() {
-                userCarId();
+                var vehicleID = $(xml).find("text:contains('" + $carVersion.val() + "')").next("value").text();
+                userCarId(vehicleID);
             });
-
-            function userCarId() {
+            }
+            function userCarId(vehicleID) {
+                $errorVehicle.html('');
                 console.log(vehicleID);
                 ajaxRequest = $.ajax({
                     type: "GET",
@@ -93,7 +99,7 @@ vehicleRequest.index = function() {
                     statusCode: {
                         404: function() {
                             //resets and error message in drop down section
-                            $errorVehicle.append('Sorry, we could not find that vehicle.')
+                            $errorVehicle.append('Sorry, we could not find the information about the vehicle.');
                             $carYear.val(0);
                             $carMake.val(0);
                             $carModel.val(0);
