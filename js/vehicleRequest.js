@@ -27,15 +27,17 @@ vehicleRequest.index = function() {
         });
         var ajaxRequest = $.ajax({
             type: "GET",
-            url: 'http://www.fueleconomy.gov/ws/rest/vehicle/menu/make?year=' + userSelectedYear,
+            url: 'https://www.fueleconomy.gov/ws/rest/vehicle/menu/make?year=' + userSelectedYear,
             dataType: "xml",
         });
         ajaxRequest.done(function(xml) {
+            $carMake.html('');
+            $carMake.append('<option>Make</option>');
             $(xml).find("value").each(function() {
-                    $carMake.append('<option>' + $(this).text() + '</option>');
-                })
+                $carMake.append('<option>' + $(this).text() + '</option>');
+            })
                 // $vehicleDefer.resolve();
-        });
+            });
     });
     //MODELSd
     $carMake.change(function() {
@@ -47,17 +49,19 @@ vehicleRequest.index = function() {
 
         ajaxRequest = $.ajax({
             type: "GET",
-            url: 'http://www.fueleconomy.gov/ws/rest/vehicle/menu/model?year=2012&make=' + userSelectedMake,
+            url: 'https://www.fueleconomy.gov/ws/rest/vehicle/menu/model?year=2012&make=' + userSelectedMake,
             dataType: "xml",
         });
         ajaxRequest.done(function(xml) {
+            $carModel.html('');
+            $carModel.append('<option>Model</option>');
             $(xml).find("value").each(function() {
-                    $carModel.append('<option>' + $(this).text() + '</option>');
-                })
+                $carModel.append('<option>' + $(this).text() + '</option>');
+            })
                 // $vehicleDefer.resolve();
                 //        console.log("vehicleDefer resolved");
 
-        });
+            });
     });
 
     $carModel.on('change', function() {
@@ -69,32 +73,34 @@ vehicleRequest.index = function() {
         userModel   = $(".carModel option:selected").text();
         ajaxRequest = $.ajax({
             type: "GET",
-            url: 'http://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=' + userYear + '&make=' + userMake + '&model=' + userModel,
+            url: 'https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=' + userYear + '&make=' + userMake + '&model=' + userModel,
             dataType: "xml",
         });
         ajaxRequest.done(function(xml) {
-
+            $carVersion.html('');
+            $carVersion.append('<option>Version</option>');
             $(xml).find("text").each(function() {
                 $carVersion.append('<option>' + $(this).text() + '</option>');
             });
-            var vehicleID = $(xml).find("text:contains('" + $carVersion.val() + "')").next("value").text();
-
-            console.log(vehicleID);
-
+            if ($carVersion.children().length===1){
+                $errorVehicle.append('Sorry, we could not find the information about the vehicle.');
+            }else{
             $carVersion.on('change', function() {
-                userCarId();
+                var vehicleID = $(xml).find("text:contains('" + $carVersion.val() + "')").next("value").text();
+                userCarId(vehicleID);
             });
-
-            function userCarId() {
+            }
+            function userCarId(vehicleID) {
+                $errorVehicle.html('');
                 console.log(vehicleID);
                 ajaxRequest = $.ajax({
                     type: "GET",
-                    url: 'http://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/' + vehicleID,
+                    url: 'https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/' + vehicleID,
                     dataType: "xml",
                     statusCode: {
                         404: function() {
                             //resets and error message in drop down section
-                            $errorVehicle.append('Sorry, we could not find that vehicle.')
+                            $errorVehicle.append('Sorry, we could not find the information about the vehicle.');
                             $carYear.val(0);
                             $carMake.val(0);
                             $carModel.val(0);

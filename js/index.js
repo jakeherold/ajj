@@ -6,7 +6,7 @@
   // var gas.rawData;
   var gasAjaxRequest = $.ajax({
     type:'GET',
-    url: 'http://www.fueleconomy.gov/ws/rest/fuelprices',
+    url: 'https://www.fueleconomy.gov/ws/rest/fuelprices',
     success: function(data){
       gas.rawData  = xmlToJson(data);
       gas.regular  = gas.rawData.fuelPrices.regular["#text"];
@@ -18,15 +18,16 @@
   });
 
   gasAjaxRequest.done(function(){
-      console.log(gas);
-          console.log("regular price: "+gas.regular);
-          console.log("midgrade price: "+gas.midgrade);
-          console.log("premium price: "+gas.premium);
+    console.log(gas);
+    console.log("regular price: "+gas.regular);
+    console.log("midgrade price: "+gas.midgrade);
+    console.log("premium price: "+gas.premium);
 
-       $gasDefer.resolve();
-       console.log("gasDefer resolved");
+    $gasDefer.resolve();
+    console.log("gasDefer resolved");
 
   });
+
 
 $.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
   user.avgMpg      =  metaMpgData.avgmpg;
@@ -41,11 +42,15 @@ $.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
   console.log(user);
   $printDataDefer.resolve()
 
-  $.when($printDataDefer).done(function(){
+
+    $.when($printDataDefer).done(function(){
       //Show miles traveled, total trip cost, and gallons of gas used in the DOM
+      $(".milesAnchor").html("");
       $(".milesAnchor").append(user.distance);
+      $(".costAnchor").html("");
       $(".costAnchor").append(user.costReg);
-      $(".gallonsAnchor").append(user.gasQuantityAvg);
+      $(".gallonsAnchor").html("");
+      $(".gallonsAnchor").append(user.gasQuantity);
       //Prints chart using nv.d3
       costChartTrigger();
       mpgChartTrigger();
@@ -61,9 +66,9 @@ $.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
       localStorage.setItem('costPrem', user.costPrem);
       localStorage.setItem('distance', user.distance);
       localStorage.setItem('vehicleID', user.vehicleID);
+    });
   });
 
-})
 
 
 
