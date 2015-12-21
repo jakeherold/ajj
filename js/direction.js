@@ -84,6 +84,7 @@ function initMap (){
   });//end of back button listener
 }//end of initmap
 
+
 function calculateAndDisplayRoute(directionsService, directionsDisplay){
   console.log(waypts);
   var avoidHighways = $('[name = avoidHighways]:checked').length;

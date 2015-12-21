@@ -3,7 +3,6 @@ page.base('/');
 page('home', myHome);
 page('about', about);
 page('trip', tripGen);
-page('results', results);
 page();
 
 //onLoad screen
@@ -34,6 +33,4 @@ function tripGen() {
   $('.tripGen').show();
   console.log('tripgen ran')
 };
-function results() {
-  console.log('results ran');
-}
+//Event listener for submit 'button'
