@@ -81,12 +81,14 @@
         <span id="total"></span>
       </h2>
       <h2 class="milesAnchor">Miles:</h2>
-      <h2 class="gallonsAnchor">Gallons:</h2>
-      <h2 class="costAnchor">Cost:</h2>
+      <h2 class="gallonsAnchor"> Average Gallons:</h2>
+      <h2 class="costAnchor">Average Cost:</h2>
       <button class = "fullWidth mobileButton" id="back">back</button>
     </section>
 
-    <div id="chart"><svg></svg></div>
+    <div id="costChart"><svg></svg></div>
+    <div id="mpgChart"><svg></svg></div>
+
   </section>
 
 
@@ -95,7 +97,7 @@
   <script type="text/javascript" src="js/libraries/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="js/libraries/handlebars-v4.0.5.js"></script>
   <!--Plugins-->
-  <script src="js/plugins/FitText.js"></script>
+  <script src="js/plugins/jquery.fittext.js"></script>
   <script type="text/javascript" src="js/libraries/d3.js"></script>
   <script src="js/libraries/nv.d3.min.js" type ="text/javascript"></script>
   <!--Model-->
@@ -105,11 +107,11 @@
   <script type="text/javascript" src="js/MapView.js"></script>
   <script src="js/direction.js"></script>
   <script src="js/vehicleRequest.js"></script>
-  <script type="text/javascript" src="js/index.js"></script>
+  <!-- <script type="text/javascript" src="js/index.js"></script> -->
   <script type="text/javascript" src="js/xml.js"></script>
   <script type="text/javascript" src="js/templateHandler.js"></script>
   <script type="text/javascript" src="js/d3Commander.js"></script>
-
+  <script type="text/javascript" src="js/index.js"></script>
 
 </body>
 
