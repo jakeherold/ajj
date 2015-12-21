@@ -80,21 +80,20 @@ vehicleRequest.index = function() {
             $(xml).find("text").each(function() {
                 $carVersion.append('<option>' + $(this).text() + '</option>');
             });
-
-            if($carVersion.children().length===1){
+            if ($carVersion.children().length===0){
+                $errorVehicle.append('Sorry, we could not find the information about the vehicle.');
+            }else{
                 var vehicleID = $(xml).find("text:contains('" + $carVersion.val() + "')").next("value").text();
                 console.log(vehicleID);
                 userCarId(vehicleID);
-            }else if ($carVersion.children().length===0){
-                $errorVehicle.append('Sorry, we could not find the information about the vehicle.');
             }
-
             $carVersion.on('change', function() {
                 var vehicleID = $(xml).find("text:contains('" + $carVersion.val() + "')").next("value").text();
                 userCarId(vehicleID);
             });
 
             function userCarId(vehicleID) {
+                $errorVehicle.html('');
                 console.log(vehicleID);
                 ajaxRequest = $.ajax({
                     type: "GET",
