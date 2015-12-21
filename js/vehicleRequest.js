@@ -14,7 +14,7 @@ vehicleRequest.index = function() {
 
     var date = new Date();
     var currentYear = date.getFullYear();
-    for (ii = 1984; ii < currentYear; ii++) {
+    for (ii = 1984; ii <= currentYear; ii++) {
         $carYear.append('<option>' + ii + '</option>')
     };
 
