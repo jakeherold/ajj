@@ -1,0 +1,21 @@
+nav {
+  height: 3rem;
+  border-radius: 4px;
+  margin: 2rem 0;
+}
+nav ul {
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+}
+nav ul li {
+  padding: 0 1rem;
+  display: inline-block;
+  text-align: center;
+}
+nav a {
+  color: #f4f3ef;
+}
+nav a:hover {
+  color: #F24738;
+}
