@@ -7,6 +7,10 @@
 .fullWidth {
     width: 100%;
 }
+a.fullWidth {
+    width: 100%;
+    display: block;
+}
 .halfWidth {
     width: 50%;
 }
@@ -19,16 +23,18 @@
 .center {
     margin: 0 auto;
 }
-.mobileButton {
+.mobileButton, a.mobileButton {
     font-family: 'Montserrat', sans-serif;
     font-size: 2rem;
     color: #f4f3ef;
     text-transform: uppercase;
+    text-align: center;
     height: 4rem;
     border-style: none;
     border-radius: 4px;
     background: #F24738;
     margin: .5rem 0;
+    padding: 1rem;
 }
 .mobileButton:active {
     background: #BF2A2A;
