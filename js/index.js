@@ -32,10 +32,12 @@ $.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
   user.avgMpg      =  metaMpgData.avgmpg;
   user.maxMpg      = metaMpgData.maxmpg;
   user.minMpg      = metaMpgData.minmpg;
-  user.gasQuantity =  (Math.round(((user.distance)/(user.avgMpg))*100)/100);
-  user.costReg     =  (Math.round(((user.gasQuantity) * (gas.regular))*100)/100);
-  user.costMid     =  ((user.gasQuantity) * (gas.midgrade));
-  user.costPrem    =  ((user.gasQuantity) * (gas.premium));
+  user.gasQuantityAvg = (Math.round(((user.distance)/(user.avgMpg))*100)/100);
+  user.gasQuantityMax = (Math.round(((user.distance)/(user.minMpg))*100)/100);
+  user.gasQuantityMin = (Math.round(((user.distance)/(user.maxMpg))*100)/100);
+  user.costReg     =  (Math.round(((user.gasQuantityAvg) * (gas.regular))*100)/100);
+  user.costMid     =  ((user.gasQuantityAvg) * (gas.midgrade));
+  user.costPrem    =  ((user.gasQuantityAvg) * (gas.premium));
   console.log(user);
   $printDataDefer.resolve()
 
@@ -43,9 +45,10 @@ $.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
       //Show miles traveled, total trip cost, and gallons of gas used in the DOM
       $(".milesAnchor").append(user.distance);
       $(".costAnchor").append(user.costReg);
-      $(".gallonsAnchor").append(user.gasQuantity);
+      $(".gallonsAnchor").append(user.gasQuantityAvg);
       //Prints chart using nv.d3
-      chartTrigger();
+      costChartTrigger();
+      mpgChartTrigger();
       //Stores whole user object in local storage one key at a time.
       localStorage.setItem('avgMpg', user.avgMpg);
       localStorage.setItem('maxMpg', user.maxMpg);
