@@ -124,9 +124,10 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay){
       var routes = response.routes;
       //Set event listener for center map button
       console.log(routes);
-      var ne = new google.maps.LatLng(routes[0].bounds.N.N,routes[0].bounds.j.N);
-      var sw = new google.maps.LatLng(routes[0].bounds.N.j,routes[0].bounds.j.j);
-      bounds = new google.maps.LatLngBounds(sw,ne);
+      // var ne = new google.maps.LatLng(routes[0].bounds.N.N,routes[0].bounds.j.N);
+      // var sw = new google.maps.LatLng(routes[0].bounds.N.j,routes[0].bounds.j.j);
+      // bounds = new google.maps.LatLngBounds(sw,ne);
+      var bounds = routes[0].bounds;
       setMapCenter(bounds);
       //calculate and print out distances
       var $summaryPanel = $('#directions-panel');
