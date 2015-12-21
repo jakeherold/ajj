@@ -14,7 +14,7 @@ vehicleRequest.index = function() {
 
     var date = new Date();
     var currentYear = date.getFullYear();
-    for (ii = 1984; ii < currentYear; ii++) {
+    for (ii = 1984; ii <= currentYear; ii++) {
         $carYear.append('<option>' + ii + '</option>')
     };
 
@@ -39,7 +39,7 @@ vehicleRequest.index = function() {
     //MODELSd
     $carMake.change(function() {
         console.log('carMake event fires');
-        var userSelectedMake = ""
+        var userSelectedMake = "";
         $(".carMake option:selected").each(function() {
             userSelectedMake += $(this).text();
         });
@@ -82,10 +82,10 @@ vehicleRequest.index = function() {
 
             $carVersion.on('change', function() {
                 userCarId();
-                console.log(vehicleID);
             });
 
             function userCarId() {
+                console.log(vehicleID);
                 ajaxRequest = $.ajax({
                     type: "GET",
                     url: 'https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/' + vehicleID,
