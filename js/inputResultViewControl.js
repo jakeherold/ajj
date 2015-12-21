@@ -1,29 +1,39 @@
-var mainControl    = {};
-var resultsControl = {};
+//routing
+page.base('/');
+page('home', myHome);
+page('about', about);
+page('trip', tripGen);
+page('results', results);
+page();
 
-//On load view
+//onLoad screen
+$('#pageResults').hide();
+$('.tripGen').hide();
+$('.aboutUs').hide();
+$('#userInput').show();
 
-function mainControl(){
+//home hide/show
+function myHome() {
   $('#pageResults').hide();
-};
-page('./', mainControl());
-//On submit results viewxs
-//Event listener for submit 'button'
-resultsControl.index = function() {
-$('#submit').on('click', function(e){
-  console.log('submittng map instructions');
-  e.preventDefault();
-  calculateAndDisplayRoute(directionsService, directionsDisplay,map);
-  $('#userInput').hide();
-  $('#pageResults').show();
-  google.maps.event.trigger(map, 'resize');
-});//end of submit button event listener
-//Event listener for back button
-$('#back').on('click', function(e){
-  e.preventDefault();
+  $('.tripGen').hide();
+  $('.aboutUs').hide();
   $('#userInput').show();
+  console.log('home ran')
+};
+function about() {
   $('#pageResults').hide();
-});//end of back button listener
+  $('#userInput').hide();
+  $('.tripGen').hide();
+  $('.aboutUs').show();
+  console.log('about ran')
+};
+function tripGen() {
+  $('#pageResults').hide();
+  $('#userInput').hide();
+  $('.aboutUs').hide();
+  $('.tripGen').show();
+  console.log('tripgen ran')
+};
+function results() {
+  console.log('results ran');
 }
-
-//page('./results', resultsControl.index());
