@@ -33,4 +33,3 @@ function tripGen() {
   $('.tripGen').show();
   console.log('tripgen ran')
 };
-//Event listener for submit 'button'
