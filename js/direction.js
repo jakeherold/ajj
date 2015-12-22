@@ -1,6 +1,7 @@
 var waypts = [];
 var user = {};
 var $distanceDefer = $.Deferred();
+var $localStorageDefer = $.Deferred();
 $('#submitWP').on('click', addWayPoint);
 $('#clearMidPoint').on('click', removeWayPoint);
 
@@ -49,6 +50,7 @@ function sum(prev, current) {
   return prev + current;
 }
 
+$.when($localStorageDefer).done(function(){ 
 //Calling routing and mapping functions
 function initMap() {
   console.log(1);
@@ -85,11 +87,21 @@ function initMap() {
   $('#tripGenButton').on('click', function(e) {
     e.preventDefault;
     console.log(userRandomTrip);
+    // localStorage.setItem('userRandomTrip', userRandomTrip);
+    // var test = localStorage.getItem('userRandomTrip');
+
     var randomTrip = userRandomTrip[0];
+    var randomTripString = JSON.stringify(randomTrip);
+    localStorage.setItem('randomTripString', randomTripString);
+    console.log(randomTripString);
+    var whatWeGetBack = localStorage.getItem('randomTripString');
+    console.log(whatWeGetBack);
+    var realItem = JSON.parse(whatWeGetBack);
+    console.log(realItem)
     randomTripGenerator(directionsService, directionsDisplay, randomTrip);
   });
-} //end of initmap
-
+  } //end of initmap
+});//end of defer wrapper
 function randomTripGenerator(directionsService, directionsDisplay, userRandomTrip) {
   var waypointArray = userRandomTrip.midpoints;
   var stopovers = [];
