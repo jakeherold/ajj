@@ -14,7 +14,7 @@ $.get('js/template.html', function(templateData) {
 var developers = [
   {
     name: "Alex Anderson",
-    blurb: "Alex is cool guy that builds cool stuff."
+    blurb: 'I grew up in Hillsboro, OR. I really enjoy: making beats that I post <a href="https://soundcloud.com/cold-teeth" target="_blank">here</a>, looking at cool rocks on the beach, playing with my dog as if I were a dogish manbeast, not using an umbrella, and most of all feeling like this pretty regularly:<img height="100px" width="100px" src="http://i.imgur.com/XWOuu8G.gif" alt="gas-logo"></img> you can lurk @<br><a href="https://soundcloud.com/cold-teeth" target="_blank">My GertHerb</a><br>or<br><a href="https://github.com/andalex" target="_blank">My Twerter</a>'
   },
   {
     name: "Jessica Hurr",

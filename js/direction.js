@@ -84,6 +84,9 @@ function initMap() {
   }
   $('#tripGenButton').on('click', function(e) {
     e.preventDefault;
+    $('.carSelection').hide();
+    $('#tripGenButton').hide();
+    $('#pageResults').show();
     console.log(userRandomTrip);
     var randomTrip = userRandomTrip[0];
     randomTripGenerator(directionsService, directionsDisplay, randomTrip);
