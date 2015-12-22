@@ -46,6 +46,7 @@
       </select>
       <select class="fullWidth mobileDrop carVersion">
       </select>
+      <h2 class="errorVehicle redOrangeText"></h2>
     </section>
 <section id="userInput">
     <section class="fullWidth mapForm">
@@ -76,7 +77,6 @@
     </section>
 
     <section class="mpgOutput">
-      <h2 class="errorVehicle redOrangeText"></h2>
       <h2 class="avgMpg">Your avg MPG: </h2>
       <h2 class="minMpg">Your min MPG: </h2>
       <h2 class="maxMpg">Your max MPG: </h2>
@@ -104,14 +104,14 @@
 
 
   </section>
+
   <section class="aboutUs">
-    <p>Hi this is a little about the dev team behind ga$.</p>
+    <section id="developerAnchor"></section>
   </section>
   <section class="tripGen">
     <a href="./results" class="fullWidth mobileButton" id="tripGenButton">Generate Trip</a>
   </section>
   </section>
-
 
   <!--SCRIPTS-->
   <!--Libraries-->
@@ -125,6 +125,7 @@
   <script src="js/libraries/nv.d3.min.js" type="text/javascript"></script>
   <!--Model-->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQitgmMI3c2ZOHWhDgNT4TppZqKZOISac&signed_in=true&callback=initMap" async defer></script>
+  <script src="js/printDeveloper.js"></script>
   <!--Controller-->
   <script type="text/javascript" src="js/inputResultViewControl.js"></script>
   <script type="text/javascript" src="js/MapView.js"></script>
@@ -132,7 +133,7 @@
   <script src="js/vehicleRequest.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
   <script type="text/javascript" src="js/xml.js"></script>
-  <script type="text/javascript" src="js/templateHandler.js"></script>
+  <!-- <script type="text/javascript" src="js/templateHandler.js"></script> -->
   <script type="text/javascript" src="js/d3Commander.js"></script>
   <script src="js/funTripData.js"></script>
 
