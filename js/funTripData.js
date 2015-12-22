@@ -38,9 +38,7 @@ var roadTripObj = [{
                     "Truckee, CA",
                     "San Francisco, CA",
                     "Salt Lake City, UT",
-                    "Calgary, AB, Canada",
-                    "Banff, AB, Canada",
-                    "Whitehorse, YT, Canada"]
+                    "Calgary, AB, Canada",]
     }, {
         start: "New York City, NY",
         end: "Portland, OR",
@@ -55,8 +53,7 @@ var roadTripObj = [{
                     "Jasckon, MS",
                     "New Orleans, LA",
                     "Atlanta, GA",
-                    "Charlotte, NC",
-                    "Richmond, VA"],
+                    "Charlotte, NC",],
     }, {
         start: "Los Angeles, CA",
         end: "New York City, NY",
@@ -75,13 +72,9 @@ var roadTripObj = [{
         end: "Havana, Cuba",
         midpoints: ["Miami, FL"]
     }]
-    //Random trip here
 var userRandomTrip = [];
-
-//Generates a random trip from data above.
 $(function() {
     var tripGen = Math.floor(Math.random() * 9);
     userRandomTrip.push(roadTripObj[tripGen])
     console.log(userRandomTrip);
-
 })

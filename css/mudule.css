@@ -1,7 +1,8 @@
 nav {
-  height: 3rem;
   border-radius: 4px;
-  margin: 2rem 0;
+  margin: 3rem auto 0 auto;
+  text-transform: uppercase;
+  letter-spacing: .2rem;
 }
 nav ul {
   margin: 0 auto;
@@ -9,13 +10,14 @@ nav ul {
   text-align: center;
 }
 nav ul li {
-  padding: 0 1rem;
+  padding: .5rem 1rem;
   display: inline-block;
   text-align: center;
+  border-radius: 4px;
 }
 nav a {
   color: #f4f3ef;
 }
-nav a:hover {
-  color: #F24738;
+nav ul li:hover {
+  background-color: #F24738;
 }

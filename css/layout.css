@@ -6,6 +6,7 @@
 }
 .fullWidth {
     width: 100%;
+    max-width: 960px;
 }
 a.fullWidth {
     width: 100%;
@@ -24,32 +25,35 @@ a.fullWidth {
     margin: 0 auto;
 }
 .mobileButton, a.mobileButton {
+    display: block;
     font-family: 'Montserrat', sans-serif;
     font-size: 2rem;
     color: #f4f3ef;
     text-transform: uppercase;
     text-align: center;
     height: 4rem;
+    max-width: 480px;
     border-style: none;
     border-radius: 4px;
     background: #F24738;
-    margin: .5rem 0;
+    margin: .5rem auto;
     padding: 1rem;
 }
 .mobileButton:active {
     background: #BF2A2A;
 }
-.mobileDrop {
+.mobileDrop, select {
+    display: block;
     font-family: 'Montserrat', sans-serif;
     text-align: center;
     height: 3rem;
+    max-width: 480px;
     border: 1px solid #3a3a3c;
-    margin: .5rem 0;
+    margin: .5rem auto;
 }
 input {
     font-family: 'Montserrat', sans-serif;
     height: 4rem;
-    width: 12rem;
     margin: 0 auto;
     border-style: none;
     border-radius: 4px;
@@ -92,5 +96,15 @@ select {
     background: #C1FEE5;
 }
 .gasLogo {
-    height: 90%;
+  width: 90%;
+  max-width: 25rem;
+  margin: 0 auto 4rem auto;
+}
+#shoppingInput{
+  margin-top: 2em;
+}
+.blurb {
+  width: 30rem;
+  margin: 0 auto;
+  text-align: center;
 }
