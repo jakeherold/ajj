@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="utf-8">
@@ -17,23 +16,23 @@
 
 <body>
   <header class="responsiveHeadline globalHeader">
-    <div>
-      <img class="gasLogo" src="assets/imgs/ga$logo.svg" alt="gas-logo">
+    <div class="center">
+      <img class="gasLogo center" src="assets/imgs/newgasLogo.svg" alt="gas-logo"></img>
     </div>
   </header>
   <nav class="responsiveHeadlinen fullWidth darkFill">
     <div class="center">
       <ul>
-        <li><a href="./home">Home</a></li>
-        <li><a href="./about">About</a></li>
-        <li><a href="shoppingList.html" target="_blank">Shopping List</a></li>
-        <li><a href="./trip">Trip Generator</a></li>
+        <li><img src="assets/open-iconic-master/home.svg" alt="home-icon" class="icon"></img><a href="./home">Home</a></li>
+        <li><img src="assets/open-iconic-master/people.svg" alt="about-icon" class="icon"></img><a href="./about">About</a></li>
+        <li><img src="assets/open-iconic-master/list.svg" alt="shoppinglist-icon" class="icon"></img><a href="shoppingList.html" target="_blank">Shopping List</a></li>
+        <li><img src="assets/open-iconic-master/loop-circular.svg" alt="trip-icon" class="icon"></img><a href="./trip">Trip Generator</a></li>
       </ul>
     </div>
   </nav>
   <!--***********user input**************-->
 
-    <section class="fullWidth carSelection">
+    <section class="fullWidth center carSelection">
       <h2 class="responsiveHeadline redOrangeText">Please select:</h2>
       <select class="fullWidth mobileDrop carYear">
         <option>Year</option>
@@ -49,20 +48,20 @@
       <h2 class="errorVehicle redOrangeText"></h2>
     </section>
 <section id="userInput">
-    <section class="fullWidth mapForm">
+    <section class="fullWidth center mapForm">
       <form return false>
-        <p class="redOrangeText">Start:</p>
-        <input class="fullWidth" id="start" type="text" placeholder="Start point" value="920 3rd Ave, Portland, OR">
-        <p class="redOrangeText">Midpoint:</p>
-        <input class="fullWidth" id="waypoint" type="text" placeholder="Mid point">
-        <button class="fullWidth mobileButton" id="submitWP">Add</button>
-        <select class="fullWidth" id="WPOutput" size="4" name="midPoints" multiple="multiple"></select>
-        <button class="fullWidth mobileButton" id="clearMidPoint">Clear mid points</button>
-        <p class="redOrangeText">End:</p>
-        <input class="fullWidth" id="end" type="text" placeholder="Destination" value="Beaverton, OR">
+        <h2 class="responsiveHeadline redOrangeText">Start:</h2>
+        <input class="fullWidth center" id="start" type="text" placeholder="Start point" value="920 3rd Ave, Portland, OR">
+        <h2 class="responsiveHeadline redOrangeText">Midpoint:</h2>
+        <input class="fullWidth center" id="waypoint" type="text" placeholder="Mid point">
+        <button class="fullWidth center mobileButton" id="submitWP">Add</button>
+        <select class="fullWidth center" id="WPOutput" size="4" name="midPoints" multiple="multiple"></select>
+        <button class="fullWidth center mobileButton" id="clearMidPoint">Clear mid points</button>
+        <h2 class="responsiveHeadline redOrangeText">End:</h2>
+        <input class="fullWidth center" id="end" type="text" placeholder="Destination" value="Beaverton, OR">
         <input class "checkBox" type="checkbox" name="avoidHighways">Avoid Freeway</input>
         <input class "checkBox" type="checkbox" name="avoidTolls">Avoid Toll</input>
-        <a href="./results" class="fullWidth mobileButton">Submit</a>
+        <a href="./results" class="fullWidth center mobileButton">Submit</a>
       </form>
     </section>
 
@@ -82,7 +81,7 @@
       <h2 class="maxMpg">Your max MPG: </h2>
     </section>
 
-    <section class="fullWidth resultsView">
+    <section class="fullWidth center resultsView">
       <h1 class="redOrangeText">Your Trip</h1>
       <h2>Total Distance:
         <span id="total"></span>
@@ -98,7 +97,7 @@
         <svg></svg>
       </div>
 
-      <a href="index.html" class="fullWidth mobileButton">Back</a>
+      <a href="index.html" class="fullWidth center mobileButton">Back</a>
     </section>
 
 
@@ -109,32 +108,33 @@
     <section id="developerAnchor"></section>
   </section>
   <section class="tripGen">
-    <a href="./results" class="fullWidth mobileButton" id="tripGenButton">Generate Trip</a>
+    <a href="./results" class="fullWidth center mobileButton" id="tripGenButton">Generate Trip</a>
   </section>
   </section>
 
   <!--SCRIPTS-->
   <!--Libraries-->
-  <script type="text/javascript" src="js/libraries/jquery-2.1.4.min.js"></script>
-  <script type="text/javascript" src="js/libraries/handlebars-v4.0.5.js"></script>
-  <script type="text/javascript" src="js/libraries/page/page.js"></script>
+  <script src="js/libraries/jquery-2.1.4.min.js"></script>
+  <script src="js/libraries/handlebars-v4.0.5.js"></script>
+  <script src="js/libraries/page/page.js"></script>
 
   <!--Plugins-->
   <script src="js/plugins/jquery.fittext.js"></script>
-  <script type="text/javascript" src="js/libraries/d3.js"></script>
-  <script src="js/libraries/nv.d3.min.js" type="text/javascript"></script>
+  <script src="js/libraries/d3.js"></script>
+  <script src="js/libraries/nv.d3.min.js"></script>
   <!--Model-->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQitgmMI3c2ZOHWhDgNT4TppZqKZOISac&signed_in=true&callback=initMap" async defer></script>
   <script src="js/printDeveloper.js"></script>
   <!--Controller-->
-  <script type="text/javascript" src="js/inputResultViewControl.js"></script>
-  <script type="text/javascript" src="js/MapView.js"></script>
+  <script src="js/MapView.js"></script>
   <script src="js/direction.js"></script>
   <script src="js/vehicleRequest.js"></script>
-  <script type="text/javascript" src="js/index.js"></script>
-  <script type="text/javascript" src="js/xml.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/xml.js"></script>
+  <script src="js/inputResultViewControl.js"></script>
+  <script src="js/router.js"></script>
   <!-- <script type="text/javascript" src="js/templateHandler.js"></script> -->
-  <script type="text/javascript" src="js/d3Commander.js"></script>
+  <script src="js/d3Commander.js"></script>
   <script src="js/funTripData.js"></script>
 
 </body>

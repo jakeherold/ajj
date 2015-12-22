@@ -13,6 +13,7 @@ h1, h2, h3, h4, h5 {
     font-family: 'Montserrat', sans-serif;
 }
 h1 {
+    font-size: 2rem;
     text-align: center;
     text-transform: uppercase;
 }
@@ -55,4 +56,8 @@ img {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+.icon {
+  size: 2rem;
+  padding: .2rem;
 }
