@@ -35,5 +35,3 @@ $(function(){
   });
   shopping.loadList();
 });//end of jquery ready function
-
-
