@@ -140,7 +140,7 @@ function randomTripGenerator (directionsService, directionsDisplay, userRandomTr
       window.alert('Directions request failed due to ' + status);
     }
   });//end of directionsService.route call
-}// end of randomTripGnerator
+}d// end of randomTripGnerator
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay){
   console.log(waypts);
