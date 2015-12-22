@@ -5,10 +5,9 @@ $(function(){
   $('.tripGen').hide();
   $('.aboutUs').hide();
   $('#userInput').show();
-  localBonkersShit = localStorage.getItem('superBonkers shit');
-  console.log(localBonkersShit);
   localStorageData = localStorage.getItem('avgMpg');
   if (localStorageData){
+    $('#prevLoad').show();
     console.log("Local Storage Data Exists");
     user.avgMpg         =  localStorage.getItem('avgMpg');
     user.maxMpg         =  localStorage.getItem('maxMpg');
@@ -20,16 +19,10 @@ $(function(){
     user.costMid        =  localStorage.getItem('costMid');
     user.costPrem       =  localStorage.getItem('costPrem');
     console.log(user);
-    var whatWeGetBack = localStorage.getItem('randomTripString');
-    console.log(whatWeGetBack);
-    var realItem = JSON.parse(whatWeGetBack);
-    console.log(realItem)
-    randomTripGenerator(directionsService, directionsDisplay, realItem);
-
   }
   else {
     console.log("Local data not set. Need user input");
-    $localStorageDefer.resolve();
+    $('#prevLoad').hide();
   }
 });
 
