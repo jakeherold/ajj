@@ -61,12 +61,12 @@ function setUserObjToLocalStorage (){
 }
 
 function printCostDistAndGas (){
-  $(".milesAnchor").html("");
-  $(".milesAnchor").append(user.distance);
+  // $(".milesAnchor").html("");
+  // $(".milesAnchor").append(user.distance);
   $(".costAnchor").html("");
-  $(".costAnchor").append(user.costReg);
+  $(".costAnchor").append("Cost = $" + user.costReg);
   $(".gallonsAnchor").html("");
-  $(".gallonsAnchor").append(user.gasQuantity);
+  $(".gallonsAnchor").append("Gallons = " + user.gasQuantityAvg);
 }
 function buildUserObject (){
   user.avgMpg      =  metaMpgData.avgmpg;
