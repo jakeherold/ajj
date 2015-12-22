@@ -77,11 +77,10 @@ var roadTripObj = [{
     }]
     //Random trip here
 var userRandomTrip = [];
-
 //Generates a random trip from data above.
 $(function() {
     var tripGen = Math.floor(Math.random() * 9);
     userRandomTrip.push(roadTripObj[tripGen])
     console.log(userRandomTrip);
-
+    
 })
