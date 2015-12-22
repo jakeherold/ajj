@@ -75,7 +75,15 @@ function initMap (){
       $('#userInput').hide();
       $('#pageResults').show();
       google.maps.event.trigger(map, 'resize');
+
   }
+  $('#tripGenButton').on('click', function(e) {
+    e.preventDefault;
+    console.log(userRandomTrip);
+     $('#start').val(userRandomTrip.start);
+     $('#end').val(userRandomTrip.end);
+     $('#waypoint').val(userRandomTrip.midpoints);
+  });
 }//end of initmap
 
 

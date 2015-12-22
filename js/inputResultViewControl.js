@@ -25,6 +25,7 @@ $(function(){
     console.log("Local data not set. Need user input");
   }
 });
+
 //routing
   page.base('/');
   page('home', myHome);
@@ -38,11 +39,13 @@ function myHome() {
   $('.tripGen').hide();
   $('.aboutUs').hide();
   $('#userInput').show();
+  $('.carSelection').show();
   console.log('home ran')
 };
 function about() {
   $('#pageResults').hide();
   $('#userInput').hide();
+  $('.carSelection').hide();
   $('.tripGen').hide();
   $('.aboutUs').show();
   console.log('about ran')
@@ -51,6 +54,7 @@ function tripGen() {
   $('#pageResults').hide();
   $('#userInput').hide();
   $('.aboutUs').hide();
+  $('.carSelection').show();
   $('.tripGen').show();
   console.log('tripgen ran')
 };
