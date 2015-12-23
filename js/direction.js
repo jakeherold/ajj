@@ -91,18 +91,20 @@ function initMap() {
         $('#userInput').hide();
         $('#pageResults').show();
         google.maps.event.trigger(map, 'resize');
-        var dataToLoad = localStorage.getItem('localBody');
-        if (dataToLoad !== null) {
-            getBodyFromLocalStorage();
-            console.log('set locStorage dataToLoad check');
-        } else {
-          //not working
-          //page.redirect('/home');
-        };
-    $('.BESTBUTT').on('click', function() {
-        setBodyDataToLocalStorage();
-        console.log('click')
-      });
+
+        //try this block in the morning 
+    //     var dataToLoad = localStorage.getItem('localBody');
+    //     if (dataToLoad !== null) {
+    //         getBodyFromLocalStorage();
+    //         console.log('set locStorage dataToLoad check');
+    //     } else {
+    //       //not working
+    //       //page.redirect('/home');
+    //     };
+    // $('.BESTBUTT').on('click', function() {
+    //     setBodyDataToLocalStorage();
+    //     console.log('click')
+    //   });
     };
     $('#tripGenButton').on('click', function(e) {
         e.preventDefault;
