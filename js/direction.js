@@ -95,6 +95,9 @@ function initMap() {
         if (dataToLoad !== null) {
             getBodyFromLocalStorage();
             console.log('set locStorage dataToLoad check');
+        } else {
+          //not working
+          //page.redirect('/home');
         };
     $('.BESTBUTT').on('click', function() {
         setBodyDataToLocalStorage();
