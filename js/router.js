@@ -13,6 +13,7 @@ page.base('/');
 page('home', myHome);
 page('about', about);
 page('trip', tripGen);
+page('results', result);
 page();
 
 //home hide/show
