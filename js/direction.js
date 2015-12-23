@@ -213,8 +213,8 @@ function randomTripGenerator(directionsService, directionsDisplay, userRandomTri
         var totalDistance = distances.reduce(sum);
         $total.html('');
         user.distance = (Math.round(totalDistance * 0.000621371 * 100) / 100);
-        buildUserObject();
-        printCostDistAndGas();
+        setBuildPrintMethods.buildUserObject();
+        setBuildPrintMethods.printCostDistAndGas();
         chart.costChartTrigger();
         chart.mpgChartTrigger();
         $distanceDefer.resolve();

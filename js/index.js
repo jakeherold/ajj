@@ -1,7 +1,7 @@
 //$(function(){
   var $gasDefer = $.Deferred();
   var $printDataDefer = $.Deferred();
-
+  var setBuildPrintMethods = {};
   var gas = {};
   // var gas.rawData;
   var gasAjaxRequest = $.ajax({
@@ -30,23 +30,23 @@
 
 
 $.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
-  buildUserObject();
+  setBuildPrintMethods.buildUserObject();
   $printDataDefer.resolve();
 
 
     $.when($printDataDefer).done(function(){
       console.log("printing Cost, distance, and gallons to DOM");
-      printCostDistAndGas(); //Show miles traveled, total trip cost, and gallons of gas used in the DOM
+      setBuildPrintMethods.printCostDistAndGas(); //Show miles traveled, total trip cost, and gallons of gas used in the DOM
       chart.costChartTrigger();//Prints chart using nv.d3
       chart.mpgChartTrigger();//Prints chart using nv.d3
-      setUserObjToLocalStorage();
+      setBuildPrintMethods.setUserObjToLocalStorage();
 
     });
   });
 
 
 //Stores whole user object in local storage one key at a time.
-function setUserObjToLocalStorage (){
+ setBuildPrintMethods.setUserObjToLocalStorage = function(){
   localStorage.setItem('avgMpg', user.avgMpg);
   localStorage.setItem('maxMpg', user.maxMpg);
   localStorage.setItem('minMpg', user.minMpg);
@@ -60,7 +60,7 @@ function setUserObjToLocalStorage (){
   localStorage.setItem('vehicleID', user.vehicleID);
 }
 
-function printCostDistAndGas (){
+ setBuildPrintMethods.printCostDistAndGas = function (){
   // $(".milesAnchor").html("");
   // $(".milesAnchor").append(user.distance);
   $(".costAnchor").html("");
@@ -68,7 +68,7 @@ function printCostDistAndGas (){
   $(".gallonsAnchor").html("");
   $(".gallonsAnchor").append("Gallons = " + user.gasQuantityAvg);
 }
-function buildUserObject (){
+setBuildPrintMethods.buildUserObject = function (){
   user.avgMpg      =  metaMpgData.avgmpg;
   user.maxMpg      = metaMpgData.maxmpg;
   user.minMpg      = metaMpgData.minmpg;
