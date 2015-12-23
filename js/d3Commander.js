@@ -22,9 +22,7 @@ function costChartTrigger(){
       ;
     localStorage.setItem('costChartData', costHtmlStorage[0][0].outerHTML);
     nv.utils.windowResize(chart.update);
-    // console.log("ending cost graph ");
-    // window.d3chartCost = chart
-    // console.log(chart);
+
     return chart;
   });
 
@@ -70,12 +68,11 @@ function mpgChartTrigger(){
 
     mpgHtmlStorage =d3.select('#mpgChart svg')
       .datum(m)
-      //// .transition().duration(500)
+      // .transition().duration(500)
       .call(chart)
       ;
     localStorage.setItem('mpgChartData', mpgHtmlStorage[0][0].outerHTML);
     nv.utils.windowResize(chart.update);
-    // $chartTwo.resolve();
     console.log("ending mpg graph shenannigans");
     window.d3chartMPG = chart;
     return chart;
