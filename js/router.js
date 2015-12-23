@@ -43,4 +43,7 @@ function tripGen() {
     $('#tripGenButton').show();
     console.log('tripgen ran')
 };
+$('.backButt').on('click', function() {
+    location.reload();
+})
 });
