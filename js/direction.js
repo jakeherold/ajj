@@ -96,7 +96,8 @@ vehicleRequest.userId = function (vehicleID) {
     $(xml).find("avgMpg").each(function() {
       metaMpgData.avgmpg = Math.round(parseInt($(this).text()));
       console.log(metaMpgData.avgmpg);
-      $avgMpg.append($(this).text());
+      $avgMpg.html('');
+      $avgMpg.append("Average MPG: " + $(this).text());
     });
     $(xml).find("maxMpg").each(function() {
       metaMpgData.maxmpg = $(this).text();

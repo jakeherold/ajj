@@ -61,8 +61,8 @@ $.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
 }
 
  setBuildPrintMethods.printCostDistAndGas = function (){
-  // $(".milesAnchor").html("");
-  // $(".milesAnchor").append(user.distance);
+  $(".milesAnchor").html("");
+  $(".milesAnchor").append(user.distance);
   $(".costAnchor").html("");
   $(".costAnchor").append("Cost = $" + user.costReg);
   $(".gallonsAnchor").html("");
