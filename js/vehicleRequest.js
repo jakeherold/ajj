@@ -2,23 +2,36 @@ var metaMpgData = {};
 var vehicleRequest = {};
 var $vehicleDefer = $.Deferred();
 
-vehicleRequest.selection = function() {
+$(function(){
+      var localInput = JSON.parse(localStorage.getItem('userInput'));
+      if(localInput){
+        $('.carSelection').html(localInput.carSelection);
+        $('.carYear').val(localInput.carYear);
+        $('.carMake').val(localInput.carMake);
+        $('.carModel').val(localInput.carModel);
+        $('#WPOutput').html(localInput.waypts);
+        $('#start').val(localInput.start);
+        $('#end').val(localInput.end);
+        $('#WPOutput option').each(function(index, elem){
+          var waypt = {
+            location: $(elem).val(),
+            stopover: true
+        }
+        waypts.push(waypt);
+    });
+        console.log(waypts);
+        setEventsCarInfo();
+    }
+    else{
+        console.log('no local input stored');
+        setEventsCarInfo();
+    }
+});//end of ready function
+function setEventsCarInfo(){
     var $carYear = $('.carYear');
     var $carMake = $('.carMake');
     var $carModel = $('.carModel');
     var $carVersion = $('.carVersion');
-    var $avgMpg = $('.avgMpg');
-    var $minMpg = $('.minMpg');
-    var $maxMpg = $('.maxMpg');
-    var $errorVehicle = $('.errorVehicle');
-
-    var date = new Date();
-    var currentYear = date.getFullYear();
-    for (ii = 1984; ii <= currentYear; ii++) {
-        $carYear.append('<option>' + ii + '</option>')
-    };
-
-  function setEventsCarInfo(){
     $carYear.on('change', function(e) {
         e.preventDefault;
         console.log('carYear event fires');
@@ -65,7 +78,25 @@ vehicleRequest.selection = function() {
         vehicleRequest.userCar();
     });
 }
+
+vehicleRequest.selection = function() {
+    var $carYear = $('.carYear');
+    var $carMake = $('.carMake');
+    var $carModel = $('.carModel');
+    var $carVersion = $('.carVersion');
+    var $avgMpg = $('.avgMpg');
+    var $minMpg = $('.minMpg');
+    var $maxMpg = $('.maxMpg');
+    var $errorVehicle = $('.errorVehicle');
+
+    var date = new Date();
+    var currentYear = date.getFullYear();
+    for (ii = 1984; ii <= currentYear; ii++) {
+        $carYear.append('<option>' + ii + '</option>')
+    };
+
 vehicleRequest.userCar = function() {
+    console.log('it runs');
     userYear = $(".carYear option:selected").text();
     userMake = $(".carMake option:selected").text();
     userModel = $(".carModel option:selected").text();
@@ -75,6 +106,7 @@ vehicleRequest.userCar = function() {
         dataType: "xml",
     });
     ajaxRequest.done(function(xml) {
+        var $carVersion = $('.carVersion');
         $carVersion.html('');
         $carVersion.append('<option>Version</option>');
         $(xml).find("text").each(function() {
