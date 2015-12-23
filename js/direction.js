@@ -1,10 +1,17 @@
 var waypts = [];
 var user = {};
 var $distanceDefer = $.Deferred();
+var $resultDefer = $.Deferred();
+var $googleDefer = $.Deferred();
 $('#submitWP').on('click', addWayPoint);
 $('#clearMidPoint').on('click', removeWayPoint);
 
 //helper functions
+function resolveGoogle(){
+  console.log('google resolve');
+  $googleDefer.resolve();
+}
+
 function setMapCenter(bounds) {
   //Event listener for centering map
   controlUI.addEventListener('click', function() {
@@ -48,8 +55,11 @@ function removeWayPoint(e) {
 function sum(prev, current) {
   return prev + current;
 }
-
+function result(){
+  $resultDefer.resolve();
+}
 //Calling routing and mapping functions
+$.when($googleDefer,$resultDefer).done(initMap);
 function initMap() {
   console.log(1);
   var mapElem = $('#map')[0];
@@ -72,16 +82,13 @@ function initMap() {
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
 
-  page('/results', result);
-
-  function result() {
+  function renderResults() {
     console.log('submittng map instructions');
     calculateAndDisplayRoute(directionsService, directionsDisplay, map);
     $('.carSelection').hide();
     $('#userInput').hide();
     $('#pageResults').show();
     google.maps.event.trigger(map, 'resize');
-
   }
   $('#tripGenButton').on('click', function(e) {
     e.preventDefault;
@@ -92,6 +99,7 @@ function initMap() {
     var randomTrip = userRandomTrip[0];
     randomTripGenerator(directionsService, directionsDisplay, randomTrip);
   });
+  renderResults();
 } //end of initmap
 
 function randomTripGenerator(directionsService, directionsDisplay, userRandomTrip) {
