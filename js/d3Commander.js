@@ -3,9 +3,8 @@
 *  COST CHART *
 ***************/
 function costChartTrigger(){
-  var costHtmlStorage;
   nv.addGraph(function() {
-    console.log("starting cost graph ");
+    console.log("starting addGraph shenannigans");
     var chart = nv.models.discreteBarChart()
       .x(function(d) { return d.label; })
       .y(function(d) { return d.value; })
@@ -15,19 +14,16 @@ function costChartTrigger(){
     var c = costChartData();
     console.log(c);
 
-    costHtmlStorage = d3.select('#costChart svg')
+    d3.select('#costChart svg')
       .datum(c)
-      //.transition().duration(500)
+      .transition().duration(500)
       .call(chart)
       ;
-    localStorage.setItem('costChartData', costHtmlStorage[0][0].outerHTML);
+
     nv.utils.windowResize(chart.update);
-    console.log("ending cost graph ");
-    window.d3chartCost = chart
-    console.log(chart);
+    console.log("ending addGraph shenannigans");
     return chart;
   });
-  
 }
 
 function costChartData () {
@@ -58,7 +54,7 @@ function costChartData () {
 ***************/
 function mpgChartTrigger(){
   nv.addGraph(function() {
-    console.log("starting mpg graph ");
+    console.log("starting addGraph shenannigans");
     var chart = nv.models.discreteBarChart()
       .x(function(d) { return d.label; })
       .y(function(d) { return d.value; })
@@ -70,19 +66,14 @@ function mpgChartTrigger(){
 
     d3.select('#mpgChart svg')
       .datum(m)
-      //// .transition().duration(500)
+      .transition().duration(500)
       .call(chart)
       ;
 
     nv.utils.windowResize(chart.update);
-    // $chartTwo.resolve();
-    console.log("ending mpg graph shenannigans");
-    window.d3chartMPG = chart;
+    console.log("ending addGraph shenannigans");
     return chart;
   });
-// if(chart) {
-//   $chartTwo.resolve();
-// }
 }
 function mpgChartData () {
   console.log("starting mpgCost Function")

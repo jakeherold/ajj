@@ -1,16 +1,19 @@
 var waypts = [];
 var user = {};
 var $distanceDefer = $.Deferred();
-var $resultDefer = $.Deferred();
-var $googleDefer = $.Deferred();
+var $vehicleDefer = $.Deferred();
+var vehicleID;
+var vehicleRequest = vehicleRequest||{};
+// var $resultDefer = $.Deferred();
+// var $googleDefer = $.Deferred();
 $('#submitWP').on('click', addWayPoint);
 $('#clearMidPoint').on('click', removeWayPoint);
 
 //helper functions
-function resolveGoogle(){
-  console.log('google resolve');
-  $googleDefer.resolve();
-}
+// function resolveGoogle(){
+//   console.log('google resolve');
+//   $googleDefer.resolve();
+// }
 
 function setMapCenter(bounds) {
   //Event listener for centering map
@@ -51,15 +54,70 @@ function removeWayPoint(e) {
   }
   createWPOutput(waypts);
 }
-
 function sum(prev, current) {
   return prev + current;
 }
-function result(){
-  $resultDefer.resolve();
+function grabInput(){
+  var userInput = {};
+  userInput.start = $('#start').val();
+  userInput.end = $('#end').val();
+  userInput.waypts = $('#WPOutput').html();
+  userInput.carSelection = $('.carSelection').html();
+  userInput.carYear = $('.carYear option:selected').val();
+  userInput.carMake = $('.carMake option:selected').val();
+  userInput.carModel = $('.carModel option:selected').val();
+  userInput.carVersion = $('.carVersion option:selected').val();
+  localStorage.setItem('userInput',JSON.stringify(userInput));
 }
+vehicleRequest.userId = function (vehicleID) {
+  var $errorVehicle = $('.errorVehicle');
+  var $avgMpg = $('.avgMpg');
+  var $minMpg = $('.minMpg');
+  var $maxMpg = $('.maxMpg');
+  $errorVehicle.html('');
+  console.log(vehicleID);
+  ajaxRequest = $.ajax({
+    type: "GET",
+    url: 'https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/' + vehicleID,
+    dataType: "xml",
+    statusCode: {
+      404: function() {
+                            //resets and error message in drop down section
+                            $errorVehicle.append('Sorry, we could not find the information about the vehicle.');
+                            $carYear.val(0);
+                            $carMake.val(0);
+                            $carModel.val(0);
+                            $carVersion.val(0);
+                          }
+                        }
+                      });
+  // console.log(xml);
+  ajaxRequest.done(function(xml) {
+    $(xml).find("avgMpg").each(function() {
+      metaMpgData.avgmpg = Math.round(parseInt($(this).text()));
+      console.log(metaMpgData.avgmpg);
+      $avgMpg.append($(this).text());
+    });
+    $(xml).find("maxMpg").each(function() {
+      metaMpgData.maxmpg = $(this).text();
+      $maxMpg.append($(this).text());
+    });
+    $(xml).find("minMpg").each(function() {
+      metaMpgData.minmpg = $(this).text();
+      $minMpg.append($(this).text());
+      console.log(metaMpgData);
+    });
+    $vehicleDefer.resolve();
+    console.log("vehicle defer resolved");
+
+  })
+            } //userCarId
+// function result(){
+//   $resultDefer.resolve();
+// }
+
 //Calling routing and mapping functions
-$.when($googleDefer,$resultDefer).done(initMap);
+// $.when($googleDefer,$resultDefer).done(initMap);
 function initMap() {
   console.log(1);
   var mapElem = $('#map')[0];
@@ -79,17 +137,21 @@ function initMap() {
   var centerControlDiv = document.createElement('div');
   var centerControl = new CenterControl(centerControlDiv, map);
   centerControlDiv.index = 1;
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(centerControlDiv);
 
-
-  function renderResults() {
-    console.log('submittng map instructions');
+  $('#submit').on('click', function(e){
+    e.preventDefault();
+    grabInput();
     calculateAndDisplayRoute(directionsService, directionsDisplay, map);
     $('.carSelection').hide();
     $('#userInput').hide();
     $('#pageResults').show();
     google.maps.event.trigger(map, 'resize');
-  }
+    if(typeof vehicleID==='undefined'){
+      vehicleID = localStorage.getItem('vehicleID');
+      vehicleRequest.userId(vehicleID);
+    }
+  });
   $('#tripGenButton').on('click', function(e) {
     e.preventDefault;
     $('.carSelection').hide();
@@ -99,7 +161,7 @@ function initMap() {
     var randomTrip = userRandomTrip[0];
     randomTripGenerator(directionsService, directionsDisplay, randomTrip);
   });
-  renderResults();
+  // renderResults();
 } //end of initmap
 
 function randomTripGenerator(directionsService, directionsDisplay, userRandomTrip) {
@@ -156,9 +218,9 @@ function randomTripGenerator(directionsService, directionsDisplay, userRandomTri
         $total.append((user.distance) + ' miles' + '<br>');
       }); //end of routes.forEach. Outputing distances, calculate prices
 
-    } else {
-      window.alert('Directions request failed due to ' + status);
-    }
+} else {
+  window.alert('Directions request failed due to ' + status);
+}
   }); //end of directionsService.route call
 } // end of randomTripGnerator
 
@@ -231,8 +293,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
       }); //end of routes.forEach. Outputing distances, calculate prices
 
-    } else {
-      window.alert('Directions request failed due to ' + status);
-    }
+} else {
+  window.alert('Directions request failed due to ' + status);
+}
   }); //end of directionsService.route call
 }

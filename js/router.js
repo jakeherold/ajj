@@ -13,6 +13,7 @@ page.base('/');
 page('home', myHome);
 page('about', about);
 page('trip', tripGen);
+// page('results', result);
 page();
 
 //home hide/show
@@ -27,14 +28,10 @@ function myHome() {
 
 function about() {
     $('#pageResults').hide();
-    console.log($('#pageResults').html());
-
     $('#userInput').hide();
-    console.log($('#userInput').html());
     $('.carSelection').hide();
     $('.tripGen').hide();
     $('.aboutUs').show();
-    console.log($('.aboutUs').html());
     console.log('about ran')
 };
 

@@ -31,35 +31,34 @@
 
 $.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
   buildUserObject();
-  console.log("build user fired");
   $printDataDefer.resolve();
-  console.log("print data resolved fired");
 
-  // $chartOne = $.Deferred();
-  // $chartTwo = $.Deferred();
 
     $.when($printDataDefer).done(function(){
       console.log("printing Cost, distance, and gallons to DOM");
       printCostDistAndGas(); //Show miles traveled, total trip cost, and gallons of gas used in the DOM
-      console.log("print cost dist and gas fired");
+      costChartTrigger();//Prints chart using nv.d3
+      mpgChartTrigger();//Prints chart using nv.d3
+      setUserObjToLocalStorage();
 
-      var costChart = costChartTrigger();//Prints chart using nv.d3
-      console.log("Cost chart trigger fired");
-      console.log(costChart);
-      var mpgChart = mpgChartTrigger();//Prints chart using nv.d3
-      console.log("mpg chart fired");
-      console.log(mpgChart);
-
-      //$.when($chartOne, $chartTwo).done(function(){
-        console.log("STARTING TO PRINT TO LOCAL STORGEE");
-
-      var localBody = $('body').html();
-      localStorage.setItem('localBody', localBody);
-
-      //});
     });
   });
 
+
+//Stores whole user object in local storage one key at a time.
+function setUserObjToLocalStorage (){
+  localStorage.setItem('avgMpg', user.avgMpg);
+  localStorage.setItem('maxMpg', user.maxMpg);
+  localStorage.setItem('minMpg', user.minMpg);
+  localStorage.setItem('gasQuantityAvg', user.gasQuantityAvg);
+  localStorage.setItem('gasQuantityMax', user.gasQuantityMax);
+  localStorage.setItem('gasQuantityMin', user.gasQuantityMin);
+  localStorage.setItem('costReg', user.costReg);
+  localStorage.setItem('costMid', user.costMid);
+  localStorage.setItem('costPrem', user.costPrem);
+  localStorage.setItem('distance', user.distance);
+  localStorage.setItem('vehicleID', user.vehicleID);
+}
 
 function printCostDistAndGas (){
   // $(".milesAnchor").html("");
@@ -73,13 +72,13 @@ function buildUserObject (){
   user.avgMpg      =  metaMpgData.avgmpg;
   user.maxMpg      = metaMpgData.maxmpg;
   user.minMpg      = metaMpgData.minmpg;
-  // user.vehicleID   = metaMpgData
   user.gasQuantityAvg = (Math.round(((user.distance)/(user.avgMpg))*100)/100);
   user.gasQuantityMax = (Math.round(((user.distance)/(user.minMpg))*100)/100);
   user.gasQuantityMin = (Math.round(((user.distance)/(user.maxMpg))*100)/100);
   user.costReg     =  (Math.round(((user.gasQuantityAvg) * (gas.regular))*100)/100);
   user.costMid     =  ((user.gasQuantityAvg) * (gas.midgrade));
   user.costPrem    =  ((user.gasQuantityAvg) * (gas.premium));
+  user.vehicleID = vehicleID;
   console.log(user);
 }
 

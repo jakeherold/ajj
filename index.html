@@ -32,39 +32,39 @@
   </nav>
   <!--***********user input**************-->
 
-    <section class="fullWidth center carSelection">
-      <h2 class="responsiveHeadline redOrangeText">Please select:</h2>
-      <select class="fullWidth mobileDrop carYear">
-        <option>Year</option>
-      </select>
-      <select class="fullWidth mobileDrop carMake">
-        <option>Make</option>
-      </select>
-      <select class="fullWidth mobileDrop carModel">
-        <option>Model</option>
-      </select>
-      <select class="fullWidth mobileDrop carVersion">
-      </select>
-      <h2 class="errorVehicle redOrangeText"></h2>
-    </section>
-<section id="userInput">
+  <section class="fullWidth center carSelection">
+    <h2 class="responsiveHeadline redOrangeText">Please select:</h2>
+    <select class="fullWidth mobileDrop carYear">
+      <option>Year</option>
+    </select>
+    <select class="fullWidth mobileDrop carMake">
+      <option>Make</option>
+    </select>
+    <select class="fullWidth mobileDrop carModel">
+      <option>Model</option>
+    </select>
+    <select class="fullWidth mobileDrop carVersion">
+    </select>
+    <h2 class="errorVehicle redOrangeText"></h2>
+  </section>
+  <section id="userInput">
     <section class="fullWidth center mapForm">
       <form return false>
         <h2 class="responsiveHeadline redOrangeText">Start:</h2>
-        <input class="fullWidth center" id="start" type="text" placeholder="Start point" value="920 3rd Ave, Portland, OR">
+        <input class="fullWidth center" id="start" type="text" placeholder="Start point">
         <h2 class="responsiveHeadline redOrangeText">Midpoint:</h2>
         <input class="fullWidth center" id="waypoint" type="text" placeholder="Mid point">
         <button class="fullWidth center mobileButton" id="submitWP">Add</button>
         <select class="fullWidth center" id="WPOutput" size="4" name="midPoints" multiple="multiple"></select>
         <button class="fullWidth center mobileButton" id="clearMidPoint">Clear mid points</button>
         <h2 class="responsiveHeadline redOrangeText">End:</h2>
-        <input class="fullWidth center" id="end" type="text" placeholder="Destination" value="Beaverton, OR">
+        <input class="fullWidth center" id="end" type="text" placeholder="Destination">
         <input class "checkBox" type="checkbox" name="avoidHighways">Avoid Freeway</input>
         <input class "checkBox" type="checkbox" name="avoidTolls">Avoid Toll</input>
-        <a href="./results" class="fullWidth center mobileButton">Submit</a>
+        <!-- <a href="./results" class="fullWidth center mobileButton">Submit</a> -->
+        <button id="submit" class="fullWidth center mobileButton">Submit</button>
       </form>
     </section>
-
   </section>
 
 
@@ -99,9 +99,6 @@
 
       <a href="index.html" class="fullWidth center mobileButton">Back</a>
     </section>
-
-
-
   </section>
 
   <section class="aboutUs">
@@ -110,32 +107,32 @@
   <section class="tripGen">
     <a href="./results" class="fullWidth center mobileButton" id="tripGenButton">Generate Trip</a>
   </section>
-  <!-- </section> -->
+</section>
 
-  <!--SCRIPTS-->
-  <!--Libraries-->
-  <script src="js/libraries/jquery-2.1.4.min.js"></script>
-  <script src="js/libraries/handlebars-v4.0.5.js"></script>
-  <script src="js/libraries/page/page.js"></script>
+<!--SCRIPTS-->
+<!--Libraries-->
+<script src="js/libraries/jquery-2.1.4.min.js"></script>
+<script src="js/libraries/handlebars-v4.0.5.js"></script>
+<script src="js/libraries/page/page.js"></script>
 
-  <!--Plugins-->
-  <script src="js/plugins/jquery.fittext.js"></script>
-  <script src="js/libraries/d3.js"></script>
-  <script src="js/libraries/nv.d3.min.js"></script>
-  <!--Model-->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQitgmMI3c2ZOHWhDgNT4TppZqKZOISac&signed_in=true&callback=resolveGoogle" async defer></script>
-  <script src="js/printDeveloper.js"></script>
-  <!--Controller-->
-  <script src="js/MapView.js"></script>
-  <script src="js/direction.js"></script>
-  <script src="js/vehicleRequest.js"></script>
-  <script src="js/index.js"></script>
-  <script src="js/xml.js"></script>
-  <script src="js/inputResultViewControl.js"></script>
-  <script src="js/router.js"></script>
-  <!-- <script type="text/javascript" src="js/templateHandler.js"></script> -->
-  <script src="js/d3Commander.js"></script>
-  <script src="js/funTripData.js"></script>
+<!--Plugins-->
+<script src="js/plugins/jquery.fittext.js"></script>
+<script src="js/libraries/d3.js"></script>
+<script src="js/libraries/nv.d3.min.js"></script>
+<!--Model-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQitgmMI3c2ZOHWhDgNT4TppZqKZOISac&signed_in=true&callback=initMap" async defer></script>
+<script src="js/printDeveloper.js"></script>
+<!--Controller-->
+<script src="js/MapView.js"></script>
+<script src="js/direction.js"></script>
+<script src="js/vehicleRequest.js"></script>
+<script src="js/index.js"></script>
+<script src="js/xml.js"></script>
+<script src="js/inputResultViewControl.js"></script>
+<script src="js/router.js"></script>
+<!-- <script type="text/javascript" src="js/templateHandler.js"></script> -->
+<script src="js/d3Commander.js"></script>
+<script src="js/funTripData.js"></script>
 
 </body>
 
