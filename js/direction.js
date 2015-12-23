@@ -75,7 +75,7 @@ vehicleRequest.userId = function (vehicleID) {
   var $minMpg = $('.minMpg');
   var $maxMpg = $('.maxMpg');
   $errorVehicle.html('');
-  console.log(vehicleID);
+  console.log( typeof vehicleID);
   ajaxRequest = $.ajax({
     type: "GET",
     url: 'https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/' + vehicleID,
@@ -96,15 +96,18 @@ vehicleRequest.userId = function (vehicleID) {
     $(xml).find("avgMpg").each(function() {
       metaMpgData.avgmpg = Math.round(parseInt($(this).text()));
       console.log(metaMpgData.avgmpg);
-      $avgMpg.append($(this).text());
+      $avgMpg.html('');
+      $avgMpg.append('Your avg MPG: '+$(this).text());
     });
     $(xml).find("maxMpg").each(function() {
       metaMpgData.maxmpg = $(this).text();
-      $maxMpg.append($(this).text());
+      $maxMpg.html('');
+      $maxMpg.append('Your max MPG: '+$(this).text());
     });
     $(xml).find("minMpg").each(function() {
       metaMpgData.minmpg = $(this).text();
-      $minMpg.append($(this).text());
+      $minMpg.html('');
+      $minMpg.append('Your min MPG: '+$(this).text());
       console.log(metaMpgData);
     });
     $vehicleDefer.resolve();
