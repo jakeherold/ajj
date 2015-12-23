@@ -1,7 +1,7 @@
 
 //Stores whole user object in local storage one key at a time.
 function setBodyDataToLocalStorage() {
-  var localBody = $('body').html();
+  var localBody = $('#gasCan').html();
   localStorage.setItem('localBody', localBody);
   console.log('set' + localStorage);
 }
@@ -9,6 +9,6 @@ function setBodyDataToLocalStorage() {
 function getBodyFromLocalStorage() {
     var dataToLoad = localStorage.getItem('localBody');
     console.log('get' + localStorage);
-    $('body').html('');
-    $('body').html(dataToLoad);
+    $('#gasCan').html('');
+    $('#gasCan').html(dataToLoad);
 }
