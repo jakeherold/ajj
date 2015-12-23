@@ -89,6 +89,7 @@ function initMap() {
     $('#userInput').hide();
     $('#pageResults').show();
     google.maps.event.trigger(map, 'resize');
+    setBodyDataToLocalStorage();
   }
   $('#tripGenButton').on('click', function(e) {
     e.preventDefault;

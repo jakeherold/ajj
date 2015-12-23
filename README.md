@@ -1,5 +1,6 @@
 # Mobile app for road trip costs
 # By team: ajj
+THIS TEAM CONSISTS OF J.HURR, A.ANDERSON, and J.HEROLD
 
 #### Welcome to ga$! We want to make your road trip easier!
 
@@ -23,5 +24,5 @@
       * fueleconomy.gov api
       * google-maps api
 
-#### About us: 
+#### About us:
   * We are students in the code-fellows 301 program in beautiful Portland, OR. Ga$ is our sweet 'lil web-app for our final project. We would like to personally thank coffee for the support during this build.
