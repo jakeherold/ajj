@@ -215,8 +215,8 @@ function randomTripGenerator(directionsService, directionsDisplay, userRandomTri
         user.distance = (Math.round(totalDistance * 0.000621371 * 100) / 100);
         buildUserObject();
         printCostDistAndGas();
-        costChartTrigger();
-        mpgChartTrigger();
+        chart.costChartTrigger();
+        chart.mpgChartTrigger();
         $distanceDefer.resolve();
         console.log("DistanceDefer resolved");
         console.log("user's total distance in miles: " + user.distance);

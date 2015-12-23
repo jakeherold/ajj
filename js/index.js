@@ -37,8 +37,8 @@ $.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
     $.when($printDataDefer).done(function(){
       console.log("printing Cost, distance, and gallons to DOM");
       printCostDistAndGas(); //Show miles traveled, total trip cost, and gallons of gas used in the DOM
-      costChartTrigger();//Prints chart using nv.d3
-      mpgChartTrigger();//Prints chart using nv.d3
+      chart.costChartTrigger();//Prints chart using nv.d3
+      chart.mpgChartTrigger();//Prints chart using nv.d3
       setUserObjToLocalStorage();
 
     });
