@@ -3,13 +3,13 @@ $(function() {
     $('.tripGen').hide();
     $('.aboutUs').hide();
     $('#userInput').show();
-//routing
+
 page.base('/');
 page('home', myHome);
 page('about', about);
 page('trip', tripGen);
 page();
-//home hide/show
+
 function myHome() {
     $('#pageResults').hide();
     $('.tripGen').hide();
