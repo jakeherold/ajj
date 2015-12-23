@@ -1,6 +1,6 @@
 nav {
   border-radius: 4px;
-  margin: 3rem auto 0 auto;
+  margin: 2rem auto 1rem auto;
   text-transform: uppercase;
   letter-spacing: .2rem;
 }
@@ -20,4 +20,9 @@ nav a {
 }
 nav ul li:hover {
   background-color: #F24738;
+}
+.gasLogo {
+    width: 100%;
+    max-width: 25rem;
+    margin: 0 auto;
 }

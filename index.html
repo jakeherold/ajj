@@ -1,138 +1,144 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-  <meta charset="utf-8">
-  <title>ga$</title>
-  <link rel="stylesheet" type="text/css" href="css/base.css">
-  <link rel="stylesheet" type="text/css" href="css/layout.css">
-  <link rel="stylesheet" type="text/css" href="css/colors.css">
-  <link rel="stylesheet" type="text/css" href="css/mudule.css">
-  <link rel="stylesheet" type="text/css" href="css/scrollOpacity.css">
-  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="css/nv.d3.min.css">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>ga$</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/colors.css">
+    <link rel="stylesheet" type="text/css" href="css/mudule.css">
+    <link rel="stylesheet" type="text/css" href="css/scrollOpacity.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/nv.d3.min.css">
 </head>
 
 <body>
-  <header class="responsiveHeadline globalHeader">
-    <div class="center">
-      <img class="gasLogo center" src="assets/imgs/newgasLogo.svg" alt="gas-logo"></img>
-    </div>
-  </header>
-  <nav class="responsiveHeadlinen fullWidth darkFill">
-    <div class="center">
-      <ul>
-        <li><img src="assets/open-iconic-master/home.svg" alt="home-icon" class="icon"></img><a href="home">Home</a></li>
-        <li><img src="assets/open-iconic-master/people.svg" alt="about-icon" class="icon"></img><a href="about">About</a></li>
-        <li><img src="assets/open-iconic-master/list.svg" alt="shoppinglist-icon" class="icon"></img><a href="shoppingList.html" target="_blank">Shopping List</a></li>
-        <li><img src="assets/open-iconic-master/loop-circular.svg" alt="trip-icon" class="icon"></img><a href="trip">Trip Generator</a></li>
-      </ul>
-    </div>
-  </nav>
-  <!--***********user input**************-->
-
-  <section class="fullWidth center carSelection">
-    <h2 class="responsiveHeadline redOrangeText">Please select:</h2>
-    <select class="fullWidth mobileDrop carYear">
-      <option>Year</option>
-    </select>
-    <select class="fullWidth mobileDrop carMake">
-      <option>Make</option>
-    </select>
-    <select class="fullWidth mobileDrop carModel">
-      <option>Model</option>
-    </select>
-    <select class="fullWidth mobileDrop carVersion">
-    </select>
-    <h2 class="errorVehicle redOrangeText"></h2>
-  </section>
-  <section id="userInput">
-    <section class="fullWidth center mapForm">
-      <form return false>
-        <h2 class="responsiveHeadline redOrangeText">Start:</h2>
-        <input class="fullWidth center" id="start" type="text" placeholder="Start point">
-        <h2 class="responsiveHeadline redOrangeText">Midpoint:</h2>
-        <input class="fullWidth center" id="waypoint" type="text" placeholder="Mid point">
-        <button class="fullWidth center mobileButton" id="submitWP">Add</button>
-        <select class="fullWidth center" id="WPOutput" size="4" name="midPoints" multiple="multiple"></select>
-        <button class="fullWidth center mobileButton" id="clearMidPoint">Clear mid points</button>
-        <h2 class="responsiveHeadline redOrangeText">End:</h2>
-        <input class="fullWidth center" id="end" type="text" placeholder="Destination">
-        <input class "checkBox" type="checkbox" name="avoidHighways">Avoid Freeway</input>
-        <input class "checkBox" type="checkbox" name="avoidTolls">Avoid Toll</input>
-        <!-- <a href="./results" class="fullWidth center mobileButton">Submit</a> -->
-        <button id="submit" class="fullWidth center mobileButton">Submit</button>
-      </form>
+    <header class="responsiveHeadline globalHeader">
+        <div class="center">
+            <img class="gasLogo center" src="assets/imgs/travelTransparent.svg" alt="gas-logo"></img>
+        </div>
+    </header>
+    <nav class="responsiveHeadlinen fullWidth darkFill">
+        <div class="center">
+            <ul>
+                <li>
+                    <a href="home">
+                        <img src="assets/open-iconic-master/home.svg" alt="home-icon" class="icon"></img>Home</a>
+                </li>
+                <li>
+                    <a href="about">
+                        <img src="assets/open-iconic-master/people.svg" alt="about-icon" class="icon"></img>About</a>
+                </li>
+                <li>
+                    <a href="shoppingList.html" target="_blank">
+                        <img src="assets/open-iconic-master/list.svg" alt="shoppinglist-icon" class="icon"></img>Shopping List</a>
+                </li>
+                <li>
+                    <a href="trip">
+                        <img src="assets/open-iconic-master/loop-circular.svg" alt="trip-icon" class="icon"></img>Trip Generator</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--***********user input**************-->
+    <section class="fullWidth center carSelection">
+        <h2 class="responsiveHeadline redOrangeText">Please select:</h2>
+        <select class="fullWidth mobileDrop carYear">
+            <option>Year</option>
+        </select>
+        <select class="fullWidth mobileDrop carMake">
+            <option>Make</option>
+        </select>
+        <select class="fullWidth mobileDrop carModel">
+            <option>Model</option>
+        </select>
+        <select class="fullWidth mobileDrop carVersion">
+        </select>
+        <h2 class="errorVehicle redOrangeText"></h2>
     </section>
-  </section>
+    <section id="userInput">
+        <section class="fullWidth center mapForm">
+            <form return false>
+                <h2 class="responsiveHeadline redOrangeText">Start:</h2>
+                <input class="fullWidth center" id="start" type="text" placeholder="Start point">
+                <h2 class="responsiveHeadline redOrangeText">Midpoint:</h2>
+                <input class="fullWidth center" id="waypoint" type="text" placeholder="Mid point">
+                <button class="fullWidth center mobileButton" id="submitWP">Add</button>
+                <select class="fullWidth center" id="WPOutput" size="4" name="midPoints" multiple="multiple"></select>
+                <button class="fullWidth center mobileButton" id="clearMidPoint">Clear mid points</button>
+                <h2 class="responsiveHeadline redOrangeText">End:</h2>
+                <input class="fullWidth center" id="end" type="text" placeholder="Destination">
+                <input class "checkBox" type="checkbox" name="avoidHighways">Avoid Freeway</input>
+                <input class "checkBox" type="checkbox" name="avoidTolls">Avoid Toll</input>
+                <button id="submit" class="fullWidth center mobileButton">Submit</button>
+            </form>
+        </section>
+    </section>
+    <div id="templateAnchor"></div>
+    <section id="pageResults">
+        <section class="">
+            <div id="map"></div>
+            <div id="directions-panel" class="fullWidth center darkFill lightText"></div>
+        </section>
 
+        <section class="mpgOutput">
+            <h2 class="avgMpg">Your avg MPG: </h2>
+            <h2 class="minMpg">Your min MPG: </h2>
+            <h2 class="maxMpg">Your max MPG: </h2>
+        </section>
 
-  <div id="templateAnchor"></div>
-  <section id="pageResults">
-    <section class="">
-      <div id="map"></div>
-      <div id="directions-panel"></div>
+        <section class="fullWidth center resultsView">
+            <h1 class="redOrangeText">Your Trip:</h1>
+            <h2>Total Distance:
+                <span id="total"></span>
+            </h2>
+
+            <h2 class="gallonsAnchor">Gallons:</h2>
+            <h2 class="costAnchor">Cost:</h2>
+
+            <div id="mpgChart">
+                <svg></svg>
+            </div>
+            <div id="costChart">
+                <svg></svg>
+            </div>
+
+            <a href="index.html" class="fullWidth center mobileButton">Back</a>
+        </section>
     </section>
 
-    <section class="mpgOutput">
-      <h2 class="avgMpg">Your avg MPG: </h2>
-      <h2 class="minMpg">Your min MPG: </h2>
-      <h2 class="maxMpg">Your max MPG: </h2>
+    <section class="aboutUs">
+        <section id="developerAnchor"></section>
+    </section>
+    <section class="tripGen">
+        <button id="tripGenButton" class="fullWidth center mobileButton">Submit</button>
+    </section>
     </section>
 
-    <section class="fullWidth center resultsView">
-      <h1 class="redOrangeText">Your Trip</h1>
-      <h2>Total Distance:
-        <span id="total"></span>
-      </h2>
-
-      <h2 class="gallonsAnchor">Gallons:</h2>
-      <h2 class="costAnchor">Cost:</h2>
-
-      <div id="mpgChart">
-        <svg></svg>
-      </div>
-      <div id="costChart">
-        <svg></svg>
-      </div>
-
-      <a href="index.html" class="fullWidth center mobileButton">Back</a>
-    </section>
-  </section>
-
-  <section class="aboutUs">
-    <section id="developerAnchor"></section>
-  </section>
-  <section class="tripGen">
-    <a href="./results" class="fullWidth center mobileButton" id="tripGenButton">Generate Trip</a>
-  </section>
-</section>
-
-<!--SCRIPTS-->
-<!--Libraries-->
-<script src="js/libraries/jquery-2.1.4.min.js"></script>
-<script src="js/libraries/handlebars-v4.0.5.js"></script>
-<script src="js/libraries/page/page.js"></script>
-
-<!--Plugins-->
-<script src="js/plugins/jquery.fittext.js"></script>
-<script src="js/libraries/d3.js"></script>
-<script src="js/libraries/nv.d3.min.js"></script>
-<!--Model-->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQitgmMI3c2ZOHWhDgNT4TppZqKZOISac&signed_in=true&callback=initMap" async defer></script>
-<script src="js/printDeveloper.js"></script>
-<!--Controller-->
-<script src="js/MapView.js"></script>
-<script src="js/direction.js"></script>
-<script src="js/vehicleRequest.js"></script>
-<script src="js/index.js"></script>
-<script src="js/xml.js"></script>
-<script src="js/inputResultViewControl.js"></script>
-<script src="js/router.js"></script>
-<!-- <script type="text/javascript" src="js/templateHandler.js"></script> -->
-<script src="js/d3Commander.js"></script>
-<script src="js/funTripData.js"></script>
+    <!--Libraries-->
+    <script src="js/libraries/jquery-2.1.4.min.js"></script>
+    <script src="js/libraries/handlebars-v4.0.5.js"></script>
+    <script src="js/libraries/page/page.js"></script>
+    <!--Plugins-->
+    <script src="js/plugins/jquery.fittext.js"></script>
+    <script src="js/libraries/d3.js"></script>
+    <script src="js/libraries/nv.d3.min.js"></script>
+    <!--Model-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQitgmMI3c2ZOHWhDgNT4TppZqKZOISac&signed_in=true&callback=initMap" async defer></script>
+    <script src="js/printDeveloper.js"></script>
+    <!--Controller-->
+    <script src="js/MapView.js"></script>
+    <script src="js/direction.js"></script>
+    <script src="js/vehicleRequest.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/xml.js"></script>
+    <script src="js/inputResultViewControl.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/d3Commander.js"></script>
+    <script src="js/funTripData.js"></script>
 
 </body>
 
