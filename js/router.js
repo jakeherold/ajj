@@ -7,7 +7,6 @@ $(function() {
     $('.tripGen').hide();
     $('.aboutUs').hide();
     $('#userInput').show();
-});
 //routing
 page.base('/');
 page('home', myHome);
@@ -48,3 +47,4 @@ function tripGen() {
     $('#tripGenButton').show();
     console.log('tripgen ran')
 };
+});

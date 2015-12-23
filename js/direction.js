@@ -89,8 +89,17 @@ function initMap() {
     $('#userInput').hide();
     $('#pageResults').show();
     google.maps.event.trigger(map, 'resize');
+
+    //resolve and check local storage - load - if not route to home
+    getBodyDataToLocalStorage();
+  };
+  $.(".BESTBUTT").on('click', function(){
+    //save a new results page to local storage.
     setBodyDataToLocalStorage();
-  }
+  })
+
+
+
   $('#tripGenButton').on('click', function(e) {
     e.preventDefault;
     $('.carSelection').hide();
