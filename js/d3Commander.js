@@ -2,7 +2,8 @@
 /***************
 *  COST CHART *
 ***************/
-function costChartTrigger(){
+var chart = {};
+ chart.costChartTrigger = function(){
   nv.addGraph(function() {
     console.log("starting addGraph shenannigans");
     var chart = nv.models.discreteBarChart()
@@ -52,7 +53,7 @@ function costChartData () {
 /***************
 *  MPG   CHART *
 ***************/
-function mpgChartTrigger(){
+chart.mpgChartTrigger = function(){
   nv.addGraph(function() {
     console.log("starting addGraph shenannigans");
     var chart = nv.models.discreteBarChart()

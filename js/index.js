@@ -1,7 +1,7 @@
 //$(function(){
   var $gasDefer = $.Deferred();
   var $printDataDefer = $.Deferred();
-
+  var setBuildPrintMethods = {};
   var gas = {};
   // var gas.rawData;
   var gasAjaxRequest = $.ajax({
@@ -30,23 +30,23 @@
 
 
 $.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
-  buildUserObject();
+  setBuildPrintMethods.buildUserObject();
   $printDataDefer.resolve();
 
 
     $.when($printDataDefer).done(function(){
       console.log("printing Cost, distance, and gallons to DOM");
-      printCostDistAndGas(); //Show miles traveled, total trip cost, and gallons of gas used in the DOM
-      costChartTrigger();//Prints chart using nv.d3
-      mpgChartTrigger();//Prints chart using nv.d3
-      setUserObjToLocalStorage();
+      setBuildPrintMethods.printCostDistAndGas(); //Show miles traveled, total trip cost, and gallons of gas used in the DOM
+      chart.costChartTrigger();//Prints chart using nv.d3
+      chart.mpgChartTrigger();//Prints chart using nv.d3
+      setBuildPrintMethods.setUserObjToLocalStorage();
 
     });
   });
 
 
 //Stores whole user object in local storage one key at a time.
-function setUserObjToLocalStorage (){
+ setBuildPrintMethods.setUserObjToLocalStorage = function(){
   localStorage.setItem('avgMpg', user.avgMpg);
   localStorage.setItem('maxMpg', user.maxMpg);
   localStorage.setItem('minMpg', user.minMpg);
@@ -58,17 +58,16 @@ function setUserObjToLocalStorage (){
   localStorage.setItem('costPrem', user.costPrem);
   localStorage.setItem('distance', user.distance);
   localStorage.setItem('vehicleID', user.vehicleID);
-}
-
-function printCostDistAndGas (){
+};
+ setBuildPrintMethods.printCostDistAndGas = function (){
   $(".milesAnchor").html("");
   $(".milesAnchor").append(user.distance);
   $(".costAnchor").html("");
   $(".costAnchor").append("Cost = $" + user.costReg);
   $(".gallonsAnchor").html("");
   $(".gallonsAnchor").append("Gallons = " + user.gasQuantityAvg);
-}
-function buildUserObject (){
+};
+setBuildPrintMethods.buildUserObject = function (){
   user.avgMpg      =  metaMpgData.avgmpg;
   user.maxMpg      = metaMpgData.maxmpg;
   user.minMpg      = metaMpgData.minmpg;
@@ -80,7 +79,4 @@ function buildUserObject (){
   user.costPrem    =  ((user.gasQuantityAvg) * (gas.premium));
   user.vehicleID = vehicleID;
   console.log(user);
-}
-
-
-//}); //ends IIFE
+};
