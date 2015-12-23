@@ -60,7 +60,9 @@ function result() {
     $resultDefer.resolve();
 }
 //Calling routing and mapping functions
-$.when($googleDefer, $resultDefer).done(initMap);
+$.when($googleDefer, $resultDefer).done(initMap);//Enter if statement to select initmap?
+
+
 
 function initMap() {
     console.log(1);
@@ -91,6 +93,7 @@ function initMap() {
         $('#userInput').hide();
         $('#pageResults').show();
         google.maps.event.trigger(map, 'resize');
+
 
         //try this block in the morning
         var dataToLoad = localStorage.getItem('localBody');
