@@ -72,11 +72,12 @@ function initMap() {
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
 
-  page('results', result);
+  page('/results', result);
 
   function result() {
     console.log('submittng map instructions');
     calculateAndDisplayRoute(directionsService, directionsDisplay, map);
+    $('.carSelection').hide();
     $('#userInput').hide();
     $('#pageResults').show();
     google.maps.event.trigger(map, 'resize');

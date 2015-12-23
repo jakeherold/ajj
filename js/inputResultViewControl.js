@@ -1,19 +1,23 @@
-$(function(){
-  localStorageData = localStorage.getItem('avgMpg');
-  if (localStorageData){
+$(function() {
+  var localBody = $('body').html();
+  localStorageData = localStorage.getItem('localBody');
+
+  if (localStorageData) {
     console.log("Local Storage Data Exists");
-    user.avgMpg         =  localStorage.getItem('avgMpg');
-    user.maxMpg         =  localStorage.getItem('maxMpg');
-    user.minMpg         =  localStorage.getItem('minMpg');
-    user.gasQuantityAvg =  localStorage.getItem('gasQuantityAvg');;
-    user.gasQuantityMax =  localStorage.getItem('gasQuantityMax');
-    user.gasQuantityMin =  localStorage.getItem('gasQuantityMin');
-    user.costReg        =  localStorage.getItem('costReg');
-    user.costMid        =  localStorage.getItem('costMid');
-    user.costPrem       =  localStorage.getItem('costPrem');
-    console.log(user);
+    getUserObjFromStore();
+  } else {
+    console.log("Local data not set. Need user input. Data will be set in result function on direction.js");
   }
-  else {
-    console.log("Local data not set. Need user input");
+
+  //Stores whole user object in local storage one key at a time.
+  function setUserObjToLocalStorage() {
+    localStorage.setItem('localBody', localBody);
+    console.log('set' + localStorage);
+  }
+
+
+  function getUserObjFromStore() {
+    localStorage.getItem('localBody');
+    console.log('get' + localStorage);
   }
 });
