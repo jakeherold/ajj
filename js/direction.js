@@ -89,8 +89,14 @@ function initMap() {
     $('#userInput').hide();
     $('#pageResults').show();
     google.maps.event.trigger(map, 'resize');
-    var localBody = $('body').html();
-    setBodyDataToLocalStorage();
+    var localStorageData = localStorage.getItem('localBody');
+    if (localStorageData !== null) {
+      console.log("Local Storage Data Exists");
+      getBodyFromLocalStorage();
+    } else {
+      setBodyDataToLocalStorage();
+      console.log('local storage set in directions.js');
+    }
 
   }
   $('#tripGenButton').on('click', function(e) {
