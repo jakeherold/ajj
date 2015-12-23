@@ -3,7 +3,6 @@ $(function() {
     $('.tripGen').hide();
     $('.aboutUs').hide();
     $('#userInput').show();
-
 page.base('/');
 page('home', myHome);
 page('about', about);
@@ -37,4 +36,7 @@ function tripGen() {
     $('#tripGenButton').show();
     console.log('tripgen ran')
 };
+$('.backButt').on('click', function() {
+    location.reload();
+})
 });
