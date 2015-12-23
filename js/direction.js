@@ -1,6 +1,9 @@
 var waypts = [];
 var user = {};
 var $distanceDefer = $.Deferred();
+var $vehicleDefer = $.Deferred();
+var vehicleID;
+var vehicleRequest = vehicleRequest||{};
 // var $resultDefer = $.Deferred();
 // var $googleDefer = $.Deferred();
 $('#submitWP').on('click', addWayPoint);
@@ -55,16 +58,60 @@ function sum(prev, current) {
   return prev + current;
 }
 function grabInput(){
-      var userInput = {};
-      userInput.start = $('#start').val();
-      userInput.end = $('#end').val();
-      userInput.waypts = $('#WPOutput').html();
-      userInput.carSelection = $('.carSelection').html();
-      userInput.carYear = $('.carYear option:selected').val();
-      userInput.carMake = $('.carMake option:selected').val();
-      userInput.carModel = $('.carModel option:selected').val();
-      localStorage.setItem('userInput',JSON.stringify(userInput));
-  }
+  var userInput = {};
+  userInput.start = $('#start').val();
+  userInput.end = $('#end').val();
+  userInput.waypts = $('#WPOutput').html();
+  userInput.carSelection = $('.carSelection').html();
+  userInput.carYear = $('.carYear option:selected').val();
+  userInput.carMake = $('.carMake option:selected').val();
+  userInput.carModel = $('.carModel option:selected').val();
+  userInput.carVersion = $('.carVersion option:selected').val();
+  localStorage.setItem('userInput',JSON.stringify(userInput));
+}
+vehicleRequest.userId = function (vehicleID) {
+  var $errorVehicle = $('.errorVehicle');
+  var $avgMpg = $('.avgMpg');
+  var $minMpg = $('.minMpg');
+  var $maxMpg = $('.maxMpg');
+  $errorVehicle.html('');
+  console.log(vehicleID);
+  ajaxRequest = $.ajax({
+    type: "GET",
+    url: 'https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/' + vehicleID,
+    dataType: "xml",
+    statusCode: {
+      404: function() {
+                            //resets and error message in drop down section
+                            $errorVehicle.append('Sorry, we could not find the information about the vehicle.');
+                            $carYear.val(0);
+                            $carMake.val(0);
+                            $carModel.val(0);
+                            $carVersion.val(0);
+                          }
+                        }
+                      });
+  // console.log(xml);
+  ajaxRequest.done(function(xml) {
+    $(xml).find("avgMpg").each(function() {
+      metaMpgData.avgmpg = Math.round(parseInt($(this).text()));
+      console.log(metaMpgData.avgmpg);
+      $avgMpg.append($(this).text());
+    });
+    $(xml).find("maxMpg").each(function() {
+      metaMpgData.maxmpg = $(this).text();
+      $maxMpg.append($(this).text());
+    });
+    $(xml).find("minMpg").each(function() {
+      metaMpgData.minmpg = $(this).text();
+      $minMpg.append($(this).text());
+      console.log(metaMpgData);
+    });
+    $vehicleDefer.resolve();
+    console.log("vehicle defer resolved");
+
+  })
+            } //userCarId
 // function result(){
 //   $resultDefer.resolve();
 // }
@@ -100,6 +147,10 @@ function initMap() {
     $('#userInput').hide();
     $('#pageResults').show();
     google.maps.event.trigger(map, 'resize');
+    if(typeof vehicleID==='undefined'){
+      vehicleID = localStorage.getItem('vehicleID');
+      vehicleRequest.userId(vehicleID);
+    }
   });
   $('#tripGenButton').on('click', function(e) {
     e.preventDefault;

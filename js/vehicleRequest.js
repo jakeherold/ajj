@@ -1,6 +1,5 @@
 var metaMpgData = {};
-var vehicleRequest = {};
-var $vehicleDefer = $.Deferred();
+var vehicleRequest = vehicleRequest||{};
 
 $(function(){
       var localInput = JSON.parse(localStorage.getItem('userInput'));
@@ -9,6 +8,7 @@ $(function(){
         $('.carYear').val(localInput.carYear);
         $('.carMake').val(localInput.carMake);
         $('.carModel').val(localInput.carModel);
+        $('.carVersion').val(localInput.carVersion);
         $('#WPOutput').html(localInput.waypts);
         $('#start').val(localInput.start);
         $('#end').val(localInput.end);
@@ -116,50 +116,12 @@ vehicleRequest.userCar = function() {
             $errorVehicle.append('Sorry, we could not find the information about the vehicle.');
         } else {
             $carVersion.on('change', function() {
-                var vehicleID = $(xml).find("text:contains('" + $carVersion.val() + "')").next("value").text();
+                vehicleID = $(xml).find("text:contains('" + $carVersion.val() + "')").next("value").text();
                 vehicleRequest.userId(vehicleID);
             });
         }
 
-        vehicleRequest.userId = function (vehicleID) {
-            $errorVehicle.html('');
-            console.log(vehicleID);
-            ajaxRequest = $.ajax({
-                type: "GET",
-                url: 'https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/' + vehicleID,
-                dataType: "xml",
-                statusCode: {
-                    404: function() {
-                            //resets and error message in drop down section
-                            $errorVehicle.append('Sorry, we could not find the information about the vehicle.');
-                            $carYear.val(0);
-                            $carMake.val(0);
-                            $carModel.val(0);
-                            $carVersion.val(0);
-                        }
-                    }
-                });
-            console.log(xml);
-            ajaxRequest.done(function(xml) {
-                $(xml).find("avgMpg").each(function() {
-                    metaMpgData.avgmpg = Math.round(parseInt($(this).text()));
-                    console.log(metaMpgData.avgmpg);
-                    $avgMpg.append($(this).text());
-                });
-                $(xml).find("maxMpg").each(function() {
-                    metaMpgData.maxmpg = $(this).text();
-                    $maxMpg.append($(this).text());
-                });
-                $(xml).find("minMpg").each(function() {
-                    metaMpgData.minmpg = $(this).text();
-                    $minMpg.append($(this).text());
-                    console.log(metaMpgData);
-                });
-                $vehicleDefer.resolve();
-                console.log("vehicle defer resolved");
-
-            })
-            } //userCarId
+        vehicleRequest.userId(vehicleID);
         }); //ajax done #1
     } //userCarVersion
 }; //vehicleRequest closed

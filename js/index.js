@@ -78,6 +78,7 @@ function buildUserObject (){
   user.costReg     =  (Math.round(((user.gasQuantityAvg) * (gas.regular))*100)/100);
   user.costMid     =  ((user.gasQuantityAvg) * (gas.midgrade));
   user.costPrem    =  ((user.gasQuantityAvg) * (gas.premium));
+  user.vehicleID = vehicleID;
   console.log(user);
 }
 
