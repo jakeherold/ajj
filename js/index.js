@@ -50,12 +50,6 @@ $.when($gasDefer, $distanceDefer , $vehicleDefer).done(function(){
       console.log("mpg chart fired");
       console.log(mpgChart);
 
-      //$.when($chartOne, $chartTwo).done(function(){
-        console.log("STARTING TO PRINT TO LOCAL STORGEE");
-
-      var localBody = $('body').html();
-      localStorage.setItem('localBody', localBody);
-
       //});
     });
   });
