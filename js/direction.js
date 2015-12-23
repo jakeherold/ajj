@@ -157,8 +157,13 @@ function initMap() {
     $('.carSelection').hide();
     $('#tripGenButton').hide();
     $('#pageResults').show();
+    google.maps.event.trigger(map, 'resize');
     console.log(userRandomTrip);
     var randomTrip = userRandomTrip[0];
+    if(typeof vehicleID==='undefined'){
+      vehicleID = localStorage.getItem('vehicleID');
+      vehicleRequest.userId(vehicleID);
+    }
     randomTripGenerator(directionsService, directionsDisplay, randomTrip);
   });
   // renderResults();
