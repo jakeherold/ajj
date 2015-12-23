@@ -1,24 +1,19 @@
-$(function() {
-  localStorageData = localStorage.getItem('localBody');
-
-  if (localStorageData) {
+$(function(){
+  localStorageData = localStorage.getItem('avgMpg');
+  if (localStorageData){
     console.log("Local Storage Data Exists");
-    getBodyFromLocalStorage();
-  } else {
-    console.log("Local data not set. Need user input. Data will be set in result function on direction.js");
-    //setBodyDataToLocalStorage();
+    user.avgMpg         =  localStorage.getItem('avgMpg');
+    user.maxMpg         =  localStorage.getItem('maxMpg');
+    user.minMpg         =  localStorage.getItem('minMpg');
+    user.gasQuantityAvg =  localStorage.getItem('gasQuantityAvg');;
+    user.gasQuantityMax =  localStorage.getItem('gasQuantityMax');
+    user.gasQuantityMin =  localStorage.getItem('gasQuantityMin');
+    user.costReg        =  localStorage.getItem('costReg');
+    user.costMid        =  localStorage.getItem('costMid');
+    user.costPrem       =  localStorage.getItem('costPrem');
+    console.log(user);
+  }
+  else {
+    console.log("Local data not set. Need user input");
   }
 });
-  //Stores whole user object in local storage one key at a time.
-  function setBodyDataToLocalStorage() {
-  var localBody = $('body').html();
-    localStorage.setItem('localBody', localBody);
-    console.log('set' + localStorage);
-  }
-
-
-  function getBodyFromLocalStorage() {
-    var dataToLoad = localStorage.getItem('localBody');
-    console.log('get' + localStorage);
-    $('body').html(dataToLoad);
-  }
