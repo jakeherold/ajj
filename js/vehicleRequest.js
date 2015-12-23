@@ -122,6 +122,8 @@ vehicleRequest.selection = function() {
                         $minMpg.append($(this).text());
                         console.log(metaMpgData);
                     });
+                    user.vehicleID = vehicleID;
+                    console.log(user.vehicleID);
                     $vehicleDefer.resolve();
                     console.log("vehicle defer resolved");
 

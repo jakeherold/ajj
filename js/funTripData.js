@@ -76,5 +76,5 @@ var userRandomTrip = [];
 $(function() {
     var tripGen = Math.floor(Math.random() * 9);
     userRandomTrip.push(roadTripObj[tripGen])
-    console.log(userRandomTrip);
+    // console.log(userRandomTrip);
 })
