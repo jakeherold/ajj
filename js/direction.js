@@ -1,16 +1,16 @@
 var waypts = [];
 var user = {};
 var $distanceDefer = $.Deferred();
-var $resultDefer = $.Deferred();
-var $googleDefer = $.Deferred();
+// var $resultDefer = $.Deferred();
+// var $googleDefer = $.Deferred();
 $('#submitWP').on('click', addWayPoint);
 $('#clearMidPoint').on('click', removeWayPoint);
 
 //helper functions
-function resolveGoogle(){
-  console.log('google resolve');
-  $googleDefer.resolve();
-}
+// function resolveGoogle(){
+//   console.log('google resolve');
+//   $googleDefer.resolve();
+// }
 
 function setMapCenter(bounds) {
   //Event listener for centering map
@@ -51,15 +51,26 @@ function removeWayPoint(e) {
   }
   createWPOutput(waypts);
 }
-
 function sum(prev, current) {
   return prev + current;
 }
-function result(){
-  $resultDefer.resolve();
-}
+function grabInput(){
+      var userInput = {};
+      userInput.start = $('#start').val();
+      userInput.end = $('#end').val();
+      userInput.waypts = $('#WPOutput').html();
+      userInput.carSelection = $('.carSelection').html();
+      userInput.carYear = $('.carYear option:selected').val();
+      userInput.carMake = $('.carMake option:selected').val();
+      userInput.carModel = $('.carModel option:selected').val();
+      localStorage.setItem('userInput',JSON.stringify(userInput));
+  }
+// function result(){
+//   $resultDefer.resolve();
+// }
+
 //Calling routing and mapping functions
-$.when($googleDefer,$resultDefer).done(initMap);
+// $.when($googleDefer,$resultDefer).done(initMap);
 function initMap() {
   console.log(1);
   var mapElem = $('#map')[0];
@@ -79,16 +90,17 @@ function initMap() {
   var centerControlDiv = document.createElement('div');
   var centerControl = new CenterControl(centerControlDiv, map);
   centerControlDiv.index = 1;
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(centerControlDiv);
 
-  function renderResults() {
-    console.log('submittng map instructions');
+  $('#submit').on('click', function(e){
+    e.preventDefault();
+    grabInput();
     calculateAndDisplayRoute(directionsService, directionsDisplay, map);
     $('.carSelection').hide();
     $('#userInput').hide();
     $('#pageResults').show();
     google.maps.event.trigger(map, 'resize');
-  }
+  });
   $('#tripGenButton').on('click', function(e) {
     e.preventDefault;
     $('.carSelection').hide();
@@ -98,7 +110,7 @@ function initMap() {
     var randomTrip = userRandomTrip[0];
     randomTripGenerator(directionsService, directionsDisplay, randomTrip);
   });
-  renderResults();
+  // renderResults();
 } //end of initmap
 
 function randomTripGenerator(directionsService, directionsDisplay, userRandomTrip) {
@@ -155,9 +167,9 @@ function randomTripGenerator(directionsService, directionsDisplay, userRandomTri
         $total.append((user.distance) + ' miles' + '<br>');
       }); //end of routes.forEach. Outputing distances, calculate prices
 
-    } else {
-      window.alert('Directions request failed due to ' + status);
-    }
+} else {
+  window.alert('Directions request failed due to ' + status);
+}
   }); //end of directionsService.route call
 } // end of randomTripGnerator
 
@@ -230,8 +242,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
       }); //end of routes.forEach. Outputing distances, calculate prices
 
-    } else {
-      window.alert('Directions request failed due to ' + status);
-    }
+} else {
+  window.alert('Directions request failed due to ' + status);
+}
   }); //end of directionsService.route call
 }
