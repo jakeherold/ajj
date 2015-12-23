@@ -97,7 +97,7 @@ vehicleRequest.userId = function (vehicleID) {
       metaMpgData.avgmpg = Math.round(parseInt($(this).text()));
       console.log(metaMpgData.avgmpg);
       $avgMpg.html('');
-      $avgMpg.append('Your avg MPG: '+$(this).text());
+      $avgMpg.append("Average MPG: " + $(this).text());
     });
     $(xml).find("maxMpg").each(function() {
       metaMpgData.maxmpg = $(this).text();
@@ -216,10 +216,10 @@ function randomTripGenerator(directionsService, directionsDisplay, userRandomTri
         var totalDistance = distances.reduce(sum);
         $total.html('');
         user.distance = (Math.round(totalDistance * 0.000621371 * 100) / 100);
-        buildUserObject();
-        printCostDistAndGas();
-        costChartTrigger();
-        mpgChartTrigger();
+        setBuildPrintMethods.buildUserObject();
+        setBuildPrintMethods.printCostDistAndGas();
+        chart.costChartTrigger();
+        chart.mpgChartTrigger();
         $distanceDefer.resolve();
         console.log("DistanceDefer resolved");
         console.log("user's total distance in miles: " + user.distance);

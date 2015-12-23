@@ -11,6 +11,7 @@ $(function(){
     user.costReg        =  localStorage.getItem('costReg');
     user.costMid        =  localStorage.getItem('costMid');
     user.costPrem       =  localStorage.getItem('costPrem');
+    user.vehicleID      =  localStorage.getItem('vehicleID');
     console.log(user);
   }
   else {
