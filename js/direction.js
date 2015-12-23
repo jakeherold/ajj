@@ -1,5 +1,6 @@
 var waypts = [];
 var user = {};
+var distance = distance || {};
 var $distanceDefer = $.Deferred();
 var $vehicleDefer = $.Deferred();
 var vehicleID;
@@ -15,14 +16,14 @@ $('#clearMidPoint').on('click', removeWayPoint);
 //   $googleDefer.resolve();
 // }
 
-function setMapCenter(bounds) {
+distance.setMapCenter = function (bounds) {
   //Event listener for centering map
   controlUI.addEventListener('click', function() {
     map.fitBounds(bounds);
   });
 }
 
-function createWPOutput(waypts) {
+distance.createWPOutput = function (waypts) {
   var $WPOutput = $('#WPOutput');
   $WPOutput.html('');
   waypts.forEach(function(waypt) {
@@ -37,7 +38,7 @@ function addWayPoint(e) {
     stopover: true
   };
   waypts.push(waypt);
-  createWPOutput(waypts);
+  distance.createWPOutput(waypts);
 }
 
 function removeWayPoint(e) {
@@ -52,12 +53,12 @@ function removeWayPoint(e) {
     }
     waypts.push(waypt);
   }
-  createWPOutput(waypts);
+  distance.createWPOutput(waypts);
 }
-function sum(prev, current) {
+distance.sum = function (prev, current) {
   return prev + current;
 }
-function grabInput(){
+distance.grabInput = function (){
   var userInput = {};
   userInput.start = $('#start').val();
   userInput.end = $('#end').val();
@@ -141,7 +142,7 @@ function initMap() {
 
   $('#submit').on('click', function(e){
     e.preventDefault();
-    grabInput();
+    distance.grabInput();
     calculateAndDisplayRoute(directionsService, directionsDisplay, map);
     $('.carSelection').hide();
     $('#userInput').hide();
@@ -164,34 +165,17 @@ function initMap() {
       vehicleID = localStorage.getItem('vehicleID');
       vehicleRequest.userId(vehicleID);
     }
-    randomTripGenerator(directionsService, directionsDisplay, randomTrip);
+    distance.randomTripGenerator(directionsService, directionsDisplay, randomTrip);
   });
   // renderResults();
 } //end of initmap
-
-function randomTripGenerator(directionsService, directionsDisplay, userRandomTrip) {
-  var waypointArray = userRandomTrip.midpoints;
-  var stopovers = [];
-  waypointArray.forEach(function(waypt) {
-    var stopover = {
-      location: waypt,
-      stopover: true
-    };
-    stopovers.push(stopover);
-  });
-  var request = {
-    origin: userRandomTrip.start,
-    destination: userRandomTrip.end,
-    waypoints: stopovers,
-    optimizeWaypoints: true,
-    travelMode: google.maps.TravelMode.DRIVING
-  }
+distance.handleRequest = function (request, directionsService, directionsDisplay){
   directionsService.route(request, function(response, status) {
     if (status === google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(response);
       var routes = response.routes;
       var bounds = routes[0].bounds;
-      setMapCenter(bounds);
+      distance.setMapCenter(bounds);
       var $summaryPanel = $('#directions-panel');
       var $total = $('#total');
       $summaryPanel.html(''); //clear directions panel to display more output
@@ -210,7 +194,7 @@ function randomTripGenerator(directionsService, directionsDisplay, userRandomTri
           counter++;
         }); //end of route.leg.forEach
         //Print out total distance
-        var totalDistance = distances.reduce(sum);
+        var totalDistance = distances.reduce(distance.sum);
         $total.html('');
         user.distance = (Math.round(totalDistance * 0.000621371 * 100) / 100);
         buildUserObject();
@@ -227,6 +211,25 @@ function randomTripGenerator(directionsService, directionsDisplay, userRandomTri
   window.alert('Directions request failed due to ' + status);
 }
   }); //end of directionsService.route call
+};
+distance.randomTripGenerator = function (directionsService, directionsDisplay, userRandomTrip) {
+  var waypointArray = userRandomTrip.midpoints;
+  var stopovers = [];
+  waypointArray.forEach(function(waypt) {
+    var stopover = {
+      location: waypt,
+      stopover: true
+    };
+    stopovers.push(stopover);
+  });
+  var request = {
+    origin: userRandomTrip.start,
+    destination: userRandomTrip.end,
+    waypoints: stopovers,
+    optimizeWaypoints: true,
+    travelMode: google.maps.TravelMode.DRIVING
+  }
+  distance.handleRequest(request, directionsService,directionsDisplay);
 } // end of randomTripGnerator
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -261,45 +264,5 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     }
     console.log(request);
   } //end of if-else request preparation
-  directionsService.route(request, function(response, status) {
-    if (status === google.maps.DirectionsStatus.OK) {
-
-      directionsDisplay.setDirections(response);
-      var routes = response.routes;
-      console.log(routes);
-      var bounds = routes[0].bounds;
-      setMapCenter(bounds);
-      //calculate and print out distances
-      var $summaryPanel = $('#directions-panel');
-      var $total = $('#total');
-      $summaryPanel.html(''); //clear directions panel to display more output
-      routes.forEach(function(route) {
-        var lat, lng;
-        var distances = [];
-        var counter = 1;
-        route.legs.forEach(function(leg) {
-          var routeSegment = '<b>Segment ' + counter + '</b><br>';
-          var start_address = 'Start: ' + leg.start_address + '<br>';
-          var end_address = 'End: ' + leg.end_address + '<br>';
-          var distance = leg.distance.text + '<br>';
-          distances.push(leg.distance.value);
-          var insert = routeSegment + start_address + end_address + distance;
-          $summaryPanel.append(insert);
-          counter++;
-        }); //end of route.leg.forEach
-        //Print out total distance
-        var totalDistance = distances.reduce(sum);
-        $total.html('');
-        user.distance = (Math.round(totalDistance * 0.000621371 * 100) / 100);
-        $distanceDefer.resolve();
-        console.log("DistanceDefer resolved");
-        console.log("user's total distance in miles: " + user.distance);
-        $total.append((user.distance) + ' miles' + '<br>');
-
-      }); //end of routes.forEach. Outputing distances, calculate prices
-
-} else {
-  window.alert('Directions request failed due to ' + status);
-}
-  }); //end of directionsService.route call
+  distance.handleRequest(request,directionsService,directionsDisplay);
 }
