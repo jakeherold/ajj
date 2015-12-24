@@ -1,6 +1,5 @@
 var waypts = [];
 var user = {};
-var distance = distance || {};
 var $distanceDefer = $.Deferred();
 var $vehicleDefer = $.Deferred();
 var vehicleID;
@@ -16,14 +15,14 @@ $('#clearMidPoint').on('click', removeWayPoint);
 //   $googleDefer.resolve();
 // }
 
-distance.setMapCenter = function (bounds) {
+function setMapCenter(bounds) {
   //Event listener for centering map
   controlUI.addEventListener('click', function() {
     map.fitBounds(bounds);
   });
 }
 
-distance.createWPOutput = function (waypts) {
+function createWPOutput(waypts) {
   var $WPOutput = $('#WPOutput');
   $WPOutput.html('');
   waypts.forEach(function(waypt) {
@@ -38,7 +37,7 @@ function addWayPoint(e) {
     stopover: true
   };
   waypts.push(waypt);
-  distance.createWPOutput(waypts);
+  createWPOutput(waypts);
 }
 
 function removeWayPoint(e) {
@@ -53,12 +52,12 @@ function removeWayPoint(e) {
     }
     waypts.push(waypt);
   }
-  distance.createWPOutput(waypts);
+  createWPOutput(waypts);
 }
-distance.sum = function (prev, current) {
+function sum(prev, current) {
   return prev + current;
 }
-distance.grabInput = function (){
+function grabInput(){
   var userInput = {};
   userInput.start = $('#start').val();
   userInput.end = $('#end').val();
@@ -98,7 +97,7 @@ vehicleRequest.userId = function (vehicleID) {
       metaMpgData.avgmpg = Math.round(parseInt($(this).text()));
       console.log(metaMpgData.avgmpg);
       $avgMpg.html('');
-      $avgMpg.append('Your avg MPG: '+$(this).text());
+      $avgMpg.append("Average MPG: " + $(this).text());
     });
     $(xml).find("maxMpg").each(function() {
       metaMpgData.maxmpg = $(this).text();
@@ -145,7 +144,7 @@ function initMap() {
 
   $('#submit').on('click', function(e){
     e.preventDefault();
-    distance.grabInput();
+    grabInput();
     calculateAndDisplayRoute(directionsService, directionsDisplay, map);
     $('.carSelection').hide();
     $('#userInput').hide();
@@ -168,17 +167,34 @@ function initMap() {
       vehicleID = localStorage.getItem('vehicleID');
       vehicleRequest.userId(vehicleID);
     }
-    distance.randomTripGenerator(directionsService, directionsDisplay, randomTrip);
+    randomTripGenerator(directionsService, directionsDisplay, randomTrip);
   });
   // renderResults();
 } //end of initmap
-distance.handleRequest = function (request, directionsService, directionsDisplay){
+
+function randomTripGenerator(directionsService, directionsDisplay, userRandomTrip) {
+  var waypointArray = userRandomTrip.midpoints;
+  var stopovers = [];
+  waypointArray.forEach(function(waypt) {
+    var stopover = {
+      location: waypt,
+      stopover: true
+    };
+    stopovers.push(stopover);
+  });
+  var request = {
+    origin: userRandomTrip.start,
+    destination: userRandomTrip.end,
+    waypoints: stopovers,
+    optimizeWaypoints: true,
+    travelMode: google.maps.TravelMode.DRIVING
+  }
   directionsService.route(request, function(response, status) {
     if (status === google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(response);
       var routes = response.routes;
       var bounds = routes[0].bounds;
-      distance.setMapCenter(bounds);
+      setMapCenter(bounds);
       var $summaryPanel = $('#directions-panel');
       var $total = $('#total');
       $summaryPanel.html(''); //clear directions panel to display more output
@@ -197,13 +213,13 @@ distance.handleRequest = function (request, directionsService, directionsDisplay
           counter++;
         }); //end of route.leg.forEach
         //Print out total distance
-        var totalDistance = distances.reduce(distance.sum);
+        var totalDistance = distances.reduce(sum);
         $total.html('');
         user.distance = (Math.round(totalDistance * 0.000621371 * 100) / 100);
-        buildUserObject();
-        printCostDistAndGas();
-        costChartTrigger();
-        mpgChartTrigger();
+        setBuildPrintMethods.buildUserObject();
+        setBuildPrintMethods.printCostDistAndGas();
+        chart.costChartTrigger();
+        chart.mpgChartTrigger();
         $distanceDefer.resolve();
         console.log("DistanceDefer resolved");
         console.log("user's total distance in miles: " + user.distance);
@@ -214,25 +230,6 @@ distance.handleRequest = function (request, directionsService, directionsDisplay
   window.alert('Directions request failed due to ' + status);
 }
   }); //end of directionsService.route call
-};
-distance.randomTripGenerator = function (directionsService, directionsDisplay, userRandomTrip) {
-  var waypointArray = userRandomTrip.midpoints;
-  var stopovers = [];
-  waypointArray.forEach(function(waypt) {
-    var stopover = {
-      location: waypt,
-      stopover: true
-    };
-    stopovers.push(stopover);
-  });
-  var request = {
-    origin: userRandomTrip.start,
-    destination: userRandomTrip.end,
-    waypoints: stopovers,
-    optimizeWaypoints: true,
-    travelMode: google.maps.TravelMode.DRIVING
-  }
-  distance.handleRequest(request, directionsService,directionsDisplay);
 } // end of randomTripGnerator
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -267,5 +264,45 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     }
     console.log(request);
   } //end of if-else request preparation
-  distance.handleRequest(request,directionsService,directionsDisplay);
+  directionsService.route(request, function(response, status) {
+    if (status === google.maps.DirectionsStatus.OK) {
+
+      directionsDisplay.setDirections(response);
+      var routes = response.routes;
+      console.log(routes);
+      var bounds = routes[0].bounds;
+      setMapCenter(bounds);
+      //calculate and print out distances
+      var $summaryPanel = $('#directions-panel');
+      var $total = $('#total');
+      $summaryPanel.html(''); //clear directions panel to display more output
+      routes.forEach(function(route) {
+        var lat, lng;
+        var distances = [];
+        var counter = 1;
+        route.legs.forEach(function(leg) {
+          var routeSegment = '<b>Segment ' + counter + '</b><br>';
+          var start_address = 'Start: ' + leg.start_address + '<br>';
+          var end_address = 'End: ' + leg.end_address + '<br>';
+          var distance = leg.distance.text + '<br>';
+          distances.push(leg.distance.value);
+          var insert = routeSegment + start_address + end_address + distance;
+          $summaryPanel.append(insert);
+          counter++;
+        }); //end of route.leg.forEach
+        //Print out total distance
+        var totalDistance = distances.reduce(sum);
+        $total.html('');
+        user.distance = (Math.round(totalDistance * 0.000621371 * 100) / 100);
+        $distanceDefer.resolve();
+        console.log("DistanceDefer resolved");
+        console.log("user's total distance in miles: " + user.distance);
+        $total.append((user.distance) + ' miles' + '<br>');
+
+      }); //end of routes.forEach. Outputing distances, calculate prices
+
+} else {
+  window.alert('Directions request failed due to ' + status);
+}
+  }); //end of directionsService.route call
 }
