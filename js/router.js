@@ -47,3 +47,7 @@ function tripGen() {
 $('.backButt').on('click', function() {
     location.reload();
 });
+$('#homeButt').on('click', function(){
+    location.reload();
+});
+});
