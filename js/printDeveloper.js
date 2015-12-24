@@ -1,5 +1,5 @@
-
-function printDevelopers(x){
+ var print = {};
+ print.printDevelopers = function(x){
 $.get('js/template.html', function(templateData) {
 
       $.each(x, function(key, value) {
@@ -29,4 +29,4 @@ var developers = [
 
 ];
 
-printDevelopers(developers);
+print.printDevelopers(developers);

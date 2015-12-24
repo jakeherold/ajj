@@ -3,6 +3,7 @@
 }
 .darkFill {
   background-color: #3a3a3c;
+  opacity: 0.75;
 }
 .blue {
   background-color: #092140;
@@ -30,6 +31,9 @@
 }
 .tanText {
   color: #F2C777;
+}
+.lightText {
+  color: #f4f3ef;
 }
 .redOrangeText {
   color: #F24738;

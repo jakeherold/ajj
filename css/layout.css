@@ -31,7 +31,6 @@ a.fullWidth {
     color: #f4f3ef;
     text-transform: uppercase;
     text-align: center;
-    height: 4rem;
     max-width: 480px;
     border-style: none;
     border-radius: 4px;
@@ -71,9 +70,6 @@ select {
     border-style: none;
     border-radius: 4px;
 }
-.carYear {}
-.carMake {}
-.carModel {}
 #map {
     position: relative;
     padding-bottom: 75%;
@@ -82,10 +78,12 @@ select {
     width: 90%;
     overflow: hidden;
 }
-.google-maps iframe {
-    position: absolute;
-    width: 90% !important;
-    height: 100px !important;
+#directions-panel {
+  text-align: center;
+  margin: 1rem auto;
+  max-width: 480px;
+  border-radius: 4px;
+  line-height: 1.5rem;
 }
 .resultsMap {
     height: 100px;
@@ -95,16 +93,11 @@ select {
     height: 100px;
     background: #C1FEE5;
 }
-.gasLogo {
-  width: 90%;
-  max-width: 25rem;
-  margin: 0 auto 4rem auto;
-}
-#shoppingInput{
-  margin-top: 2em;
+#shoppingInput {
+    margin-top: 2em;
 }
 .blurb {
-  width: 30rem;
-  margin: 0 auto;
-  text-align: center;
+    width: 30rem;
+    margin: 0 auto;
+    text-align: center;
 }

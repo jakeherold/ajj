@@ -2,7 +2,8 @@
 /***************
 *  COST CHART *
 ***************/
-function costChartTrigger(){
+var chart = {};
+ chart.costChartTrigger = function(){
   nv.addGraph(function() {
     console.log("starting addGraph shenannigans");
     var chart = nv.models.discreteBarChart()
@@ -37,7 +38,7 @@ function costChartData () {
                 "value" : user.costReg
               } ,
               {
-                "label" : "Mid Gas Cost" ,
+                "label" : "Avg Gas Cost" ,
                 "value" : user.costMid
               } ,
               {
@@ -52,7 +53,7 @@ function costChartData () {
 /***************
 *  MPG   CHART *
 ***************/
-function mpgChartTrigger(){
+chart.mpgChartTrigger = function(){
   nv.addGraph(function() {
     console.log("starting addGraph shenannigans");
     var chart = nv.models.discreteBarChart()
@@ -82,15 +83,15 @@ function mpgChartData () {
             key: "Gallons of Gas Used",
             values: [
               {
-                "label" : "Min" ,
+                "label" : "Min Gas Use" ,
                 "value" : user.gasQuantityMin
               } ,
               {
-                "label" : "Avg" ,
+                "label" : "Avg Gas Use" ,
                 "value" : user.gasQuantityAvg
               } ,
               {
-                "label" : "High" ,
+                "label" : "High Gas Use" ,
                 "value" : user.gasQuantityMax
               }
             ]
