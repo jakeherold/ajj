@@ -61,8 +61,8 @@ function setUserObjToLocalStorage (){
 }
 
 function printCostDistAndGas (){
-  // $(".milesAnchor").html("");
-  // $(".milesAnchor").append(user.distance);
+  $(".milesAnchor").html("");
+  $(".milesAnchor").append(user.distance);
   $(".costAnchor").html("");
   $(".costAnchor").append("Cost = $" + user.costReg);
   $(".gallonsAnchor").html("");
